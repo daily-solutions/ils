@@ -1,0 +1,5 @@
+{
+  "extends": ["config:base"],
+  "rangeStrategy": "bump",
+  "schedule": ["before 8am every monday"]
+}
