@@ -1,0 +1,1 @@
+export { Haircheck } from './Haircheck';
