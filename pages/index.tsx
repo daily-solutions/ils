@@ -22,7 +22,11 @@ const Home: NextPage = () => {
 			<DailyProvider
 				url={`https://${process.env.NEXT_PUBLIC_DAILY_DOMAIN}.daily.co/${process.env.NEXT_PUBLIC_DAILY_ROOM}`}
 				token={token}
-				dailyConfig={{ experimentalChromeVideoMuteLightOff: true }}
+				dailyConfig={{
+					avoidEval: true,
+					experimentalChromeVideoMuteLightOff: true,
+					useDevicePreferenceCookies: true,
+				}}
 			>
 				<Layout />
 			</DailyProvider>

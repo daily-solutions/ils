@@ -55,7 +55,7 @@ export const Chat = () => {
 			css={{
 				flexDirection: 'column',
 				width: '100%',
-				maxHeight: 'calc(100dvh - 100px)',
+				maxHeight: 'calc(100dvh - 136px)',
 				height: '100%',
 			}}
 		>
