@@ -40,14 +40,18 @@ export const Tile = ({
 	return (
 		<Box
 			ref={tileRef}
-			css={{ position: 'relative', width: '100%', height: '100%' }}
+			css={{
+				position: 'relative',
+				width: '100%',
+				overflow: 'hidden',
+				minWidth: '1px',
+				maxWidth: 'calc(100% / var(--grid-columns, 1) - var(--grid-gap))',
+			}}
 		>
 			<Box
 				css={{
-					position: 'relative',
 					pb: `${100 / aspectRatio}%`,
 					background: '$disabled',
-					overflow: 'hidden',
 				}}
 			>
 				{video ? (
