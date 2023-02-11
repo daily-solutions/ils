@@ -56,10 +56,7 @@ export const Sidebar = () => {
 			handleViewers(participants);
 		};
 
-		const interval = setInterval(fetchPresenceData, 5000);
-		return () => {
-			clearInterval(interval);
-		};
+		fetchPresenceData();
 	}, [handleViewers, hidden, isOwner, md]);
 
 	if (!md) return null;
