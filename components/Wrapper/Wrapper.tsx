@@ -1,6 +1,7 @@
 import {
 	DailyEventObjectAppMessage,
 	DailyParticipant,
+	DailyRoomInfo,
 } from '@daily-co/daily-js';
 import {
 	useAppMessage,
@@ -10,7 +11,7 @@ import {
 	useParticipantIds,
 	useParticipantProperty,
 } from '@daily-co/daily-react';
-import React, { useCallback, useEffect } from 'react';
+import React, { memo, useCallback, useEffect } from 'react';
 
 import {
 	PresenceParticipant,
@@ -20,7 +21,7 @@ import {
 } from '../../contexts/UIState';
 import { useParticipantCounts } from '../../hooks/useParticipantCount';
 
-export const Wrapper = ({ children }: React.PropsWithChildren<{}>) => {
+export const Wrapper = memo(({ children }: React.PropsWithChildren<{}>) => {
 	const daily = useDaily();
 	const localSessionId = useLocalSessionId();
 	const isOwner = useParticipantProperty(localSessionId as string, 'owner');
@@ -28,17 +29,33 @@ export const Wrapper = ({ children }: React.PropsWithChildren<{}>) => {
 	const [meetingState, setMeetingState] = useMeetingState();
 	const [, setChatMessages] = useMessages();
 
+	const handlePreAuth = useCallback(async () => {
+		if (!daily) return;
+
+		// @ts-ignore
+		const { token, url } = daily.properties;
+		await daily.preAuth({ url, token });
+		const room = (await daily.room()) as DailyRoomInfo;
+		if (room?.id) {
+			const { config, domainConfig, tokenConfig } = room;
+			const enablePrejoinUI =
+				tokenConfig?.enable_prejoin_ui ??
+				config?.enable_prejoin_ui ??
+				domainConfig?.enable_prejoin_ui;
+			console.log(enablePrejoinUI);
+			if (enablePrejoinUI) setMeetingState('lobby');
+			else {
+				setMeetingState('joining-meeting');
+				await daily.join();
+			}
+		}
+	}, [daily, setMeetingState]);
+
 	useEffect(() => {
 		if (!daily || meetingState !== 'new') return;
 
-		const doPreAuth = async () => {
-			// @ts-ignore
-			const { token, url } = daily.properties;
-			await daily.preAuth({ url, token });
-			setMeetingState('lobby');
-		};
-		doPreAuth();
-	}, [daily, meetingState, setMeetingState]);
+		handlePreAuth();
+	}, [daily, handlePreAuth, meetingState]);
 
 	useDailyEvent(
 		'joined-meeting',
@@ -97,4 +114,6 @@ export const Wrapper = ({ children }: React.PropsWithChildren<{}>) => {
 	}, [handleViewers, hidden, isOwner]);
 
 	return <>{children}</>;
-};
+});
+
+Wrapper.displayName = 'Wrapper';
