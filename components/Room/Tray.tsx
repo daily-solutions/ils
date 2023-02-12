@@ -2,6 +2,7 @@ import Image from 'next/image';
 import React from 'react';
 
 import { useParticipantCounts } from '../../hooks/useParticipantCount';
+import Logo from '../../public/Logo.png';
 import { Badge } from '../../ui/Badge';
 import { Flex } from '../../ui/Flex';
 import { AudioControl } from './Tray/AudioControl';
@@ -19,7 +20,7 @@ export const Tray = () => {
 				p: '$5',
 			}}
 		>
-			<Image src="/logo.png" alt="Daily Logo" width={25} height={35} />
+			<Image src={Logo} alt="Daily Logo" />
 			<Flex css={{ alignItems: 'center', justifyContent: 'center', gap: '$2' }}>
 				<VideoControl />
 				<AudioControl />
