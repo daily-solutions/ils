@@ -21,19 +21,15 @@ export const Haircheck = () => {
 	const [state, setState] = useState<'name' | 'setup'>('name');
 	const [, setMeetingState] = useMeetingState();
 
-	const onContinue = useCallback(
-		(name: string) => {
-			if (!daily) return;
+	const onContinue = useCallback(() => {
+		if (!daily) return;
 
-			daily.setUserName(name);
-			if (hasPermission) setState('setup');
-			else {
-				setMeetingState('joining-meeting');
-				daily.join();
-			}
-		},
-		[daily, hasPermission, setMeetingState]
-	);
+		if (hasPermission) setState('setup');
+		else {
+			setMeetingState('joining-meeting');
+			daily.join();
+		}
+	}, [daily, hasPermission, setMeetingState]);
 
 	return (
 		<Flex

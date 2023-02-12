@@ -1,5 +1,5 @@
 import { useDevices } from '@daily-co/daily-react';
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 
 import { styled } from '../../styles/stitches.config';
 import { Flex } from '../../ui/Flex';
@@ -33,13 +33,32 @@ export const Devices = () => {
 		[speakers]
 	);
 
+	const handleDeviceChange = useCallback(
+		async (type: 'cam' | 'mic' | 'speaker', deviceId: string) => {
+			switch (type) {
+				case 'cam':
+					await setCamera(deviceId);
+					break;
+				case 'mic':
+					await setMicrophone(deviceId);
+					break;
+				case 'speaker':
+					await setSpeaker(deviceId);
+					break;
+				default:
+					break;
+			}
+		},
+		[setCamera, setMicrophone, setSpeaker]
+	);
+
 	return (
 		<Flex css={{ flexFlow: 'column wrap', rowGap: '$3', p: '$5' }}>
 			<Flex css={{ flexFlow: 'column wrap', rowGap: '$1' }}>
 				<StyledLabel>Camera</StyledLabel>
 				<Select
 					value={currentCamera?.device?.deviceId}
-					onChange={(e) => setCamera(e.target.value)}
+					onChange={(e) => handleDeviceChange('cam', e.target.value)}
 				>
 					{cameras.map((cam) => (
 						<option value={cam.device.deviceId} key={cam.device.deviceId}>
@@ -52,7 +71,7 @@ export const Devices = () => {
 				<StyledLabel>Microphone</StyledLabel>
 				<Select
 					value={currentMic?.device?.deviceId}
-					onChange={(e) => setMicrophone(e.target.value)}
+					onChange={(e) => handleDeviceChange('mic', e.target.value)}
 				>
 					{microphones.map((mic) => (
 						<option value={mic.device.deviceId} key={mic.device.deviceId}>
@@ -65,7 +84,7 @@ export const Devices = () => {
 				<StyledLabel>Speaker</StyledLabel>
 				<Select
 					value={currentSpeaker?.device?.deviceId}
-					onChange={(e) => setSpeaker(e.target.value)}
+					onChange={(e) => handleDeviceChange('speaker', e.target.value)}
 				>
 					{speakers.length > 0 ? (
 						speakers.map((s) => (

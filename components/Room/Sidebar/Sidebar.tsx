@@ -1,13 +1,5 @@
-import { DailyParticipant } from '@daily-co/daily-js';
-import {
-	useLocalSessionId,
-	useParticipantIds,
-	useParticipantProperty,
-} from '@daily-co/daily-react';
-import { useCallback, useEffect, useState } from 'react';
-
+import { useViewers } from '../../../contexts/UIState';
 import { useMediaQuery } from '../../../hooks/useMediaQuery';
-import { useParticipantCounts } from '../../../hooks/useParticipantCount';
 import { Box } from '../../../ui/Box';
 import { Card } from '../../../ui/Card';
 import { Divider } from '../../../ui/Divider';
@@ -17,47 +9,9 @@ import { Chat } from './Chat';
 import { Participants } from './Participants';
 import { Viewers } from './Viewers';
 
-type PresenceParticipant = {
-	id: string;
-	userId: string | null;
-	userName: string;
-	joinTime: string;
-	duration: number;
-	room: string;
-};
-
 export const Sidebar = () => {
-	const localSessionId = useLocalSessionId();
-	const isOwner = useParticipantProperty(localSessionId as string, 'owner');
+	const [viewers] = useViewers();
 	const md = useMediaQuery('(min-width: 800px)');
-
-	const [viewers, setViewers] = useState<PresenceParticipant[]>([]);
-	const participantIds = useParticipantIds({
-		filter: useCallback((p: DailyParticipant) => p.permissions.hasPresence, []),
-	});
-	const { hidden } = useParticipantCounts();
-
-	const handleViewers = useCallback(
-		(presenceParticipants: PresenceParticipant[]) => {
-			const viewers = presenceParticipants.filter(
-				(p) => !participantIds.includes(p.id)
-			);
-			setViewers(viewers);
-		},
-		[participantIds]
-	);
-
-	useEffect(() => {
-		if (!isOwner || !md || hidden < 1) return;
-
-		const fetchPresenceData = async () => {
-			const presenceRes = await fetch(`${window.location.origin}/api/presence`);
-			const { participants } = await presenceRes.json();
-			handleViewers(participants);
-		};
-
-		fetchPresenceData();
-	}, [handleViewers, hidden, isOwner, md]);
 
 	if (!md) return null;
 

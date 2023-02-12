@@ -1,5 +1,5 @@
 import { useDaily, useLocalSessionId } from '@daily-co/daily-react';
-import React, { useCallback, useEffect } from 'react';
+import React, { memo, useCallback, useEffect } from 'react';
 
 import { useMeetingState } from '../../contexts/UIState';
 import { Box } from '../../ui/Box';
@@ -10,7 +10,7 @@ import { AudioControl, VideoControl } from '../Room';
 import { Tile } from '../Tile';
 import { Devices } from './Devices';
 
-export const Setup = () => {
+export const Setup = memo(() => {
 	const daily = useDaily();
 	const localSessionId = useLocalSessionId();
 	const [, setMeetingState] = useMeetingState();
@@ -49,4 +49,6 @@ export const Setup = () => {
 			<Devices />
 		</Box>
 	);
-};
+});
+
+Setup.displayName = 'Setup';

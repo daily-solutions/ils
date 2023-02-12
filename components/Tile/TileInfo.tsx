@@ -1,4 +1,5 @@
 import { useParticipantProperty } from '@daily-co/daily-react';
+import { memo } from 'react';
 
 import { Flex } from '../../ui/Flex';
 
@@ -6,7 +7,7 @@ interface Props {
 	sessionId: string;
 }
 
-export const TileInfo = ({ sessionId }: Props) => {
+export const TileInfo = memo(({ sessionId }: Props) => {
 	const [userName, isLocal] = useParticipantProperty(sessionId, [
 		'user_name',
 		'local',
@@ -28,4 +29,6 @@ export const TileInfo = ({ sessionId }: Props) => {
 			{userName} {isLocal && '(You)'}
 		</Flex>
 	);
-};
+});
+
+TileInfo.displayName = 'TileInfo';

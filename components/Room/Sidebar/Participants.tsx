@@ -5,7 +5,7 @@ import {
 	useParticipantIds,
 	useParticipantProperty,
 } from '@daily-co/daily-react';
-import React, { useCallback } from 'react';
+import React, { memo, useCallback } from 'react';
 
 import { Badge } from '../../../ui/Badge';
 import { Box } from '../../../ui/Box';
@@ -17,7 +17,7 @@ interface ParticipantProps {
 	sessionId: string;
 }
 
-const Participant = ({ sessionId }: ParticipantProps) => {
+const Participant = memo(({ sessionId }: ParticipantProps) => {
 	const daily = useDaily();
 	const localSessionId = useLocalSessionId();
 	const isLocalOwner = useParticipantProperty(
@@ -57,7 +57,9 @@ const Participant = ({ sessionId }: ParticipantProps) => {
 			)}
 		</Flex>
 	);
-};
+});
+
+Participant.displayName = 'Participant';
 
 export const Participants = () => {
 	const participantIds = useParticipantIds({

@@ -1,5 +1,5 @@
 import { useDaily } from '@daily-co/daily-react';
-import React, { useCallback } from 'react';
+import React, { memo, useCallback } from 'react';
 
 import { Box } from '../../../ui/Box';
 import { Button } from '../../../ui/Button';
@@ -11,7 +11,7 @@ interface Viewer {
 	userName: string;
 }
 
-const Viewer = ({ id, userName }: Viewer) => {
+const Viewer = memo(({ id, userName }: Viewer) => {
 	const daily = useDaily();
 
 	const handleBringToStage = useCallback(() => {
@@ -32,7 +32,9 @@ const Viewer = ({ id, userName }: Viewer) => {
 			</Button>
 		</Flex>
 	);
-};
+});
+
+Viewer.displayName = 'Viewer';
 
 interface Props {
 	viewers: Viewer[];

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useDaily } from '@daily-co/daily-react';
+import React, { memo, useCallback, useState } from 'react';
 
 import { Button } from '../../ui/Button';
 import { Flex } from '../../ui/Flex';
@@ -6,17 +7,25 @@ import { Input } from '../../ui/Input';
 
 interface Props {
 	hasPermission: boolean;
-	onContinue: (name: string) => void;
+	onContinue: () => void;
 }
 
-export const NameSetup = ({ hasPermission, onContinue }: Props) => {
+export const NameSetup = memo(({ hasPermission, onContinue }: Props) => {
+	const daily = useDaily();
 	const [name, setName] = useState<string>('');
+
+	const handleContinue = useCallback(() => {
+		if (!daily) return;
+
+		daily.setUserName(name);
+		onContinue();
+	}, [daily, name, onContinue]);
 
 	return (
 		<form
 			onSubmit={(e) => {
 				e.preventDefault();
-				onContinue(name);
+				handleContinue();
 			}}
 		>
 			<Flex css={{ flexFlow: 'column wrap', rowGap: '$5', padding: '$5' }}>
@@ -34,4 +43,6 @@ export const NameSetup = ({ hasPermission, onContinue }: Props) => {
 			</Flex>
 		</form>
 	);
-};
+});
+
+NameSetup.displayName = 'NameSetup';
