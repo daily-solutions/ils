@@ -42,7 +42,6 @@ export const Wrapper = memo(({ children }: React.PropsWithChildren<{}>) => {
 				tokenConfig?.enable_prejoin_ui ??
 				config?.enable_prejoin_ui ??
 				domainConfig?.enable_prejoin_ui;
-			console.log(enablePrejoinUI);
 			if (enablePrejoinUI) setMeetingState('lobby');
 			else {
 				setMeetingState('joining-meeting');
