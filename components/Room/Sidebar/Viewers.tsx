@@ -1,6 +1,7 @@
 import { useDaily } from '@daily-co/daily-react';
 import React, { memo, useCallback } from 'react';
 
+import { useViewers } from '../../../contexts/UIState';
 import { Box } from '../../../ui/Box';
 import { Button } from '../../../ui/Button';
 import { Flex } from '../../../ui/Flex';
@@ -36,11 +37,8 @@ const Viewer = memo(({ id, userName }: Viewer) => {
 
 Viewer.displayName = 'Viewer';
 
-interface Props {
-	viewers: Viewer[];
-}
-
-export const Viewers = ({ viewers }: Props) => {
+export const Viewers = () => {
+	const [viewers] = useViewers();
 	return (
 		<Box css={{ p: '$4' }}>
 			{viewers.length > 0 ? (

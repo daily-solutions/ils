@@ -101,7 +101,7 @@ export const Wrapper = memo(({ children }: React.PropsWithChildren<{}>) => {
 	);
 
 	useEffect(() => {
-		if (!isOwner || hidden < 1) return;
+		if (!isOwner) return;
 
 		const fetchPresenceData = async () => {
 			const presenceRes = await fetch(`${window.location.origin}/api/presence`);
@@ -109,7 +109,8 @@ export const Wrapper = memo(({ children }: React.PropsWithChildren<{}>) => {
 			handleViewers(participants);
 		};
 
-		fetchPresenceData();
+		if (hidden > 0) fetchPresenceData();
+		else handleViewers([]);
 	}, [handleViewers, hidden, isOwner]);
 
 	return <>{children}</>;

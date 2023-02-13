@@ -1,4 +1,8 @@
-import { useViewers } from '../../../contexts/UIState';
+import {
+	useLocalSessionId,
+	useParticipantProperty,
+} from '@daily-co/daily-react';
+
 import { useMediaQuery } from '../../../hooks/useMediaQuery';
 import { Box } from '../../../ui/Box';
 import { Card } from '../../../ui/Card';
@@ -10,7 +14,8 @@ import { Participants } from './Participants';
 import { Viewers } from './Viewers';
 
 export const Sidebar = () => {
-	const [viewers] = useViewers();
+	const localSessionId = useLocalSessionId();
+	const isOwner = useParticipantProperty(localSessionId as string, 'owner');
 	const md = useMediaQuery('(min-width: 800px)');
 
 	if (!md) return null;
@@ -56,7 +61,7 @@ export const Sidebar = () => {
 					</Tabs>
 				</TabsContent>
 				<TabsContent value="participants">
-					{viewers.length > 0 ? (
+					{isOwner ? (
 						<Tabs defaultValue="participants">
 							<TabsList variant="secondary" aria-label="ParticipantTabs">
 								<TabsTrigger variant="secondary" value="participants">
@@ -71,7 +76,7 @@ export const Sidebar = () => {
 								<Participants />
 							</TabsContent>
 							<TabsContent value="viewers">
-								<Viewers viewers={viewers} />
+								<Viewers />
 							</TabsContent>
 						</Tabs>
 					) : (
