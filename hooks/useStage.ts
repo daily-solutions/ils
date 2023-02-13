@@ -70,86 +70,6 @@ export const useStage = () => {
 
 	const sendAppMessage = useAppMessage();
 
-	const onAppMessage = useCallback(
-		(ev: DailyEventObjectAppMessage<StageAppMessage>) => {
-			switch (ev?.data?.event) {
-				case 'bring-to-stage':
-					const sessionId = ev.data?.sessionId;
-					if (isOwner) {
-						setRequestedParticipants((prev) => {
-							const prevP = { ...prev };
-							delete prevP[sessionId];
-							return prevP;
-						});
-					} else if (localSessionId === sessionId) {
-						toaster.notify('light', {
-							title: 'You are on stage',
-							description: 'You can unmute your mic to talk',
-						});
-						setIsRequesting(false);
-					}
-					break;
-				case 'remove-from-stage':
-					if (localSessionId === ev.data?.sessionId) {
-						const participant = daily?.participants()?.[ev.fromId];
-						toaster.notify('light', {
-							title: 'You were removed from the stage',
-							description: `${
-								participant?.user_name ?? 'Guest'
-							} removed you from the stage`,
-						});
-					}
-					break;
-				case 'leave-stage':
-					if (isOwner) {
-						const participant = daily?.participants()?.[ev.fromId];
-						toaster.notify('light', {
-							title: 'Participant left',
-							description: `${
-								participant?.user_name ?? 'Guest'
-							} left the stage`,
-						});
-					}
-					break;
-				case 'request-stage':
-					if (isOwner) {
-						const userName = ev.data?.userName;
-						setRequestedParticipants((prev) => ({
-							...prev,
-							[ev.fromId]: { id: ev.fromId, userName },
-						}));
-						toaster.notify('light', {
-							title: `${userName ?? 'Guest'} requested to join the stage`,
-							actions: {
-								type: 'bringToStage',
-								sessionId: ev.fromId,
-							},
-						});
-					}
-					break;
-				case 'cancel-request-stage':
-					if (isOwner) {
-						setRequestedParticipants((prev) => {
-							const prevP = { ...prev };
-							delete prevP[ev.fromId];
-							return prevP;
-						});
-					}
-					break;
-				default:
-					break;
-			}
-		},
-		[
-			daily,
-			isOwner,
-			localSessionId,
-			setIsRequesting,
-			setRequestedParticipants,
-			toaster,
-		]
-	);
-
 	const requestToJoinStage = useCallback(() => {
 		if (isOwner) return;
 
@@ -214,6 +134,87 @@ export const useStage = () => {
 			description: 'You can always request to join the stage',
 		});
 	}, [sendAppMessage, toaster]);
+
+	const onAppMessage = useCallback(
+		(ev: DailyEventObjectAppMessage<StageAppMessage>) => {
+			switch (ev?.data?.event) {
+				case 'bring-to-stage':
+					const sessionId = ev.data?.sessionId;
+					if (isOwner) {
+						setRequestedParticipants((prev) => {
+							const prevP = { ...prev };
+							delete prevP[sessionId];
+							return prevP;
+						});
+					} else if (localSessionId === sessionId) {
+						toaster.notify('light', {
+							title: 'You are on stage',
+							description: 'You can unmute your mic to talk',
+						});
+						setIsRequesting(false);
+					}
+					break;
+				case 'remove-from-stage':
+					if (localSessionId === ev.data?.sessionId) {
+						const participant = daily?.participants()?.[ev.fromId];
+						toaster.notify('light', {
+							title: 'You were removed from the stage',
+							description: `${
+								participant?.user_name ?? 'Guest'
+							} removed you from the stage`,
+						});
+					}
+					break;
+				case 'leave-stage':
+					if (isOwner) {
+						const participant = daily?.participants()?.[ev.fromId];
+						toaster.notify('light', {
+							title: 'Participant left',
+							description: `${
+								participant?.user_name ?? 'Guest'
+							} left the stage`,
+						});
+					}
+					break;
+				case 'request-stage':
+					if (isOwner) {
+						const userName = ev.data?.userName;
+						setRequestedParticipants((prev) => ({
+							...prev,
+							[ev.fromId]: { id: ev.fromId, userName },
+						}));
+						toaster.notify('light', {
+							title: `${userName ?? 'Guest'} requested to join the stage`,
+							actions: {
+								type: 'bringToStage',
+								bringToStage: () => bringToStage(ev.fromId),
+							},
+						});
+					}
+					break;
+				case 'cancel-request-stage':
+					if (isOwner) {
+						setRequestedParticipants((prev) => {
+							const prevP = { ...prev };
+							delete prevP[ev.fromId];
+							return prevP;
+						});
+					}
+					break;
+				default:
+					break;
+			}
+		},
+		[
+			bringToStage,
+			daily,
+			isOwner,
+			localSessionId,
+			setIsRequesting,
+			setRequestedParticipants,
+			toaster,
+		]
+	);
 
 	return {
 		isRequesting,

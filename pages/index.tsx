@@ -20,19 +20,19 @@ const Home: NextPage = () => {
 
 	return token !== null ? (
 		<RecoilRoot>
-			<DailyProvider
-				url={`https://${process.env.NEXT_PUBLIC_DAILY_DOMAIN}.daily.co/${process.env.NEXT_PUBLIC_DAILY_ROOM}`}
-				token={token}
-				dailyConfig={{
-					avoidEval: true,
-					experimentalChromeVideoMuteLightOff: true,
-					useDevicePreferenceCookies: true,
-				}}
-			>
-				<ToastProvider>
+			<ToastProvider>
+				<DailyProvider
+					url={`https://${process.env.NEXT_PUBLIC_DAILY_DOMAIN}.daily.co/${process.env.NEXT_PUBLIC_DAILY_ROOM}`}
+					token={token}
+					dailyConfig={{
+						avoidEval: true,
+						experimentalChromeVideoMuteLightOff: true,
+						useDevicePreferenceCookies: true,
+					}}
+				>
 					<Layout />
-				</ToastProvider>
-			</DailyProvider>
+				</DailyProvider>
+			</ToastProvider>
 		</RecoilRoot>
 	) : (
 		<Loader />

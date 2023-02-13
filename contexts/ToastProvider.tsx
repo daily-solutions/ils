@@ -6,7 +6,6 @@ import React, {
 	useState,
 } from 'react';
 
-import { useStage } from '../hooks/useStage';
 import { Button } from '../ui/Button';
 import { Flex } from '../ui/Flex';
 import {
@@ -18,7 +17,7 @@ import {
 
 type BringToStage = {
 	type: 'bringToStage';
-	sessionId: string;
+	bringToStage: () => void;
 };
 
 type ToastAction = BringToStage;
@@ -53,9 +52,7 @@ interface ContextValue {
 // @ts-ignore
 const ToastContext = createContext<ContextValue>();
 
-export const ToastProvider = ({
-	children,
-}: PropsWithChildren<Record<string, unknown>>) => {
+export const ToastProvider = ({ children }: PropsWithChildren<{}>) => {
 	const [toasts, setToasts] = useState<{ [key: string]: Toast }>({});
 
 	const notify = useCallback(
@@ -97,8 +94,6 @@ export const ToastProvider = ({
 
 	const closeAll = useCallback(() => setToasts({}), []);
 
-	const { bringToStage } = useStage();
-
 	return (
 		<ToastContext.Provider
 			value={{
@@ -117,11 +112,7 @@ export const ToastProvider = ({
 					>
 						{toasts[id]?.actions?.type === 'bringToStage' && (
 							<Flex css={{ gap: '$2' }}>
-								<Button
-									onClick={() =>
-										bringToStage(toasts[id]?.actions?.sessionId as string)
-									}
-								>
+								<Button onClick={() => toasts[id]?.actions?.bringToStage()}>
 									Bring to stage
 								</Button>
 								<Button variant="secondary" onClick={() => close(id)}>
