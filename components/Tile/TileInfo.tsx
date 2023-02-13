@@ -26,7 +26,7 @@ export const TileInfo = memo(({ sessionId }: Props) => {
 				fontSize: '$1',
 			}}
 		>
-			{userName} {isLocal && '(You)'}
+			{userName ?? 'Guest'} {isLocal && '(You)'}
 		</Flex>
 	);
 });

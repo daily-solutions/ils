@@ -1,8 +1,3 @@
-import {
-	useLocalSessionId,
-	useParticipantProperty,
-} from '@daily-co/daily-react';
-
 import { useMediaQuery } from '../../../hooks/useMediaQuery';
 import { Box } from '../../../ui/Box';
 import { Card } from '../../../ui/Card';
@@ -10,16 +5,12 @@ import { Divider } from '../../../ui/Divider';
 import { Icon } from '../../../ui/Icon';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../../ui/Tabs';
 import { Chat } from './Chat';
-import { Participants } from './Participants';
-import { Viewers } from './Viewers';
+import { People } from './People';
 
 export const Sidebar = () => {
-	const localSessionId = useLocalSessionId();
-	const isOwner = useParticipantProperty(localSessionId as string, 'owner');
 	const md = useMediaQuery('(min-width: 800px)');
 
 	if (!md) return null;
-
 	return (
 		<Card
 			css={{
@@ -42,46 +33,10 @@ export const Sidebar = () => {
 				</Box>
 				<Divider css={{ mt: '$2' }} />
 				<TabsContent value="chat">
-					<Tabs defaultValue="messages">
-						<TabsList variant="secondary" aria-label="ChatTabs">
-							<TabsTrigger variant="secondary" value="messages">
-								Chat
-							</TabsTrigger>
-							<TabsTrigger variant="secondary" value="questions">
-								Questions
-							</TabsTrigger>
-						</TabsList>
-						<Divider css={{ mt: '$2' }} />
-						<TabsContent value="messages">
-							<Chat />
-						</TabsContent>
-						<TabsContent value="questions">
-							<Chat />
-						</TabsContent>
-					</Tabs>
+					<Chat />
 				</TabsContent>
 				<TabsContent value="participants">
-					{isOwner ? (
-						<Tabs defaultValue="participants">
-							<TabsList variant="secondary" aria-label="ParticipantTabs">
-								<TabsTrigger variant="secondary" value="participants">
-									Participants
-								</TabsTrigger>
-								<TabsTrigger variant="secondary" value="viewers">
-									Viewers
-								</TabsTrigger>
-							</TabsList>
-							<Divider css={{ mt: '$2' }} />
-							<TabsContent value="participants">
-								<Participants />
-							</TabsContent>
-							<TabsContent value="viewers">
-								<Viewers />
-							</TabsContent>
-						</Tabs>
-					) : (
-						<Participants />
-					)}
+					<People />
 				</TabsContent>
 			</Tabs>
 		</Card>

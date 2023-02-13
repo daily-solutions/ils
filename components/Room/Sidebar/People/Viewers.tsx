@@ -1,11 +1,11 @@
 import { useDaily } from '@daily-co/daily-react';
 import React, { memo, useCallback } from 'react';
 
-import { useViewers } from '../../../contexts/UIState';
-import { Box } from '../../../ui/Box';
-import { Button } from '../../../ui/Button';
-import { Flex } from '../../../ui/Flex';
-import { Text } from '../../../ui/Text';
+import { useViewers } from '../../../../contexts/UIState';
+import { Box } from '../../../../ui/Box';
+import { Button } from '../../../../ui/Button';
+import { Flex } from '../../../../ui/Flex';
+import { Text } from '../../../../ui/Text';
 
 interface Viewer {
 	id: string;
@@ -27,7 +27,7 @@ const Viewer = memo(({ id, userName }: Viewer) => {
 
 	return (
 		<Flex css={{ alignItems: 'center', justifyContent: 'space-between' }}>
-			<Text>{userName}</Text>
+			<Text>{userName ?? 'Guest'}</Text>
 			<Button onClick={handleBringToStage} size="small">
 				Bring to stage
 			</Button>

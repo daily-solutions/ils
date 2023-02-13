@@ -7,11 +7,11 @@ import {
 } from '@daily-co/daily-react';
 import React, { memo, useCallback } from 'react';
 
-import { Badge } from '../../../ui/Badge';
-import { Box } from '../../../ui/Box';
-import { Button } from '../../../ui/Button';
-import { Flex } from '../../../ui/Flex';
-import { Text } from '../../../ui/Text';
+import { Badge } from '../../../../ui/Badge';
+import { Box } from '../../../../ui/Box';
+import { Button } from '../../../../ui/Button';
+import { Flex } from '../../../../ui/Flex';
+import { Text } from '../../../../ui/Text';
 
 interface ParticipantProps {
 	sessionId: string;
@@ -44,7 +44,7 @@ const Participant = memo(({ sessionId }: ParticipantProps) => {
 	return (
 		<Flex css={{ alignItems: 'center', justifyContent: 'space-between' }}>
 			<Text>
-				{userName} {local && '(you)'}
+				{userName ?? 'Guest'} {local && '(you)'}
 			</Text>
 			{owner ? (
 				<Badge size={1}>Owner</Badge>
