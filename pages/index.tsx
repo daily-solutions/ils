@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { RecoilRoot } from 'recoil';
 
 import { Layout } from '../components/Layout';
+import { ToastProvider } from '../contexts/ToastProvider';
 import { Loader } from '../ui/Loader';
 
 const Home: NextPage = () => {
@@ -28,7 +29,9 @@ const Home: NextPage = () => {
 					useDevicePreferenceCookies: true,
 				}}
 			>
-				<Layout />
+				<ToastProvider>
+					<Layout />
+				</ToastProvider>
 			</DailyProvider>
 		</RecoilRoot>
 	) : (

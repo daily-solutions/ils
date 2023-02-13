@@ -8,6 +8,8 @@ import {
 import { useCallback } from 'react';
 import { atom, useRecoilState } from 'recoil';
 
+import { useToasts } from '../contexts/ToastProvider';
+
 interface BringToStageAppMessage {
 	event: 'bring-to-stage';
 	sessionId: string;
@@ -64,6 +66,7 @@ export const useStage = () => {
 	const [requestedParticipants, setRequestedParticipants] = useRecoilState(
 		requestedParticipantsState
 	);
+	const { toaster } = useToasts();
 
 	const sendAppMessage = useAppMessage();
 
@@ -79,17 +82,34 @@ export const useStage = () => {
 							return prevP;
 						});
 					} else if (localSessionId === sessionId) {
-						// @TODO: send toast saying that you are on stage
+						toaster.notify('light', {
+							title: 'You are on stage',
+							description: 'You can unmute your mic to talk',
+						});
 						setIsRequesting(false);
 					}
 					break;
 				case 'remove-from-stage':
 					if (localSessionId === ev.data?.sessionId) {
-						// @TODO: send toast saying that you were removed from the stage
+						const participant = daily?.participants()?.[ev.fromId];
+						toaster.notify('light', {
+							title: 'You were removed from the stage',
+							description: `${
+								participant?.user_name ?? 'Guest'
+							} removed you from the stage`,
+						});
 					}
 					break;
 				case 'leave-stage':
-					// @TODO: send toast to everyone saying that you left the stage (everyone? or just owners)
+					if (isOwner) {
+						const participant = daily?.participants()?.[ev.fromId];
+						toaster.notify('light', {
+							title: 'Participant left',
+							description: `${
+								participant?.user_name ?? 'Guest'
+							} left the stage`,
+						});
+					}
 					break;
 				case 'request-stage':
 					if (isOwner) {
@@ -98,7 +118,13 @@ export const useStage = () => {
 							...prev,
 							[ev.fromId]: { id: ev.fromId, userName },
 						}));
-						// @TODO: send toast saying someone requested to join the stage
+						toaster.notify('light', {
+							title: `${userName ?? 'Guest'} requested to join the stage`,
+							actions: {
+								type: 'bringToStage',
+								sessionId: ev.fromId,
+							},
+						});
 					}
 					break;
 				case 'cancel-request-stage':
@@ -114,7 +140,14 @@ export const useStage = () => {
 					break;
 			}
 		},
-		[isOwner, localSessionId, setIsRequesting, setRequestedParticipants]
+		[
+			daily,
+			isOwner,
+			localSessionId,
+			setIsRequesting,
+			setRequestedParticipants,
+			toaster,
+		]
 	);
 
 	const requestToJoinStage = useCallback(() => {
@@ -122,16 +155,22 @@ export const useStage = () => {
 
 		setIsRequesting(true);
 		sendAppMessage({ event: 'request-stage', userName });
-		// @TODO: toast to say that you requested to join the stage.
-	}, [isOwner, sendAppMessage, setIsRequesting, userName]);
+		toaster.notify('light', {
+			title: 'Requested to join the stage',
+			description: 'Please wait till the host accepts the request',
+		});
+	}, [isOwner, sendAppMessage, setIsRequesting, toaster, userName]);
 
 	const cancelRequestToJoinStage = useCallback(() => {
 		if (isOwner) return;
 
 		setIsRequesting(false);
 		sendAppMessage({ event: 'cancel-request-stage' });
-		// @TODO: toast to say that you cancelled your request to join the stage.
-	}, [isOwner, sendAppMessage, setIsRequesting]);
+		toaster.notify('light', {
+			title: 'Cancelled your request to join the stage',
+			description: 'You can always request to join the stage',
+		});
+	}, [isOwner, sendAppMessage, setIsRequesting, toaster]);
 
 	const bringToStage = useCallback(
 		(sessionId: string) => {
@@ -170,7 +209,11 @@ export const useStage = () => {
 
 	const leaveStage = useCallback(() => {
 		sendAppMessage({ event: 'leave-stage' });
-	}, [sendAppMessage]);
+		toaster.notify('light', {
+			title: 'Left the stage',
+			description: 'You can always request to join the stage',
+		});
+	}, [sendAppMessage, toaster]);
 
 	return {
 		isRequesting,
