@@ -14,12 +14,16 @@ import {
 import React, { memo, useCallback, useEffect } from 'react';
 
 import {
+	ChatMessage,
 	PresenceParticipant,
 	useMeetingState,
 	useMessages,
 	useViewers,
 } from '../../contexts/UIState';
 import { useParticipantCounts } from '../../hooks/useParticipantCount';
+import { StageAppMessage, useStage } from '../../hooks/useStage';
+
+type AppMessage = StageAppMessage | ChatMessage;
 
 export const Wrapper = memo(({ children }: React.PropsWithChildren<{}>) => {
 	const daily = useDaily();
@@ -28,6 +32,8 @@ export const Wrapper = memo(({ children }: React.PropsWithChildren<{}>) => {
 
 	const [meetingState, setMeetingState] = useMeetingState();
 	const [, setChatMessages] = useMessages();
+
+	const { onAppMessage: onStageAppMessage } = useStage();
 
 	const handlePreAuth = useCallback(async () => {
 		if (!daily) return;
@@ -68,19 +74,24 @@ export const Wrapper = memo(({ children }: React.PropsWithChildren<{}>) => {
 
 	useAppMessage({
 		onAppMessage: useCallback(
-			(ev: DailyEventObjectAppMessage) => {
-				setChatMessages((msgs) => [
-					...msgs,
-					{
-						...ev.data,
-						id: crypto.randomUUID(),
-						fromId: ev.fromId,
-						receivedAt: new Date(),
-						isLocal: false,
-					},
-				]);
+			(ev: DailyEventObjectAppMessage<AppMessage>) => {
+				if ('event' in ev.data && ev.data?.event)
+					onStageAppMessage(ev as DailyEventObjectAppMessage<StageAppMessage>);
+				else {
+					const event = ev as DailyEventObjectAppMessage<ChatMessage>;
+					setChatMessages((msgs) => [
+						...msgs,
+						{
+							...event.data,
+							id: crypto.randomUUID(),
+							fromId: event.fromId,
+							receivedAt: new Date(),
+							isLocal: false,
+						},
+					]);
+				}
 			},
-			[setChatMessages]
+			[setChatMessages, onStageAppMessage]
 		),
 	});
 

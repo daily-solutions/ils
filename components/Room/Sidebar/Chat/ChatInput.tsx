@@ -6,6 +6,7 @@ import {
 import React, { memo, useCallback, useState } from 'react';
 
 import { useMessages } from '../../../../contexts/UIState';
+import { Box } from '../../../../ui/Box';
 import { Input } from '../../../../ui/Input';
 
 export const ChatInput = memo(() => {
@@ -39,18 +40,20 @@ export const ChatInput = memo(() => {
 	}, [localSessionId, message, sendAppMessage, setChatMsgs, userName]);
 
 	return (
-		<form
-			onSubmit={(e) => {
-				e.preventDefault();
-				handleSendMessage();
-			}}
-		>
-			<Input
-				value={message}
-				onChange={(e) => setMessage(e.target.value)}
-				placeholder="Enter your message"
-			/>
-		</form>
+		<Box css={{ p: '$4', marginTop: 'auto' }}>
+			<form
+				onSubmit={(e) => {
+					e.preventDefault();
+					handleSendMessage();
+				}}
+			>
+				<Input
+					value={message}
+					onChange={(e) => setMessage(e.target.value)}
+					placeholder="Enter your message"
+				/>
+			</form>
+		</Box>
 	);
 });
 

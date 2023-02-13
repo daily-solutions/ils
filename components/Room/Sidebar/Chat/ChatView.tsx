@@ -4,8 +4,8 @@ import { useMessages } from '../../../../contexts/UIState';
 import { Box } from '../../../../ui/Box';
 import { Divider } from '../../../../ui/Divider';
 import { Flex } from '../../../../ui/Flex';
-import { Text } from '../../../../ui/Text';
 import { ChatInput } from './ChatInput';
+import { ChatMessage } from './ChatMessage';
 
 export const ChatView = () => {
 	const chatRef = useRef<HTMLDivElement>(null);
@@ -32,22 +32,17 @@ export const ChatView = () => {
 				ref={chatRef}
 				css={{
 					flex: 1,
-					px: '$4',
+					p: '$2 $4',
 					overflowY: 'auto',
 					scrollBehavior: 'smooth',
 				}}
 			>
 				{messages.map((message) => (
-					<Box key={message.id}>
-						<Text css={{ fontWeight: '$bold' }}>{message.userName}</Text>
-						<Text css={{ py: '$3' }}>{message.message}</Text>
-					</Box>
+					<ChatMessage key={message.id} {...message} />
 				))}
 			</Box>
 			<Divider />
-			<Box css={{ p: '$4', marginTop: 'auto' }}>
-				<ChatInput />
-			</Box>
+			<ChatInput />
 		</Flex>
 	);
 };

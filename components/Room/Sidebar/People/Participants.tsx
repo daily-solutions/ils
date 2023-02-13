@@ -1,12 +1,12 @@
 import { DailyParticipant } from '@daily-co/daily-js';
 import {
-	useDaily,
 	useLocalSessionId,
 	useParticipantIds,
 	useParticipantProperty,
 } from '@daily-co/daily-react';
 import React, { memo, useCallback } from 'react';
 
+import { useStage } from '../../../../hooks/useStage';
 import { Badge } from '../../../../ui/Badge';
 import { Box } from '../../../../ui/Box';
 import { Button } from '../../../../ui/Button';
@@ -18,7 +18,6 @@ interface ParticipantProps {
 }
 
 const Participant = memo(({ sessionId }: ParticipantProps) => {
-	const daily = useDaily();
 	const localSessionId = useLocalSessionId();
 	const isLocalOwner = useParticipantProperty(
 		localSessionId as string,
@@ -30,16 +29,11 @@ const Participant = memo(({ sessionId }: ParticipantProps) => {
 		'local',
 	]);
 
-	const handleRemoveFromStage = useCallback(() => {
-		if (!daily || !isLocalOwner) return;
-
-		daily.updateParticipant(sessionId, {
-			updatePermissions: {
-				canSend: false,
-				hasPresence: false,
-			},
-		});
-	}, [daily, isLocalOwner, sessionId]);
+	const { removeFromStage } = useStage();
+	const handleRemoveFromStage = useCallback(
+		() => removeFromStage(sessionId),
+		[removeFromStage, sessionId]
+	);
 
 	return (
 		<Flex css={{ alignItems: 'center', justifyContent: 'space-between' }}>

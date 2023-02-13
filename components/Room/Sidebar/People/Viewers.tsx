@@ -1,7 +1,7 @@
-import { useDaily } from '@daily-co/daily-react';
 import React, { memo, useCallback } from 'react';
 
 import { useViewers } from '../../../../contexts/UIState';
+import { useStage } from '../../../../hooks/useStage';
 import { Box } from '../../../../ui/Box';
 import { Button } from '../../../../ui/Button';
 import { Flex } from '../../../../ui/Flex';
@@ -12,18 +12,12 @@ interface Viewer {
 	userName: string;
 }
 
-const Viewer = memo(({ id, userName }: Viewer) => {
-	const daily = useDaily();
-
-	const handleBringToStage = useCallback(() => {
-		if (!daily) return;
-		daily.updateParticipant(id, {
-			updatePermissions: {
-				canSend: true,
-				hasPresence: true,
-			},
-		});
-	}, [daily, id]);
+export const Viewer = memo(({ id, userName }: Viewer) => {
+	const { bringToStage } = useStage();
+	const handleBringToStage = useCallback(
+		() => bringToStage(id),
+		[bringToStage, id]
+	);
 
 	return (
 		<Flex css={{ alignItems: 'center', justifyContent: 'space-between' }}>
