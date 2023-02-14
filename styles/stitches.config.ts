@@ -25,6 +25,8 @@ export const {
 			disabled: '#F0F0F0',
 			tileInfo: 'rgba(107, 119, 133, 0.7)',
 			dark: '#1F2D3D',
+			baseText: '#121A24',
+			orange: '#FF9254',
 		},
 		fonts: {
 			sans: '"Work Sans", "Helvetica Neue", Arial, sans-serif',

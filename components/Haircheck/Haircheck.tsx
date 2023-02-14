@@ -40,7 +40,13 @@ export const Haircheck = () => {
 				height: '100dvh',
 			}}
 		>
-			<Card css={{ maxWidth: 460, width: '100%', padding: 0 }}>
+			<Card
+				css={{
+					maxWidth: state === 'name' ? 330 : 460,
+					width: '100%',
+					padding: 0,
+				}}
+			>
 				{state === 'name' && (
 					<NameSetup hasPermission={hasPermission} onContinue={onContinue} />
 				)}
