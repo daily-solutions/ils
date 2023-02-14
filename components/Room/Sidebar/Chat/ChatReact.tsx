@@ -38,7 +38,7 @@ export const ChatReact = ({ id }: Props) => {
 				<PopoverTrigger asChild>
 					<Button
 						className="msg-react"
-						variant="primary"
+						variant="cyan"
 						size="xs"
 						css={{
 							visibility: open ? 'visible' : 'hidden',
@@ -52,8 +52,8 @@ export const ChatReact = ({ id }: Props) => {
 				<PopoverContent css={{ p: '$4' }}>
 					<Grid
 						css={{
-							gridGap: '$3',
-							gridTemplateColumns: '1fr 1fr 1fr',
+							gridGap: '$4',
+							gridTemplateColumns: 'repeat(3, 1fr)',
 						}}
 					>
 						{emojis.map((emoji) => (

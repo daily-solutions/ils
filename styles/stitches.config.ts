@@ -27,6 +27,9 @@ export const {
 			dark: '#1F2D3D',
 			baseText: '#121A24',
 			orange: '#FF9254',
+			cyanLight: '#E2FBFD',
+			cyanLightText: '#00C9DF',
+			message: 'rgba(226, 251, 253, 0.4)',
 		},
 		fonts: {
 			sans: '"Work Sans", "Helvetica Neue", Arial, sans-serif',

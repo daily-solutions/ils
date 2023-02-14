@@ -22,8 +22,11 @@ export const ChatMessage = ({ id }: Props) => {
 			css={{
 				justifyContent: 'space-between',
 				gap: '$3',
-				p: '$3 $1',
-				'&:hover': { '.msg-react': { visibility: 'visible', opacity: 1 } },
+				p: '$3',
+				'&:hover': {
+					background: '$message',
+					'.msg-react': { visibility: 'visible', opacity: 1 },
+				},
 			}}
 		>
 			<Avatar

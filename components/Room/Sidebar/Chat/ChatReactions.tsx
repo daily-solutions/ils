@@ -43,7 +43,7 @@ export const ChatReactions = ({ id }: Props) => {
 							onClick={() => reactToMsg(id, reaction)}
 							key={reaction}
 							size="reaction"
-							variant={hasReacted ? 'inverse' : 'secondary'}
+							variant={hasReacted ? 'cyan' : 'secondary'}
 						>
 							{reaction} {count}
 						</Button>

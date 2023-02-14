@@ -32,7 +32,7 @@ export const Chat = () => {
 				ref={chatRef}
 				css={{
 					flex: 1,
-					p: '$2 $4',
+					p: '$2 0',
 					overflowY: 'auto',
 					scrollBehavior: 'smooth',
 				}}
