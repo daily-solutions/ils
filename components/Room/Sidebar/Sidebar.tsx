@@ -1,3 +1,4 @@
+import { useSidebar } from '../../../contexts/UIState';
 import { useMediaQuery } from '../../../hooks/useMediaQuery';
 import { Box } from '../../../ui/Box';
 import { Card } from '../../../ui/Card';
@@ -8,9 +9,11 @@ import { Chat } from './Chat';
 import { People } from './People';
 
 export const Sidebar = () => {
+	const [sidebar] = useSidebar();
 	const md = useMediaQuery('(min-width: 800px)');
 
-	if (!md) return null;
+	if (!md || !sidebar) return null;
+
 	return (
 		<Card
 			css={{

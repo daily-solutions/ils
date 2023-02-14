@@ -19,15 +19,32 @@ export const Badge = styled('span', {
 	},
 
 	// Custom
-	backgroundColor: '$secondary',
+
 	borderRadius: '$pill',
-	color: '$text',
-	fontWeight: 600,
+	fontWeight: '$semibold',
 	whiteSpace: 'nowrap',
 	fontVariantNumeric: 'tabular-nums',
 
 	variants: {
+		color: {
+			default: {
+				backgroundColor: '$secondary',
+				color: '$text',
+			},
+			primary: {
+				backgroundColor: '$primary',
+				color: '$background',
+			},
+		},
 		size: {
+			xs: {
+				height: '16px',
+				p: '$2',
+				fontSize: '8px',
+				textTransform: 'uppercase',
+				letterSpacing: '0.05em',
+				lineHeight: '100%',
+			},
 			'1': {
 				height: '$5',
 				p: '$2',
@@ -41,6 +58,7 @@ export const Badge = styled('span', {
 		},
 	},
 	defaultVariants: {
+		color: 'default',
 		size: 2,
 	},
 });

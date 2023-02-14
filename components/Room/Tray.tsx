@@ -2,8 +2,10 @@ import Image from 'next/image';
 import React from 'react';
 
 import Logo from '../../public/Logo.png';
+import { Divider } from '../../ui/Divider';
 import { Flex } from '../../ui/Flex';
 import { AudioControl } from './Tray/AudioControl';
+import { ChatControl } from './Tray/ChatControl';
 import { RecordingControl } from './Tray/RecordingControl';
 import { RequestStageControl } from './Tray/RequestStageControl';
 import { ScreenShareControl } from './Tray/ScreenShareControl';
@@ -23,11 +25,15 @@ export const Tray = () => {
 			<Flex css={{ alignItems: 'center', justifyContent: 'center', gap: '$2' }}>
 				<VideoControl />
 				<AudioControl />
+				<ChatControl />
 				<ScreenShareControl />
 				<RecordingControl />
-				<RequestStageControl />
 			</Flex>
-			<ViewerCount />
+			<Flex css={{ alignItems: 'center', justifyContent: 'center', gap: '$2' }}>
+				<RequestStageControl />
+				<Divider />
+				<ViewerCount />
+			</Flex>
 		</Flex>
 	);
 };

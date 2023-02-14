@@ -14,16 +14,15 @@ import {
 import React, { memo, useCallback, useEffect } from 'react';
 
 import {
-	ChatMessage,
 	PresenceParticipant,
 	useMeetingState,
-	useMessages,
 	useViewers,
 } from '../../contexts/UIState';
+import { ChatAppMessage, useChat } from '../../hooks/useChat';
 import { useParticipantCounts } from '../../hooks/useParticipantCount';
 import { StageAppMessage, useStage } from '../../hooks/useStage';
 
-type AppMessage = StageAppMessage | ChatMessage;
+type AppMessage = StageAppMessage | ChatAppMessage;
 
 export const Wrapper = memo(({ children }: React.PropsWithChildren<{}>) => {
 	const daily = useDaily();
@@ -31,9 +30,9 @@ export const Wrapper = memo(({ children }: React.PropsWithChildren<{}>) => {
 	const isOwner = useParticipantProperty(localSessionId as string, 'owner');
 
 	const [meetingState, setMeetingState] = useMeetingState();
-	const [, setChatMessages] = useMessages();
 
 	const { onAppMessage: onStageAppMessage } = useStage();
+	const { onAppMessage: onChatAppMessage } = useChat();
 
 	const handlePreAuth = useCallback(async () => {
 		if (!daily) return;
@@ -60,6 +59,8 @@ export const Wrapper = memo(({ children }: React.PropsWithChildren<{}>) => {
 		if (!daily || meetingState !== 'new') return;
 
 		handlePreAuth();
+		// @ts-ignore
+		window['callObject'] = daily;
 	}, [daily, handlePreAuth, meetingState]);
 
 	useDailyEvent(
@@ -75,23 +76,21 @@ export const Wrapper = memo(({ children }: React.PropsWithChildren<{}>) => {
 	useAppMessage({
 		onAppMessage: useCallback(
 			(ev: DailyEventObjectAppMessage<AppMessage>) => {
-				if ('event' in ev.data && ev.data?.event)
-					onStageAppMessage(ev as DailyEventObjectAppMessage<StageAppMessage>);
-				else {
-					const event = ev as DailyEventObjectAppMessage<ChatMessage>;
-					setChatMessages((msgs) => [
-						...msgs,
-						{
-							...event.data,
-							id: crypto.randomUUID(),
-							fromId: event.fromId,
-							receivedAt: new Date(),
-							isLocal: false,
-						},
-					]);
+				switch (ev.data.event) {
+					case 'chat-message':
+						onChatAppMessage(ev as DailyEventObjectAppMessage<ChatAppMessage>);
+						break;
+					case 'react-msg':
+						onChatAppMessage(ev as DailyEventObjectAppMessage<ChatAppMessage>);
+						break;
+					default:
+						onStageAppMessage(
+							ev as DailyEventObjectAppMessage<StageAppMessage>
+						);
+						break;
 				}
 			},
-			[setChatMessages, onStageAppMessage]
+			[onStageAppMessage, onChatAppMessage]
 		),
 	});
 

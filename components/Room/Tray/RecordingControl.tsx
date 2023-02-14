@@ -19,7 +19,6 @@ export const RecordingControl = () => {
 	);
 
 	if (!isOwner) return null;
-
 	return (
 		<TrayButton muted={isRecording} onClick={handleToggleRecording}>
 			<Icon icon="recording" />

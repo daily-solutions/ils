@@ -11,6 +11,7 @@
 	"dependencies": {
 		"@daily-co/daily-js": "^0.38.0",
 		"@daily-co/daily-react": "^0.7.2",
+		"@radix-ui/react-popover": "^1.0.3",
 		"@radix-ui/react-tabs": "^1.0.2",
 		"@radix-ui/react-toast": "^1.1.2",
 		"@stitches/react": "^1.2.8",

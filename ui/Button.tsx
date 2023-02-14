@@ -48,6 +48,14 @@ const StyledButton = styled('button', {
 				backgroundColor: '$danger',
 				color: '$dangerText',
 			},
+			inverse: {
+				backgroundColor: '$muted',
+				color: '$background',
+			},
+			ghost: {
+				backgroundColor: 'transparent',
+				color: '$primary',
+			},
 		},
 
 		size: {
@@ -69,6 +77,15 @@ const StyledButton = styled('button', {
 				height: '$7',
 				width: '$7',
 			},
+			xs: {
+				height: '$4',
+				width: '$4',
+			},
+			reaction: {
+				height: '$4',
+				p: '$4 $2',
+				width: 'auto',
+			},
 		},
 		fullWidth: {
 			true: {
@@ -83,9 +100,16 @@ const StyledButton = styled('button', {
 	},
 });
 
+export type ButtonVariant =
+	| 'primary'
+	| 'secondary'
+	| 'danger'
+	| 'inverse'
+	| 'ghost';
+
 interface Props extends React.ComponentPropsWithRef<'button'> {
-	size?: 'small' | 'medium' | 'icon';
-	variant?: 'primary' | 'secondary' | 'danger';
+	size?: 'small' | 'medium' | 'icon' | 'xs' | 'reaction';
+	variant?: ButtonVariant;
 	disabled?: boolean;
 	fullWidth?: boolean;
 	css?: CSS;

@@ -1,4 +1,4 @@
-import { atom, useRecoilState } from 'recoil';
+import { atom, selectorFamily, useRecoilState, useRecoilValue } from 'recoil';
 
 export type MeetingState =
 	| 'new'
@@ -14,6 +14,17 @@ export const meetingState = atom<MeetingState>({
 
 export const useMeetingState = () => useRecoilState(meetingState);
 
+export type Emoji =
+	| '👏'
+	| '👍'
+	| '👎'
+	| '👋'
+	| '❤️'
+	| '😂'
+	| '🤯'
+	| '🔥'
+	| '🎉';
+
 export interface ChatMessage {
 	id: string;
 	message: string;
@@ -21,6 +32,8 @@ export interface ChatMessage {
 	userName: string;
 	isLocal: boolean;
 	receivedAt: Date;
+	avatar: string;
+	reactions: Record<Emoji, string[]>;
 }
 
 export const chatState = atom<ChatMessage[]>({
@@ -29,6 +42,17 @@ export const chatState = atom<ChatMessage[]>({
 });
 
 export const useMessages = () => useRecoilState(chatState);
+
+const messageSelector = selectorFamily({
+	key: 'MessageSelector',
+	get:
+		(id) =>
+		({ get }) => {
+			return get(chatState).find((msg) => msg.id === id);
+		},
+});
+
+export const useMessage = (id: string) => useRecoilValue(messageSelector(id));
 
 export type PresenceParticipant = {
 	id: string;
@@ -45,3 +69,10 @@ export const viewersState = atom<PresenceParticipant[]>({
 });
 
 export const useViewers = () => useRecoilState(viewersState);
+
+export const sidebarState = atom<'chat' | 'people' | null>({
+	key: 'sidebar-state',
+	default: null,
+});
+
+export const useSidebar = () => useRecoilState(sidebarState);

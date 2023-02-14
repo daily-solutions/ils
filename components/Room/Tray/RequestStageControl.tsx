@@ -5,8 +5,7 @@ import {
 import React, { useCallback } from 'react';
 
 import { useStage } from '../../../hooks/useStage';
-import { Icon } from '../../../ui/Icon';
-import { TrayButton } from '../../TrayButton';
+import { Button } from '../../../ui/Button';
 
 export const RequestStageControl = () => {
 	const localSessionId = useLocalSessionId();
@@ -28,8 +27,8 @@ export const RequestStageControl = () => {
 	if (isOwner || hasPresence) return null;
 
 	return (
-		<TrayButton muted={isRequesting} onClick={handleToggleRequest}>
-			<Icon icon={isRequesting ? 'cancel' : 'stage'} />
-		</TrayButton>
+		<Button onClick={handleToggleRequest}>
+			{isRequesting ? 'Cancel request' : 'Join the stage'}
+		</Button>
 	);
 };

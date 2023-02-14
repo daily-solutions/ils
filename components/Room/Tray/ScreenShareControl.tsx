@@ -30,6 +30,7 @@ export const ScreenShareControl = () => {
 		[isSharingScreen, startScreenShare, stopScreenShare]
 	);
 
+	if (disabled) return null;
 	return (
 		<TrayButton
 			muted={isSharingScreen}

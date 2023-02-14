@@ -26,6 +26,7 @@ export const AudioControl = () => {
 		[daily]
 	);
 
+	if (disabled) return null;
 	return (
 		<TrayButton
 			muted={!audio}

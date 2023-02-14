@@ -26,6 +26,7 @@ export const VideoControl = () => {
 		[daily]
 	);
 
+	if (disabled) return null;
 	return (
 		<TrayButton
 			muted={!video}

@@ -65,18 +65,9 @@ export const NameSetup = memo(({ hasPermission, onContinue }: Props) => {
 		if (!daily) return;
 
 		daily.setUserName(name);
+		daily.setUserData({ avatar: selectedAvatar });
 		onContinue();
-	}, [daily, name, onContinue]);
-
-	const handleOnSelectAvatar = useCallback(
-		(avatar: Avatar) => {
-			if (!daily) return;
-
-			setSelectedAvatar(avatar);
-			daily.setUserData({ avatar });
-		},
-		[daily]
-	);
+	}, [daily, name, onContinue, selectedAvatar]);
 
 	return (
 		<form
@@ -91,6 +82,7 @@ export const NameSetup = memo(({ hasPermission, onContinue }: Props) => {
 					<Flex css={{ flexFlow: 'column wrap', rowGap: '$3' }}>
 						<Label>Enter your display name</Label>
 						<Input
+							autoFocus
 							value={name}
 							onChange={(e) => setName(e.target.value)}
 							placeholder="Eg. Andrew"
@@ -105,7 +97,7 @@ export const NameSetup = memo(({ hasPermission, onContinue }: Props) => {
 								<StyledAvatar
 									key={name}
 									isSelected={selectedAvatar === name}
-									onClick={() => handleOnSelectAvatar(name)}
+									onClick={() => setSelectedAvatar(name)}
 								>
 									<Avatar
 										size={46}
@@ -120,7 +112,7 @@ export const NameSetup = memo(({ hasPermission, onContinue }: Props) => {
 				</Flex>
 				<Divider />
 				<Box css={{ p: '$5' }}>
-					<Button type="submit" fullWidth>
+					<Button type="submit" fullWidth disabled={name === ''}>
 						<Flex
 							css={{
 								alignItems: 'center',
