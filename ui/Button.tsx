@@ -24,7 +24,7 @@ const StyledButton = styled('button', {
 	alignItems: 'center',
 	br: '$default',
 
-	fontFamily: '$sans',
+	fontFamily: 'inherit',
 	fontSize: '$2',
 	fontWeight: '$semibold',
 

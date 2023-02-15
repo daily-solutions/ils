@@ -1,5 +1,8 @@
+import { Inter } from '@next/font/google';
 import type * as Stitches from '@stitches/react';
 import { createStitches } from '@stitches/react';
+
+const inter = Inter({ subsets: ['latin'] });
 
 export const {
 	config,
@@ -32,6 +35,7 @@ export const {
 			message: 'rgba(226, 251, 253, 0.4)',
 		},
 		fonts: {
+			inter: `${inter.style.fontFamily},"Helvetica Neue", Arial, sans-serif`,
 			sans: '"Work Sans", "Helvetica Neue", Arial, sans-serif',
 			serif: '"Work Sans", "Helvetica Neue", Arial, sans-serif',
 			mono: '"IBM Plex Mono", "JetBrains Mono", "Fira Code", "Input Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
@@ -299,7 +303,7 @@ export const globalStyles = globalCss({
 		fontSize: '$body',
 		lineHeight: '$body',
 		fontWeight: '$normal',
-		fontFamily: '$sans',
+		fontFamily: '$inter',
 		color: '$text',
 		backgroundColor: '$background!important',
 	},

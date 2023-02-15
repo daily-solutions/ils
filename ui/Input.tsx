@@ -8,7 +8,7 @@ export const Input = styled('input', {
 	boxSizing: 'border-box',
 	cursor: 'pointer',
 	display: 'inline-block',
-	fontFamily: '$sans',
+	fontFamily: 'inherit',
 	height: '$7',
 	px: '$4',
 	fontSize: '$2',
