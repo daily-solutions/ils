@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 
 import { Box } from '../../ui/Box';
 import { Flex } from '../../ui/Flex';
+import { EmojiReactions } from './EmojiReactions';
 import { Sidebar } from './Sidebar';
 import { Tray } from './Tray';
 import { View } from './View';
@@ -26,6 +27,7 @@ export const Room = () => {
 			</Flex>
 			<Sidebar />
 			<DailyAudio />
+			<EmojiReactions />
 		</Flex>
 	);
 };

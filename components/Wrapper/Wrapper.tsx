@@ -1,38 +1,34 @@
 import {
+	DailyEventObject,
 	DailyEventObjectAppMessage,
-	DailyParticipant,
 	DailyRoomInfo,
 } from '@daily-co/daily-js';
 import {
 	useAppMessage,
 	useDaily,
-	useDailyEvent,
-	useLocalSessionId,
-	useParticipantIds,
-	useParticipantProperty,
+	useThrottledDailyEvent,
 } from '@daily-co/daily-react';
 import React, { memo, useCallback, useEffect } from 'react';
 
-import {
-	PresenceParticipant,
-	useMeetingState,
-	useViewers,
-} from '../../contexts/UIState';
+import { useMeetingState } from '../../contexts/UIState';
 import { ChatAppMessage, useChat } from '../../hooks/useChat';
-import { useParticipantCounts } from '../../hooks/useParticipantCount';
+import { useDailyViewers } from '../../hooks/useDailyViewers';
+import {
+	EmojiReactionsAppMessage,
+	useReactions,
+} from '../../hooks/useReactions';
 import { StageAppMessage, useStage } from '../../hooks/useStage';
 
-type AppMessage = StageAppMessage | ChatAppMessage;
+type AppMessage = StageAppMessage | ChatAppMessage | EmojiReactionsAppMessage;
 
 export const Wrapper = memo(({ children }: React.PropsWithChildren<{}>) => {
+	useDailyViewers();
 	const daily = useDaily();
-	const localSessionId = useLocalSessionId();
-	const isOwner = useParticipantProperty(localSessionId as string, 'owner');
-
 	const [meetingState, setMeetingState] = useMeetingState();
 
 	const { onAppMessage: onStageAppMessage } = useStage();
 	const { onAppMessage: onChatAppMessage } = useChat();
+	const { onAppMessage: onEmojiReactionsMessage } = useReactions();
 
 	const handlePreAuth = useCallback(async () => {
 		if (!daily) return;
@@ -48,10 +44,7 @@ export const Wrapper = memo(({ children }: React.PropsWithChildren<{}>) => {
 				config?.enable_prejoin_ui ??
 				domainConfig?.enable_prejoin_ui;
 			if (enablePrejoinUI) setMeetingState('lobby');
-			else {
-				setMeetingState('joining-meeting');
-				await daily.join();
-			}
+			else await daily.join();
 		}
 	}, [daily, setMeetingState]);
 
@@ -63,14 +56,31 @@ export const Wrapper = memo(({ children }: React.PropsWithChildren<{}>) => {
 		window['callObject'] = daily;
 	}, [daily, handlePreAuth, meetingState]);
 
-	useDailyEvent(
-		'joined-meeting',
-		useCallback(() => setMeetingState('joined-meeting'), [setMeetingState])
-	);
-
-	useDailyEvent(
-		'left-meeting',
-		useCallback(() => setMeetingState('left-meeting'), [setMeetingState])
+	useThrottledDailyEvent(
+		['joining-meeting', 'joined-meeting', 'left-meeting'],
+		useCallback(
+			(
+				events: DailyEventObject<
+					'joining-meeting' | 'joined-meeting' | 'left-meeting'
+				>[]
+			) => {
+				if (!events.length) return;
+				events.forEach((ev) => {
+					switch (ev.action) {
+						case 'joining-meeting':
+							setMeetingState('joining-meeting');
+							break;
+						case 'joined-meeting':
+							setMeetingState('joined-meeting');
+							break;
+						case 'left-meeting':
+							setMeetingState('left-meeting');
+							break;
+					}
+				});
+			},
+			[setMeetingState]
+		)
 	);
 
 	useAppMessage({
@@ -83,6 +93,11 @@ export const Wrapper = memo(({ children }: React.PropsWithChildren<{}>) => {
 					case 'react-msg':
 						onChatAppMessage(ev as DailyEventObjectAppMessage<ChatAppMessage>);
 						break;
+					case 'emoji-reactions':
+						onEmojiReactionsMessage(
+							ev as DailyEventObjectAppMessage<EmojiReactionsAppMessage>
+						);
+						break;
 					default:
 						onStageAppMessage(
 							ev as DailyEventObjectAppMessage<StageAppMessage>
@@ -90,38 +105,9 @@ export const Wrapper = memo(({ children }: React.PropsWithChildren<{}>) => {
 						break;
 				}
 			},
-			[onStageAppMessage, onChatAppMessage]
+			[onChatAppMessage, onEmojiReactionsMessage, onStageAppMessage]
 		),
 	});
-
-	const participantIds = useParticipantIds({
-		filter: useCallback((p: DailyParticipant) => p.permissions.hasPresence, []),
-	});
-	const { hidden } = useParticipantCounts();
-	const [, setViewers] = useViewers();
-
-	const handleViewers = useCallback(
-		(presenceParticipants: PresenceParticipant[]) => {
-			const viewers = presenceParticipants.filter(
-				(p) => !participantIds.includes(p.id)
-			);
-			setViewers(viewers);
-		},
-		[participantIds, setViewers]
-	);
-
-	useEffect(() => {
-		if (!isOwner) return;
-
-		const fetchPresenceData = async () => {
-			const presenceRes = await fetch(`${window.location.origin}/api/presence`);
-			const { participants } = await presenceRes.json();
-			handleViewers(participants);
-		};
-
-		if (hidden > 0) fetchPresenceData();
-		else handleViewers([]);
-	}, [handleViewers, hidden, isOwner]);
 
 	return <>{children}</>;
 });

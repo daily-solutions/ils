@@ -6,6 +6,7 @@ import { Divider } from '../../ui/Divider';
 import { Flex } from '../../ui/Flex';
 import { AudioControl } from './Tray/AudioControl';
 import { ChatControl } from './Tray/ChatControl';
+import { ReactionsControl } from './Tray/ReactionsControl';
 import { RecordingControl } from './Tray/RecordingControl';
 import { RequestStageControl } from './Tray/RequestStageControl';
 import { ScreenShareControl } from './Tray/ScreenShareControl';
@@ -28,6 +29,7 @@ export const Tray = () => {
 				<ChatControl />
 				<ScreenShareControl />
 				<RecordingControl />
+				<ReactionsControl />
 			</Flex>
 			<Flex css={{ alignItems: 'center', justifyContent: 'center', gap: '$2' }}>
 				<RequestStageControl />

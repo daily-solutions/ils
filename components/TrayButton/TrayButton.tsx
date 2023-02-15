@@ -3,13 +3,13 @@ import React from 'react';
 import { Button, ButtonVariant } from '../../ui/Button';
 
 interface Props extends React.ComponentProps<typeof Button> {
-	muted: boolean;
+	muted?: boolean;
 	mutedVariant?: ButtonVariant;
 }
 
 export const TrayButton = ({
 	children,
-	muted,
+	muted = false,
 	mutedVariant = 'danger',
 	...rest
 }: React.PropsWithChildren<Props>) => {
