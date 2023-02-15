@@ -13,6 +13,7 @@ export const ToastContainer = () => {
 			{Object.keys(toasts).map((id) => (
 				<Toast
 					{...toasts[id]}
+					avatar={toasts[id]?.avatar}
 					key={id}
 					open={toasts[id].isShown}
 					setOpen={() => toaster.close(id)}

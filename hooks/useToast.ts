@@ -18,6 +18,7 @@ interface Toast {
 	duration?: number;
 	isShown: boolean;
 	actions?: ToastAction;
+	avatar?: string;
 }
 
 type InputToast = {
@@ -26,6 +27,7 @@ type InputToast = {
 	description?: string;
 	duration?: number;
 	actions?: ToastAction;
+	avatar?: string;
 };
 
 const toastsState = atom<Record<string, Toast>>({
@@ -44,6 +46,7 @@ export const useToasts = () => {
 				title,
 				description = '',
 				duration = 5000,
+				avatar = undefined,
 				actions = undefined,
 			}: InputToast
 		) => {
@@ -55,6 +58,7 @@ export const useToasts = () => {
 					variant,
 					duration,
 					actions,
+					avatar,
 					isShown: true,
 				};
 				return { ...toasts, [newToast.id]: newToast };

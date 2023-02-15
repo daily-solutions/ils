@@ -28,6 +28,7 @@ interface LeaveStageAppMessage {
 interface RequestStageAppMessage {
 	event: 'request-stage';
 	userName: string;
+	avatar: string;
 }
 
 interface CancelRequestStageAppMessage {
@@ -59,10 +60,10 @@ const requestedParticipantsState = atom<Record<string, RequestedParticipant>>({
 export const useStage = () => {
 	const daily = useDaily();
 	const localSessionId = useLocalSessionId();
-	const [isOwner, userName] = useParticipantProperty(localSessionId as string, [
-		'owner',
-		'user_name',
-	]);
+	const [isOwner, userName, userData] = useParticipantProperty(
+		localSessionId as string,
+		['owner', 'user_name', 'userData']
+	);
 	const [isRequesting, setIsRequesting] = useRecoilState(isRequestingState);
 	const [requestedParticipants, setRequestedParticipants] = useRecoilState(
 		requestedParticipantsState
@@ -76,8 +77,12 @@ export const useStage = () => {
 		if (isOwner) return;
 
 		setIsRequesting(true);
-		sendAppMessage({ event: 'request-stage', userName });
-	}, [isOwner, sendAppMessage, setIsRequesting, userName]);
+		sendAppMessage({
+			event: 'request-stage',
+			userName,
+			avatar: (userData as any)?.['avatar'],
+		});
+	}, [isOwner, sendAppMessage, setIsRequesting, userData, userName]);
 
 	const cancelRequestToJoinStage = useCallback(() => {
 		if (isOwner) return;
@@ -169,12 +174,14 @@ export const useStage = () => {
 				case 'request-stage':
 					if (isOwner) {
 						const userName = ev.data?.userName;
+						const avatar = ev.data?.avatar;
 						setRequestedParticipants((prev) => ({
 							...prev,
-							[ev.fromId]: { id: ev.fromId, userName },
+							[ev.fromId]: { id: ev.fromId, userName, avatar },
 						}));
 						toaster.notify('light', {
 							title: `${userName ?? 'Guest'} requested to join the stage`,
+							avatar: avatar,
 							actions: {
 								type: 'bringToStage',
 								bringToStage: () => bringToStage(ev.fromId),

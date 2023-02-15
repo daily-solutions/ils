@@ -1,7 +1,9 @@
 import * as ToastPrimitive from '@radix-ui/react-toast';
-import React from 'react';
+import Avatar from 'boring-avatars';
+import React, { memo } from 'react';
 
 import { keyframes, styled } from '../styles/stitches.config';
+import { Flex } from './Flex';
 
 const VIEWPORT_PADDING = 25;
 
@@ -52,7 +54,6 @@ const StyledToastRoot = styled(ToastPrimitive.Root, {
 	},
 });
 const StyledToastTile = styled(ToastPrimitive.Title, {
-	marginBottom: 5,
 	fontWeight: 500,
 	color: '$dark',
 	fontSize: 15,
@@ -70,9 +71,9 @@ export const ToastViewport = styled(ToastPrimitive.Viewport, {
 	right: 0,
 	display: 'flex',
 	flexDirection: 'column',
+	minWidth: 390,
 	padding: VIEWPORT_PADDING,
 	gap: 10,
-	width: 390,
 	maxWidth: '100vw',
 	margin: 0,
 	listStyle: 'none',
@@ -94,9 +95,31 @@ interface Props {
 	duration?: number;
 	open: boolean;
 	setOpen: (open: boolean) => void;
+	avatar?: string;
 }
 
+const ToastWithoutAvatar = memo(
+	({
+		children,
+		description,
+		title,
+	}: React.PropsWithChildren<{ title?: string; description?: string }>) => (
+		<Flex css={{ flexFlow: 'column wrap', flex: 1, gap: '$2' }}>
+			{title && <StyledToastTile>{title}</StyledToastTile>}
+			{description && (
+				<StyledToastDescription>{description}</StyledToastDescription>
+			)}
+			<StyledToastAction asChild altText={title as string}>
+				{children}
+			</StyledToastAction>
+		</Flex>
+	)
+);
+
+ToastWithoutAvatar.displayName = 'ToastWithoutAvatar';
+
 export const Toast = ({
+	avatar,
 	children,
 	description = '',
 	duration = 5000,
@@ -114,13 +137,23 @@ export const Toast = ({
 			duration={duration}
 			variant={variant}
 		>
-			{title && <StyledToastTile>{title}</StyledToastTile>}
-			{description && (
-				<StyledToastDescription>{description}</StyledToastDescription>
+			{avatar ? (
+				<Flex css={{ gap: '$4' }}>
+					<Avatar
+						variant="beam"
+						size={56}
+						name={avatar}
+						colors={['#1BEBB9', '#00C9DF', '#2B3F56', '#D1FBF1']}
+					/>
+					<ToastWithoutAvatar title={title} description={description}>
+						{children}
+					</ToastWithoutAvatar>
+				</Flex>
+			) : (
+				<ToastWithoutAvatar title={title} description={description}>
+					{children}
+				</ToastWithoutAvatar>
 			)}
-			<StyledToastAction asChild altText={title}>
-				{children}
-			</StyledToastAction>
 		</StyledToastRoot>
 	);
 };
