@@ -58,8 +58,11 @@ interface Props {
 
 export const NameSetup = memo(({ hasPermission, onContinue }: Props) => {
 	const daily = useDaily();
+
 	const [name, setName] = useState<string>('');
-	const [selectedAvatar, setSelectedAvatar] = useState<Avatar>(avatarNames[0]);
+	const [selectedAvatar, setSelectedAvatar] = useState<Avatar>(
+		avatarNames[Math.floor(Math.random() * 10)]
+	);
 
 	const handleContinue = useCallback(() => {
 		if (!daily) return;

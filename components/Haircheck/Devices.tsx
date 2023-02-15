@@ -53,7 +53,7 @@ export const Devices = () => {
 	);
 
 	return (
-		<Flex css={{ flexFlow: 'column wrap', rowGap: '$3', p: '$5' }}>
+		<Flex css={{ flexFlow: 'column wrap', rowGap: '$3' }}>
 			<Flex css={{ flexFlow: 'column wrap', rowGap: '$1' }}>
 				<StyledLabel>Camera</StyledLabel>
 				<Select

@@ -36,6 +36,11 @@ const StyledButton = styled('button', {
 
 	variants: {
 		variant: {
+			outline: {
+				border: '1px solid $border',
+				background: '$background',
+				color: '$baseText',
+			},
 			primary: {
 				backgroundColor: '$primary',
 				color: '$primaryText',
@@ -112,7 +117,8 @@ export type ButtonVariant =
 	| 'danger'
 	| 'inverse'
 	| 'ghost'
-	| 'cyan';
+	| 'cyan'
+	| 'outline';
 
 interface Props extends React.ComponentPropsWithRef<'button'> {
 	size?: 'small' | 'medium' | 'icon' | 'xs' | 'reaction';

@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 
 import { Box } from '../../ui/Box';
 import { Flex } from '../../ui/Flex';
+import { InviteToJoin } from '../Modal';
 import { EmojiReactions } from './EmojiReactions';
 import { Sidebar } from './Sidebar';
 import { Tray } from './Tray';
@@ -28,6 +29,7 @@ export const Room = () => {
 			<Sidebar />
 			<DailyAudio />
 			<EmojiReactions />
+			<InviteToJoin />
 		</Flex>
 	);
 };

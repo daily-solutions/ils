@@ -17,7 +17,7 @@ export const Sidebar = () => {
 	return (
 		<Card
 			css={{
-				width: '280px',
+				width: '20rem',
 				boxShadow: '0px 0px 20px 5px rgba(0, 0, 0, 0.03)',
 				padding: 0,
 				maxWidth: '100dvh',

@@ -3,36 +3,30 @@ import {
 	useLocalSessionId,
 	useParticipantProperty,
 } from '@daily-co/daily-react';
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
 
+import { useIsOnStage } from '../../../hooks/useIsOnStage';
 import { Icon } from '../../../ui/Icon';
 import { TrayButton } from '../../TrayButton';
 
-export const VideoControl = () => {
+interface Props {
+	ignoreOnStage?: boolean;
+}
+
+export const VideoControl = ({ ignoreOnStage = false }: Props) => {
 	const daily = useDaily();
 	const localSessionId = useLocalSessionId();
-	const [video, canSend] = useParticipantProperty(localSessionId as string, [
-		'video',
-		'permissions.canSend',
-	]);
+	const video = useParticipantProperty(localSessionId as string, 'video');
 
-	const disabled = useMemo(
-		() => (typeof canSend === 'boolean' ? !canSend : !canSend.has('video')),
-		[canSend]
-	);
-
+	const isOnStage = useIsOnStage('video', ignoreOnStage);
 	const handleToggleVideo = useCallback(
 		(state: boolean) => daily?.setLocalVideo(state),
 		[daily]
 	);
 
-	if (disabled) return null;
+	if (!isOnStage) return null;
 	return (
-		<TrayButton
-			muted={!video}
-			onClick={() => handleToggleVideo(!video)}
-			disabled={disabled}
-		>
+		<TrayButton muted={!video} onClick={() => handleToggleVideo(!video)}>
 			<Icon icon={video ? 'cam' : 'cam_muted'} />
 		</TrayButton>
 	);

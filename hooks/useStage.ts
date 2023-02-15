@@ -9,6 +9,7 @@ import { useCallback } from 'react';
 import { atom, useRecoilState } from 'recoil';
 
 import { useToasts } from '../contexts/ToastProvider';
+import { useInviteToJoin } from '../contexts/UIState';
 
 interface BringToStageAppMessage {
 	event: 'bring-to-stage';
@@ -66,6 +67,7 @@ export const useStage = () => {
 	const [requestedParticipants, setRequestedParticipants] = useRecoilState(
 		requestedParticipantsState
 	);
+	const [, setInvited] = useInviteToJoin();
 	const { toaster } = useToasts();
 
 	const sendAppMessage = useAppMessage();
@@ -147,15 +149,13 @@ export const useStage = () => {
 							return prevP;
 						});
 					} else if (localSessionId === sessionId) {
-						toaster.notify('light', {
-							title: 'You are on stage',
-							description: 'You can unmute your mic to talk',
-						});
+						setInvited(true);
 						setIsRequesting(false);
 					}
 					break;
 				case 'remove-from-stage':
 					if (localSessionId === ev.data?.sessionId) {
+						daily?.setUserData(undefined);
 						const participant = daily?.participants()?.[ev.fromId];
 						toaster.notify('light', {
 							title: 'You were removed from the stage',
@@ -167,6 +167,7 @@ export const useStage = () => {
 					break;
 				case 'leave-stage':
 					if (isOwner) {
+						daily?.setUserData(undefined);
 						const participant = daily?.participants()?.[ev.fromId];
 						toaster.notify('light', {
 							title: 'Participant left',
@@ -210,6 +211,7 @@ export const useStage = () => {
 			daily,
 			isOwner,
 			localSessionId,
+			setInvited,
 			setIsRequesting,
 			setRequestedParticipants,
 			toaster,

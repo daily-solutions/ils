@@ -3,36 +3,32 @@ import {
 	useLocalSessionId,
 	useParticipantProperty,
 } from '@daily-co/daily-react';
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
 
+import { useIsOnStage } from '../../../hooks/useIsOnStage';
 import { Icon } from '../../../ui/Icon';
 import { TrayButton } from '../../TrayButton';
 
-export const AudioControl = () => {
+interface Props {
+	ignoreOnStage?: boolean;
+}
+
+export const AudioControl = ({ ignoreOnStage = false }: Props) => {
 	const daily = useDaily();
 	const localSessionId = useLocalSessionId();
-	const [audio, canSend] = useParticipantProperty(localSessionId as string, [
-		'audio',
-		'permissions.canSend',
-	]);
+	const audio = useParticipantProperty(localSessionId as string, 'audio');
 
-	const disabled = useMemo(
-		() => (typeof canSend === 'boolean' ? !canSend : !canSend.has('audio')),
-		[canSend]
-	);
+	const isOnStage = useIsOnStage('audio', ignoreOnStage);
 
 	const handleToggleAudio = useCallback(
 		(state: boolean) => daily?.setLocalAudio(state),
 		[daily]
 	);
 
-	if (disabled) return null;
+	if (!isOnStage) return null;
+
 	return (
-		<TrayButton
-			muted={!audio}
-			onClick={() => handleToggleAudio(!audio)}
-			disabled={disabled}
-		>
+		<TrayButton muted={!audio} onClick={() => handleToggleAudio(!audio)}>
 			<Icon icon={audio ? 'mic' : 'mic_muted'} />
 		</TrayButton>
 	);

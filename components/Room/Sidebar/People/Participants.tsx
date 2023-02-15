@@ -57,7 +57,14 @@ Participant.displayName = 'Participant';
 
 export const Participants = () => {
 	const participantIds = useParticipantIds({
-		filter: useCallback((p: DailyParticipant) => p.permissions.hasPresence, []),
+		filter: useCallback(
+			(p: DailyParticipant) =>
+				Boolean(
+					p?.permissions?.canSend &&
+						(p.owner || (p?.userData as any)?.['onStage'])
+				),
+			[]
+		),
 		sort: 'user_name',
 	});
 

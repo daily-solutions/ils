@@ -14,7 +14,14 @@ export const useDailyViewers = () => {
 	const isOwner = useParticipantProperty(localSessionId as string, 'owner');
 
 	const participantIds = useParticipantIds({
-		filter: useCallback((p: DailyParticipant) => p.permissions.hasPresence, []),
+		filter: useCallback(
+			(p: DailyParticipant) =>
+				Boolean(
+					p?.permissions?.canSend &&
+						(p.owner || (p?.userData as any)?.['onStage'])
+				),
+			[]
+		),
 	});
 	const { hidden } = useParticipantCounts();
 	const [, setViewers] = useViewers();

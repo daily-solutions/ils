@@ -12,7 +12,11 @@ export const View = () => {
 	const viewRef = useRef<HTMLDivElement>(null);
 	const participantIds = useParticipantIds({
 		filter: useCallback(
-			(p: DailyParticipant) => Boolean(p?.permissions?.canSend),
+			(p: DailyParticipant) =>
+				Boolean(
+					p?.permissions?.canSend &&
+						(p.owner || (p?.userData as any)?.['onStage'])
+				),
 			[]
 		),
 	});

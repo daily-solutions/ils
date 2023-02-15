@@ -1,56 +1,46 @@
 import { useDaily, useLocalSessionId } from '@daily-co/daily-react';
-import React, { memo, useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 
-import { useMeetingState } from '../../contexts/UIState';
+import { useInviteToJoin } from '../../contexts/UIState';
 import { Box } from '../../ui/Box';
 import { Button } from '../../ui/Button';
-import { Divider } from '../../ui/Divider';
 import { Flex } from '../../ui/Flex';
+import { Modal } from '../../ui/Modal';
+import { Devices } from '../Haircheck/Devices';
 import { AudioControl, VideoControl } from '../Room';
 import { Tile } from '../Tile';
-import { Devices } from './Devices';
 
-export const Setup = memo(() => {
+export const InviteToJoin = () => {
 	const daily = useDaily();
 	const localSessionId = useLocalSessionId();
-	const [, setMeetingState] = useMeetingState();
-
-	useEffect(() => {
-		if (!daily) return;
-
-		daily.startCamera();
-	}, [daily]);
+	const [show, setShow] = useInviteToJoin();
 
 	const handleJoin = useCallback(() => {
 		if (!daily) return;
 
-		setMeetingState('joining-meeting');
-		daily?.join();
-	}, [daily, setMeetingState]);
+		daily.setUserData({ onStage: true });
+		setShow(false);
+	}, [daily, setShow]);
 
 	return (
-		<Box css={{ width: '100%', height: '100%' }}>
+		<Modal open={show} onClose={setShow} title="Invited to join stage">
 			<Tile sessionId={localSessionId as string} />
 			<Flex
 				css={{
 					alignItems: 'center',
 					justifyContent: 'space-between',
-					mt: '$5',
-					px: '$3',
+					mt: '$4',
 				}}
 			>
 				<Flex css={{ gap: '$2' }}>
-					<VideoControl />
-					<AudioControl />
+					<VideoControl ignoreOnStage />
+					<AudioControl ignoreOnStage />
 				</Flex>
 				<Button onClick={handleJoin}>Join</Button>
 			</Flex>
-			<Divider css={{ mt: '$4' }} />
-			<Box css={{ p: '$5' }}>
+			<Box css={{ p: '$4 $2' }}>
 				<Devices />
 			</Box>
-		</Box>
+		</Modal>
 	);
-});
-
-Setup.displayName = 'Setup';
+};
