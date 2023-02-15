@@ -1,10 +1,18 @@
 import type { AppProps } from 'next/app';
+import { RecoilRoot } from 'recoil';
 
 import { globalStyles } from '../styles/stitches.config';
+import { ToastProvider } from '../ui/Toast';
 
 function MyApp({ Component, pageProps }: AppProps) {
 	globalStyles();
-	return <Component {...pageProps} />;
+	return (
+		<RecoilRoot>
+			<ToastProvider>
+				<Component {...pageProps} />
+			</ToastProvider>
+		</RecoilRoot>
+	);
 }
 
 export default MyApp;

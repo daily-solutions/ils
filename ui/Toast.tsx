@@ -65,7 +65,7 @@ const StyledToastDescription = styled(ToastPrimitive.Description, {
 });
 
 export const ToastViewport = styled(ToastPrimitive.Viewport, {
-	position: 'fixed',
+	position: 'absolute',
 	bottom: 0,
 	right: 0,
 	display: 'flex',

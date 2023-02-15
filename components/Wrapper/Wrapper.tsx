@@ -18,6 +18,7 @@ import {
 	useReactions,
 } from '../../hooks/useReactions';
 import { StageAppMessage, useStage } from '../../hooks/useStage';
+import { ToastContainer } from './ToastContainer';
 
 type AppMessage = StageAppMessage | ChatAppMessage | EmojiReactionsAppMessage;
 
@@ -109,7 +110,12 @@ export const Wrapper = memo(({ children }: React.PropsWithChildren<{}>) => {
 		),
 	});
 
-	return <>{children}</>;
+	return (
+		<>
+			{children}
+			<ToastContainer />
+		</>
+	);
 });
 
 Wrapper.displayName = 'Wrapper';

@@ -6,6 +6,7 @@ import { useResizeObserver } from '../../hooks/useResizeObserver';
 import { useVideoGrid } from '../../hooks/useVideoGrid';
 import { Box } from '../../ui/Box';
 import { Flex } from '../../ui/Flex';
+import { ToastViewport } from '../../ui/Toast';
 import { Tile } from '../Tile';
 
 export const View = () => {
@@ -55,6 +56,7 @@ export const View = () => {
 		<Flex
 			ref={viewRef}
 			css={{
+				position: 'relative',
 				width: '100%',
 				height: '100%',
 				alignItems: 'center',
@@ -85,6 +87,7 @@ export const View = () => {
 					<h3>Please wait till a host joins your call</h3>
 				</Box>
 			)}
+			<ToastViewport />
 		</Flex>
 	);
 };
