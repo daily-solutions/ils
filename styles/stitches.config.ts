@@ -33,6 +33,7 @@ export const {
 			cyanLight: '#E2FBFD',
 			cyanLightText: '#00C9DF',
 			message: 'rgba(226, 251, 253, 0.4)',
+			border: '#C8D1DC',
 		},
 		fonts: {
 			inter: `${inter.style.fontFamily},"Helvetica Neue", Arial, sans-serif`,
@@ -95,7 +96,7 @@ export const {
 			5: '25px',
 		},
 		shadows: {
-			card: '0px 0px 20px 5px rgba(0, 0, 0, 0.05)',
+			card: '0px 156px 62px rgba(90, 125, 140, 0.01), 0px 88px 53px rgba(90, 125, 140, 0.03), 0px 39px 39px rgba(90, 125, 140, 0.04), 0px 10px 21px rgba(90, 125, 140, 0.05), 0px 0px 0px rgba(90, 125, 140, 0.05)',
 		},
 		transitions: {
 			default: 'all 250ms ease',

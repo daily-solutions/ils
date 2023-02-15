@@ -14,8 +14,8 @@ export const Input = styled('input', {
 	fontSize: '$2',
 	lineHeight: '$none',
 	transition: '$default',
-	border: '1px solid $slate6',
-	backgroundColor: '$secondary',
+	border: '1px solid $border',
+	backgroundColor: '$background',
 	color: '$text',
 
 	'&::-webkit-outer-spin-button, &::-webkit-inner-spin-button': {
@@ -32,17 +32,15 @@ export const Input = styled('input', {
 		cursor: 'not-allowed',
 	},
 	'&::placeholder': {
-		color: '$muted',
+		color: '$border',
 		opacity: 1,
 	},
 
 	'&:hover': {
-		borderColor: '$secondary',
 		outline: 'none',
 	},
 
 	'&:focus': {
-		borderColor: '$secondary',
 		outline: 'none',
 	},
 });

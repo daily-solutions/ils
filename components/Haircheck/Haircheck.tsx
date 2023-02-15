@@ -38,6 +38,7 @@ export const Haircheck = () => {
 				justifyContent: 'center',
 				width: '100dvw',
 				height: '100dvh',
+				background: '$secondary',
 			}}
 		>
 			<Card
