@@ -1,16 +1,11 @@
 import React, { useCallback, useState } from 'react';
 
 import { Emoji } from '../../../../contexts/UIState';
-import { emojis, useChat } from '../../../../hooks/useChat';
+import { useChat } from '../../../../hooks/useChat';
 import { Box } from '../../../../ui/Box';
 import { Button } from '../../../../ui/Button';
-import { Grid } from '../../../../ui/Grid';
 import { Icon } from '../../../../ui/Icon';
-import {
-	Popover,
-	PopoverContent,
-	PopoverTrigger,
-} from '../../../../ui/Popover';
+import { EmojiReactionsPopover } from '../../EmojiReactionsPopover';
 
 interface Props {
 	id: string;
@@ -34,40 +29,24 @@ export const ChatReact = ({ id }: Props) => {
 				transform: 'translateY(-50%)',
 			}}
 		>
-			<Popover open={open} onOpenChange={setOpen}>
-				<PopoverTrigger asChild>
-					<Button
-						className="msg-react"
-						variant="cyan"
-						size="xs"
-						css={{
-							visibility: open ? 'visible' : 'hidden',
-							opacity: open ? 1 : 0,
-							transition: 'visibility 0.3s linear,opacity 0.3s linear',
-						}}
-					>
-						<Icon icon="plus" size={15} />
-					</Button>
-				</PopoverTrigger>
-				<PopoverContent css={{ p: '$4' }}>
-					<Grid
-						css={{
-							gridGap: '$4',
-							gridTemplateColumns: 'repeat(3, 1fr)',
-						}}
-					>
-						{emojis.map((emoji) => (
-							<Box
-								key={emoji}
-								onClick={() => handleOnReact(emoji)}
-								css={{ cursor: 'pointer' }}
-							>
-								{emoji}
-							</Box>
-						))}
-					</Grid>
-				</PopoverContent>
-			</Popover>
+			<EmojiReactionsPopover
+				open={open}
+				setOpen={setOpen}
+				onEmojiClick={handleOnReact}
+			>
+				<Button
+					className="msg-react"
+					variant="cyan"
+					size="xs"
+					css={{
+						visibility: open ? 'visible' : 'hidden',
+						opacity: open ? 1 : 0,
+						transition: 'visibility 0.3s linear,opacity 0.3s linear',
+					}}
+				>
+					<Icon icon="plus" size={15} />
+				</Button>
+			</EmojiReactionsPopover>
 		</Box>
 	);
 };
