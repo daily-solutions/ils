@@ -9,7 +9,7 @@ import { Chat } from './Chat';
 import { People } from './People';
 
 export const Sidebar = () => {
-	const [sidebar] = useSidebar();
+	const [sidebar, setSidebar] = useSidebar();
 	const md = useMediaQuery('(min-width: 800px)');
 
 	if (!sidebar) return null;
@@ -24,7 +24,12 @@ export const Sidebar = () => {
 				padding: 0,
 			}}
 		>
-			<Tabs value={sidebar}>
+			<Tabs
+				value={sidebar}
+				onValueChange={(value: string) =>
+					setSidebar(value as 'chat' | 'people')
+				}
+			>
 				<Box css={{ p: '$3' }}>
 					<TabsList aria-label="Sidebar">
 						<TabsTrigger value="chat">
