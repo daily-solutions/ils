@@ -163,6 +163,12 @@ export const useStage = () => {
 					break;
 				case 'leave-stage':
 					if (isOwner) {
+						daily?.updateParticipant(ev.fromId, {
+							updatePermissions: {
+								canSend: false,
+								hasPresence: false,
+							},
+						});
 						const participant = daily?.participants()?.[ev.fromId];
 						toaster.notify('light', {
 							title: 'Participant left',
