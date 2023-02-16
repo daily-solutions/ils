@@ -1,5 +1,4 @@
 import { useDaily } from '@daily-co/daily-react';
-import { styled } from '@stitches/react';
 import Avatar from 'boring-avatars';
 import React, { memo, useCallback, useState } from 'react';
 
@@ -11,20 +10,6 @@ import { Icon } from '../../ui/Icon';
 import { Input } from '../../ui/Input';
 import { Label } from '../../ui/Label';
 import { Text } from '../../ui/Text';
-
-const StyledAvatar = styled('div', {
-	cursor: 'pointer',
-	variants: {
-		isSelected: {
-			true: {
-				height: 46,
-				width: 46,
-				border: '5px solid $orange',
-				borderRadius: '50%',
-			},
-		},
-	},
-});
 
 type Avatar =
 	| 'Margaret Brent'
@@ -97,10 +82,10 @@ export const NameSetup = memo(({ hasPermission, onContinue }: Props) => {
 							css={{ gap: '$3', flexFlow: 'row wrap', position: 'relative' }}
 						>
 							{avatarNames.map((name) => (
-								<StyledAvatar
-									key={name}
-									isSelected={selectedAvatar === name}
+								<Box
+									css={{ position: 'relative', cursor: 'pointer' }}
 									onClick={() => setSelectedAvatar(name)}
+									key={name}
 								>
 									<Avatar
 										size={46}
@@ -108,7 +93,20 @@ export const NameSetup = memo(({ hasPermission, onContinue }: Props) => {
 										variant="beam"
 										colors={['#1BEBB9', '#00C9DF', '#2B3F56', '#D1FBF1']}
 									/>
-								</StyledAvatar>
+									{selectedAvatar === name && (
+										<Box
+											css={{
+												position: 'absolute',
+												top: 0,
+												left: 0,
+												width: 46,
+												height: 46,
+												border: '3px solid $orange',
+												borderRadius: '50%',
+											}}
+										/>
+									)}
+								</Box>
 							))}
 						</Flex>
 					</Flex>
