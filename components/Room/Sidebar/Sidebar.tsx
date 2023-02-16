@@ -24,13 +24,13 @@ export const Sidebar = () => {
 				padding: 0,
 			}}
 		>
-			<Tabs defaultValue="chat">
+			<Tabs defaultValue={sidebar}>
 				<Box css={{ p: '$3' }}>
 					<TabsList aria-label="Sidebar">
 						<TabsTrigger value="chat">
 							<Icon icon="chat" />
 						</TabsTrigger>
-						<TabsTrigger value="participants">
+						<TabsTrigger value="people">
 							<Icon icon="user" />
 						</TabsTrigger>
 					</TabsList>
@@ -39,7 +39,7 @@ export const Sidebar = () => {
 				<TabsContent value="chat">
 					<Chat />
 				</TabsContent>
-				<TabsContent value="participants">
+				<TabsContent value="people">
 					<People />
 				</TabsContent>
 			</Tabs>

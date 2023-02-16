@@ -7,6 +7,7 @@ import { Divider } from '../../ui/Divider';
 import { Flex } from '../../ui/Flex';
 import { AudioControl } from './Tray/AudioControl';
 import { ChatControl } from './Tray/ChatControl';
+import { PeopleControl } from './Tray/PeopleControl';
 import { ReactionsControl } from './Tray/ReactionsControl';
 import { RecordingControl } from './Tray/RecordingControl';
 import { RequestStageControl } from './Tray/RequestStageControl';
@@ -31,6 +32,7 @@ export const Tray = () => {
 				<VideoControl />
 				<AudioControl />
 				<ChatControl />
+				<PeopleControl />
 				<RecordingControl />
 				<ReactionsControl />
 				<SettingsControl />
