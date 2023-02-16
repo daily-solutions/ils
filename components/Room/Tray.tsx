@@ -10,6 +10,7 @@ import { ChatControl } from './Tray/ChatControl';
 import { ReactionsControl } from './Tray/ReactionsControl';
 import { RecordingControl } from './Tray/RecordingControl';
 import { RequestStageControl } from './Tray/RequestStageControl';
+import { SettingsControl } from './Tray/SettingsControl';
 import { VideoControl } from './Tray/VideoControl';
 import { ViewerCount } from './Tray/ViewerCount';
 
@@ -32,6 +33,7 @@ export const Tray = () => {
 				<ChatControl />
 				<RecordingControl />
 				<ReactionsControl />
+				<SettingsControl />
 			</Flex>
 			<Flex css={{ alignItems: 'center', justifyContent: 'center', gap: '$2' }}>
 				<RequestStageControl />

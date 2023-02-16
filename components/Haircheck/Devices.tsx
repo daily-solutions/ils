@@ -10,7 +10,11 @@ const StyledLabel = styled('label', {
 	fontWeight: 600,
 });
 
-export const Devices = () => {
+interface Props {
+	audioVideo?: boolean;
+}
+
+export const Devices = ({ audioVideo = true }: Props) => {
 	const {
 		cameras,
 		microphones,
@@ -54,32 +58,36 @@ export const Devices = () => {
 
 	return (
 		<Flex css={{ flexFlow: 'column wrap', rowGap: '$3' }}>
-			<Flex css={{ flexFlow: 'column wrap', rowGap: '$1' }}>
-				<StyledLabel>Camera</StyledLabel>
-				<Select
-					value={currentCamera?.device?.deviceId}
-					onChange={(e) => handleDeviceChange('cam', e.target.value)}
-				>
-					{cameras.map((cam) => (
-						<option value={cam.device.deviceId} key={cam.device.deviceId}>
-							{cam.device.label}
-						</option>
-					))}
-				</Select>
-			</Flex>
-			<Flex css={{ flexFlow: 'column wrap', rowGap: '$1' }}>
-				<StyledLabel>Microphone</StyledLabel>
-				<Select
-					value={currentMic?.device?.deviceId}
-					onChange={(e) => handleDeviceChange('mic', e.target.value)}
-				>
-					{microphones.map((mic) => (
-						<option value={mic.device.deviceId} key={mic.device.deviceId}>
-							{mic.device.label}
-						</option>
-					))}
-				</Select>
-			</Flex>
+			{audioVideo && (
+				<Flex css={{ flexFlow: 'column wrap', rowGap: '$1' }}>
+					<StyledLabel>Camera</StyledLabel>
+					<Select
+						value={currentCamera?.device?.deviceId}
+						onChange={(e) => handleDeviceChange('cam', e.target.value)}
+					>
+						{cameras.map((cam) => (
+							<option value={cam.device.deviceId} key={cam.device.deviceId}>
+								{cam.device.label}
+							</option>
+						))}
+					</Select>
+				</Flex>
+			)}
+			{audioVideo && (
+				<Flex css={{ flexFlow: 'column wrap', rowGap: '$1' }}>
+					<StyledLabel>Microphone</StyledLabel>
+					<Select
+						value={currentMic?.device?.deviceId}
+						onChange={(e) => handleDeviceChange('mic', e.target.value)}
+					>
+						{microphones.map((mic) => (
+							<option value={mic.device.deviceId} key={mic.device.deviceId}>
+								{mic.device.label}
+							</option>
+						))}
+					</Select>
+				</Flex>
+			)}
 			<Flex css={{ flexFlow: 'column wrap', rowGap: '$1' }}>
 				<StyledLabel>Speaker</StyledLabel>
 				<Select
