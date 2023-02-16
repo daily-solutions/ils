@@ -22,7 +22,7 @@ interface Props {
 }
 
 export const Tile = memo(
-	({ isScreen = false, sessionId, aspectRatio = 16 / 9 }: Props) => {
+	({ aspectRatio = 16 / 9, isScreen = false, sessionId }: Props) => {
 		const tileRef = useRef<HTMLDivElement>(null);
 		const videoRef = useRef<HTMLVideoElement>(null);
 		const [tileAspectRatio, setTileAspectRatio] = useState(aspectRatio);
