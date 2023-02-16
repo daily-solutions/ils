@@ -12,15 +12,16 @@ export const Sidebar = () => {
 	const [sidebar] = useSidebar();
 	const md = useMediaQuery('(min-width: 800px)');
 
-	if (!md || !sidebar) return null;
+	if (!sidebar) return null;
 
 	return (
 		<Card
 			css={{
-				width: '20rem',
-				boxShadow: '0px 0px 20px 5px rgba(0, 0, 0, 0.03)',
+				position: md ? 'initial' : 'absolute',
+				width: md ? '20rem' : '100%',
+				height: md ? 'auto' : 'calc(100% - 80px)',
+				boxShadow: '0px 0px 20px 5px rgba(0, 0, 0, 0.05)',
 				padding: 0,
-				maxWidth: '100dvh',
 			}}
 		>
 			<Tabs defaultValue="chat">

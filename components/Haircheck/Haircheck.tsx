@@ -6,6 +6,7 @@ import {
 import React, { useCallback, useState } from 'react';
 
 import { useMeetingState } from '../../contexts/UIState';
+import { useMediaQuery } from '../../hooks/useMediaQuery';
 import Card from '../../ui/Card';
 import { Flex } from '../../ui/Flex';
 import { NameSetup } from './NameSetup';
@@ -20,6 +21,7 @@ export const Haircheck = () => {
 	);
 	const [state, setState] = useState<'name' | 'setup'>('name');
 	const [, setMeetingState] = useMeetingState();
+	const md = useMediaQuery('(min-width: 800px)');
 
 	const onContinue = useCallback(() => {
 		if (!daily) return;
@@ -43,7 +45,7 @@ export const Haircheck = () => {
 		>
 			<Card
 				css={{
-					maxWidth: state === 'name' ? 330 : 460,
+					maxWidth: state === 'name' ? 330 : md ? 460 : '95%',
 					width: '100%',
 					padding: 0,
 				}}

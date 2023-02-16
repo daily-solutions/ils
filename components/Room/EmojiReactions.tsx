@@ -35,6 +35,8 @@ const StyledEmojiReactions = styled('div', {
 	pointerEvents: 'none',
 	userSelect: 'none',
 	zIndex: 99,
+	minHeight: '100dvh',
+	minWidth: '100dvw',
 
 	'.emoji': {
 		position: 'absolute',

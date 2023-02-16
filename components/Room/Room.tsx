@@ -11,17 +11,26 @@ import { View } from './View';
 
 export const Room = () => {
 	return (
-		<Flex css={{ width: '100dvw', height: '100dvh' }}>
-			<Flex css={{ flexDirection: 'column', flex: 1 }}>
-				<Box css={{ flex: 1, p: '$5' }}>
-					<View />
-				</Box>
-				<Tray />
+		<>
+			<Flex css={{ width: '100dvw', height: '100dvh' }}>
+				<Flex
+					css={{
+						flexDirection: 'column',
+						flex: 1,
+						width: '100%',
+						height: '100%',
+					}}
+				>
+					<Box css={{ flex: 1, p: '$5' }}>
+						<View />
+					</Box>
+					<Tray />
+				</Flex>
+				<Sidebar />
 			</Flex>
-			<Sidebar />
 			<DailyAudio />
 			<EmojiReactions />
 			<InviteToJoin />
-		</Flex>
+		</>
 	);
 };
