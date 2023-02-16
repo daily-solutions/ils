@@ -39,13 +39,20 @@ export const useDailyViewers = () => {
 	useEffect(() => {
 		if (!isOwner) return;
 
+		let timeout: ReturnType<typeof setTimeout>;
 		const fetchPresenceData = async () => {
 			const presenceRes = await fetch(`${window.location.origin}/api/presence`);
 			const { participants } = await presenceRes.json();
 			handleViewers(participants);
 		};
 
-		if (hidden > 0) fetchPresenceData();
-		else handleViewers([]);
+		if (hidden > 0) {
+			fetchPresenceData();
+			timeout = setTimeout(fetchPresenceData, 5000);
+		} else handleViewers([]);
+
+		return () => {
+			clearTimeout(timeout);
+		};
 	}, [handleViewers, hidden, isOwner]);
 };
