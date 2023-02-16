@@ -126,10 +126,12 @@ export const useStage = () => {
 		[daily, isOwner, sendAppMessage]
 	);
 
-	const leaveStage = useCallback(
-		() => sendAppMessage({ event: 'leave-stage' }),
-		[sendAppMessage]
-	);
+	const leaveStage = useCallback(() => {
+		if (!daily) return;
+
+		daily.setUserData(undefined);
+		sendAppMessage({ event: 'leave-stage' });
+	}, [daily, sendAppMessage]);
 
 	const onAppMessage = useCallback(
 		(ev: DailyEventObjectAppMessage<StageAppMessage>) => {
@@ -161,7 +163,6 @@ export const useStage = () => {
 					break;
 				case 'leave-stage':
 					if (isOwner) {
-						daily?.setUserData(undefined);
 						const participant = daily?.participants()?.[ev.fromId];
 						toaster.notify('light', {
 							title: 'Participant left',
