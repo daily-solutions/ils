@@ -99,6 +99,8 @@ export const {
 		},
 		shadows: {
 			card: '0px 156px 62px rgba(90, 125, 140, 0.01), 0px 88px 53px rgba(90, 125, 140, 0.03), 0px 39px 39px rgba(90, 125, 140, 0.04), 0px 10px 21px rgba(90, 125, 140, 0.05), 0px 0px 0px rgba(90, 125, 140, 0.05)',
+			toast:
+				'0px 49px 20px rgba(43, 63, 86, 0.01), 0px 27px 16px rgba(43, 63, 86, 0.03), 0px 12px 12px rgba(43, 63, 86, 0.04), 0px 3px 7px rgba(43, 63, 86, 0.05), 0px 0px 0px rgba(43, 63, 86, 0.05)',
 		},
 		transitions: {
 			default: 'all 250ms ease',

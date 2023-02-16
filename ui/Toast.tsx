@@ -23,10 +23,11 @@ const swipeOut = keyframes({
 });
 
 const StyledToastRoot = styled(ToastPrimitive.Root, {
-	boxShadow: '$card',
+	boxShadow: '$toast',
 	padding: 15,
 	display: 'flex',
 	flexDirection: 'column',
+	br: '$default',
 
 	variants: {
 		variant: {
