@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Flex } from './Flex';
+import { Spinner } from './Spinner';
 
 export const Loader = () => {
 	return (
@@ -10,9 +11,10 @@ export const Loader = () => {
 				justifyContent: 'center',
 				width: '100dvw',
 				height: '100dvh',
+				background: '$secondary',
 			}}
 		>
-			<p>Loading...</p>
+			<Spinner />
 		</Flex>
 	);
 };
