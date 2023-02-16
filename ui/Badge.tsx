@@ -8,7 +8,6 @@ export const Badge = styled('span', {
 	boxSizing: 'border-box',
 	display: 'inline-flex',
 	fontFamily: 'inherit',
-	justifyContent: 'center',
 	padding: 0,
 	textDecoration: 'none',
 	userSelect: 'none',
@@ -35,6 +34,10 @@ export const Badge = styled('span', {
 				backgroundColor: '$primary',
 				color: '$background',
 			},
+			dark: {
+				backgroundColor: '$baseText',
+				color: '$background',
+			},
 		},
 		size: {
 			xs: {
@@ -51,9 +54,8 @@ export const Badge = styled('span', {
 				fontSize: '$2',
 			},
 			'2': {
+				p: '$2',
 				height: '$7',
-				p: '0 $5',
-				fontSize: '$3',
 			},
 		},
 	},

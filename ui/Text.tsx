@@ -10,6 +10,9 @@ export const Text = styled('span', {
 
 	variants: {
 		size: {
+			'0': {
+				fontSize: '$0',
+			},
 			'1': {
 				fontSize: '$1',
 			},
