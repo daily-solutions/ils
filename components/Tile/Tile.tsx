@@ -19,18 +19,24 @@ interface Props {
 	sessionId: string;
 	isScreen?: boolean;
 	aspectRatio?: number;
+	showBorder?: boolean;
 }
 
 export const Tile = memo(
-	({ aspectRatio = 16 / 9, isScreen = false, sessionId }: Props) => {
+	({
+		aspectRatio = 16 / 9,
+		isScreen = false,
+		sessionId,
+		showBorder = false,
+	}: Props) => {
 		const tileRef = useRef<HTMLDivElement>(null);
 		const videoRef = useRef<HTMLVideoElement>(null);
 		const [tileAspectRatio, setTileAspectRatio] = useState(aspectRatio);
 
 		const activeSpeakerId = useActiveSpeakerId({ ignoreLocal: true });
-		const isActiveSpeaker = useMemo(
-			() => activeSpeakerId === sessionId,
-			[activeSpeakerId, sessionId]
+		const isSpeaking = useMemo(
+			() => activeSpeakerId === sessionId && showBorder,
+			[activeSpeakerId, sessionId, showBorder]
 		);
 
 		const [video, userName, isLocal] = useParticipantProperty(sessionId, [
@@ -86,7 +92,7 @@ export const Tile = memo(
 									objectPosition: 'center',
 								}}
 							/>
-							<TileInfo sessionId={sessionId} />
+							<TileInfo sessionId={sessionId} isSpeaking={isSpeaking} />
 						</>
 					) : (
 						<Box
@@ -100,7 +106,7 @@ export const Tile = memo(
 							{userName} {isLocal && '(You)'}
 						</Box>
 					)}
-					{isActiveSpeaker && (
+					{isSpeaking && (
 						<Box
 							css={{
 								position: 'absolute',

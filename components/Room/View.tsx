@@ -79,7 +79,11 @@ export const View = () => {
 					}}
 				>
 					{participantIds.map((participantId) => (
-						<Tile sessionId={participantId} key={participantId} />
+						<Tile
+							sessionId={participantId}
+							key={participantId}
+							showBorder={participantIds.length > 1}
+						/>
 					))}
 				</Flex>
 			) : (
