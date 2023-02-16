@@ -1,5 +1,16 @@
-import { DailyVideo, useParticipantProperty } from '@daily-co/daily-react';
-import React, { memo, useCallback, useEffect, useRef, useState } from 'react';
+import {
+	DailyVideo,
+	useActiveSpeakerId,
+	useParticipantProperty,
+} from '@daily-co/daily-react';
+import React, {
+	memo,
+	useCallback,
+	useEffect,
+	useMemo,
+	useRef,
+	useState,
+} from 'react';
 
 import { Box } from '../../ui/Box';
 import { TileInfo } from './TileInfo';
@@ -15,6 +26,12 @@ export const Tile = memo(
 		const tileRef = useRef<HTMLDivElement>(null);
 		const videoRef = useRef<HTMLVideoElement>(null);
 		const [tileAspectRatio, setTileAspectRatio] = useState(aspectRatio);
+
+		const activeSpeakerId = useActiveSpeakerId({ ignoreLocal: true });
+		const isActiveSpeaker = useMemo(
+			() => activeSpeakerId === sessionId,
+			[activeSpeakerId, sessionId]
+		);
 
 		const [video, userName, isLocal] = useParticipantProperty(sessionId, [
 			'video',
@@ -82,6 +99,18 @@ export const Tile = memo(
 						>
 							{userName} {isLocal && '(You)'}
 						</Box>
+					)}
+					{isActiveSpeaker && (
+						<Box
+							css={{
+								position: 'absolute',
+								height: '100%',
+								width: '100%',
+								left: 0,
+								top: 0,
+								border: '3px solid $yellow',
+							}}
+						/>
 					)}
 				</Box>
 			</Box>

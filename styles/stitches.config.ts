@@ -34,6 +34,8 @@ export const {
 			cyanLightText: '#00C9DF',
 			message: 'rgba(226, 251, 253, 0.4)',
 			border: '#C8D1DC',
+			yellow: '#FAD71F',
+			yellowText: '#1C1C1C',
 		},
 		fonts: {
 			inter: `${inter.style.fontFamily},"Helvetica Neue", Arial, sans-serif`,
