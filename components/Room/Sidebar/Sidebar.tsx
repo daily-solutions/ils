@@ -24,7 +24,7 @@ export const Sidebar = () => {
 				padding: 0,
 			}}
 		>
-			<Tabs defaultValue={sidebar}>
+			<Tabs value={sidebar}>
 				<Box css={{ p: '$3' }}>
 					<TabsList aria-label="Sidebar">
 						<TabsTrigger value="chat">
