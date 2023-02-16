@@ -1,8 +1,4 @@
-import {
-	DailyVideo,
-	useActiveSpeakerId,
-	useParticipantProperty,
-} from '@daily-co/daily-react';
+import { DailyVideo, useParticipantProperty } from '@daily-co/daily-react';
 import React, {
 	memo,
 	useCallback,
@@ -12,6 +8,7 @@ import React, {
 	useState,
 } from 'react';
 
+import { useActiveSpeakerId } from '../../hooks/useActiveSpeakerId';
 import { Box } from '../../ui/Box';
 import { TileInfo } from './TileInfo';
 
