@@ -1,3 +1,4 @@
+import DailyIframe, { DailyCall } from '@daily-co/daily-js';
 import { DailyProvider } from '@daily-co/daily-react';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
@@ -8,28 +9,37 @@ import { Loader } from '../ui/Loader';
 
 const Home: NextPage = () => {
 	const router = useRouter();
-	const [token, setToken] = useState<string | null>(null);
+	const [callObject, setCallObject] = useState<DailyCall | null>(null);
 
 	useEffect(() => {
-		if (!router.isReady) return;
+		if (callObject || !router.isReady) return;
 
-		setToken((router.query?.['t'] as string) ?? '');
-	}, [router.isReady, router.query]);
-
-	return token !== null ? (
-		<DailyProvider
-			url={`https://${process.env.NEXT_PUBLIC_DAILY_DOMAIN}.daily.co/${process.env.NEXT_PUBLIC_DAILY_ROOM}`}
-			token={token}
-			dailyConfig={{
+		const token = (router.query?.['t'] as string) ?? '';
+		const co = DailyIframe.createCallObject({
+			url: `https://${process.env.NEXT_PUBLIC_DAILY_DOMAIN}.daily.co/${process.env.NEXT_PUBLIC_DAILY_ROOM}`,
+			token,
+			subscribeToTracksAutomatically: true,
+			dailyConfig: {
 				avoidEval: true,
 				experimentalChromeVideoMuteLightOff: true,
 				useDevicePreferenceCookies: true,
-			}}
-		>
+			},
+		});
+		setCallObject(co);
+	}, [callObject, router.isReady, router.query]);
+
+	useEffect(() => {
+		return () => {
+			callObject?.destroy();
+		};
+	}, [callObject]);
+
+	if (!callObject) return <Loader />;
+
+	return (
+		<DailyProvider callObject={callObject}>
 			<Layout />
 		</DailyProvider>
-	) : (
-		<Loader />
 	);
 };
 
