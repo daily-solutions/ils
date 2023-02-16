@@ -4,7 +4,7 @@ import {
 	useParticipantIds,
 	useParticipantProperty,
 } from '@daily-co/daily-react';
-import React, { memo, useCallback } from 'react';
+import React, { memo, useCallback, useMemo } from 'react';
 
 import { useStage } from '../../../../hooks/useStage';
 import { Badge } from '../../../../ui/Badge';
@@ -23,11 +23,19 @@ const Participant = memo(({ sessionId }: ParticipantProps) => {
 		localSessionId as string,
 		'owner'
 	);
-	const [userName, owner, local] = useParticipantProperty(sessionId, [
-		'user_name',
-		'owner',
-		'local',
-	]);
+	const [userName, owner, local, userData, hasPresence] =
+		useParticipantProperty(sessionId, [
+			'user_name',
+			'owner',
+			'local',
+			'userData',
+			'permissions.hasPresence',
+		]);
+
+	const isInvited = useMemo(
+		() => hasPresence && !(userData as any)?.['onStage'],
+		[hasPresence, userData]
+	);
 
 	const { removeFromStage } = useStage();
 	const handleRemoveFromStage = useCallback(
@@ -37,15 +45,26 @@ const Participant = memo(({ sessionId }: ParticipantProps) => {
 
 	return (
 		<Flex css={{ alignItems: 'center', justifyContent: 'space-between' }}>
-			<Text>
-				{userName ?? 'Guest'} {local && '(you)'}
-			</Text>
+			<Flex
+				css={{
+					flexFlow: 'column wrap',
+					justifyContent: 'center',
+					gap: '$1',
+				}}
+			>
+				<Text>
+					{userName ?? 'Guest'} {local && '(you)'}
+				</Text>
+				{isLocalOwner && isInvited && !owner && (
+					<Text size={1}>Invited but not on stage</Text>
+				)}
+			</Flex>
 			{owner ? (
 				<Badge size={1}>Owner</Badge>
 			) : (
 				isLocalOwner && (
 					<Button variant="danger" size="small" onClick={handleRemoveFromStage}>
-						Remove from stage
+						Remove
 					</Button>
 				)
 			)}
@@ -58,11 +77,7 @@ Participant.displayName = 'Participant';
 export const Participants = () => {
 	const participantIds = useParticipantIds({
 		filter: useCallback(
-			(p: DailyParticipant) =>
-				Boolean(
-					p?.permissions?.canSend &&
-						(p.owner || (p?.userData as any)?.['onStage'])
-				),
+			(p: DailyParticipant) => Boolean(p?.permissions?.canSend),
 			[]
 		),
 		sort: 'user_name',

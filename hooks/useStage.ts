@@ -129,9 +129,9 @@ export const useStage = () => {
 	const leaveStage = useCallback(() => {
 		if (!daily) return;
 
-		daily.setUserData(undefined);
+		daily.setUserData({ ...(userData as any), onStage: false });
 		sendAppMessage({ event: 'leave-stage' });
-	}, [daily, sendAppMessage]);
+	}, [daily, sendAppMessage, userData]);
 
 	const onAppMessage = useCallback(
 		(ev: DailyEventObjectAppMessage<StageAppMessage>) => {
@@ -145,13 +145,14 @@ export const useStage = () => {
 							return prevP;
 						});
 					} else if (localSessionId === sessionId) {
+						daily?.setUserData({ ...(userData as any), invited: true });
 						setInvited(true);
 						setIsRequesting(false);
 					}
 					break;
 				case 'remove-from-stage':
 					if (localSessionId === ev.data?.sessionId) {
-						daily?.setUserData(undefined);
+						daily?.setUserData({ ...(userData as any), onStage: false });
 						const participant = daily?.participants()?.[ev.fromId];
 						toaster.notify('light', {
 							title: 'You were removed from the stage',
@@ -218,6 +219,7 @@ export const useStage = () => {
 			setIsRequesting,
 			setRequestedParticipants,
 			toaster,
+			userData,
 		]
 	);
 

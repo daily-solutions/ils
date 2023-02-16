@@ -1,4 +1,8 @@
-import { useDaily, useLocalSessionId } from '@daily-co/daily-react';
+import {
+	useDaily,
+	useLocalSessionId,
+	useParticipantProperty,
+} from '@daily-co/daily-react';
 import { useCallback } from 'react';
 
 import { useInviteToJoin } from '../../contexts/UIState';
@@ -13,14 +17,15 @@ import { Tile } from '../Tile';
 export const InviteToJoin = () => {
 	const daily = useDaily();
 	const localSessionId = useLocalSessionId();
+	const userData = useParticipantProperty(localSessionId as string, 'userData');
 	const [show, setShow] = useInviteToJoin();
 
 	const handleJoin = useCallback(() => {
 		if (!daily) return;
 
-		daily.setUserData({ onStage: true });
+		daily.setUserData({ ...(userData as any), invited: false, onStage: true });
 		setShow(false);
-	}, [daily, setShow]);
+	}, [daily, setShow, userData]);
 
 	return (
 		<Modal open={show} onClose={setShow} title="Invited to join stage">

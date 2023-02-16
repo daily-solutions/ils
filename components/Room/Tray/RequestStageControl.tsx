@@ -2,16 +2,23 @@ import {
 	useLocalSessionId,
 	useParticipantProperty,
 } from '@daily-co/daily-react';
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 
+import { useInviteToJoin } from '../../../contexts/UIState';
 import { useIsOnStage } from '../../../hooks/useIsOnStage';
 import { useStage } from '../../../hooks/useStage';
 import { Button } from '../../../ui/Button';
 
 export const RequestStageControl = () => {
 	const localSessionId = useLocalSessionId();
-	const isOwner = useParticipantProperty(localSessionId as string, 'owner');
+	const [isOwner, userData] = useParticipantProperty(localSessionId as string, [
+		'owner',
+		'userData',
+	]);
 	const isOnStage = useIsOnStage();
+	const [, setInvited] = useInviteToJoin();
+
+	const isInvited = useMemo(() => (userData as any)?.invited, [userData]);
 
 	const {
 		cancelRequestToJoinStage,
@@ -26,6 +33,13 @@ export const RequestStageControl = () => {
 	);
 
 	if (isOwner) return null;
+
+	if (isInvited)
+		return (
+			<Button variant="primary" onClick={() => setInvited(true)}>
+				Join
+			</Button>
+		);
 
 	if (isOnStage)
 		return (
