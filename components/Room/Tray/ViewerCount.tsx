@@ -7,7 +7,11 @@ import { Badge } from '../../../ui/Badge';
 import { Flex } from '../../../ui/Flex';
 import { Text } from '../../../ui/Text';
 
-export const ViewerCount = () => {
+interface Props {
+	isMobile?: boolean;
+}
+
+export const ViewerCount = ({ isMobile = false }: Props) => {
 	const { hidden } = useParticipantCounts();
 	return (
 		<Badge color="dark">
@@ -21,23 +25,25 @@ export const ViewerCount = () => {
 				<Image src={eye} alt="Eye" />
 				<Flex
 					css={{
-						pr: '$3',
+						px: '$3',
 						flexFlow: 'column wrap',
 						gap: '$1',
 						alignItems: 'center',
 						justifyContent: 'center',
 					}}
 				>
-					<Text
-						size={0}
-						css={{
-							textTransform: 'uppercase',
-							letterSpacing: '0.05em',
-							fontWeight: '$semibold',
-						}}
-					>
-						Viewers
-					</Text>
+					{!isMobile && (
+						<Text
+							size={0}
+							css={{
+								textTransform: 'uppercase',
+								letterSpacing: '0.05em',
+								fontWeight: '$semibold',
+							}}
+						>
+							Viewers
+						</Text>
+					)}
 					<Text size={1}>{hidden.toLocaleString('en-US')}</Text>
 				</Flex>
 			</Flex>

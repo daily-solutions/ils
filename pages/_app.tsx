@@ -9,6 +9,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 	return (
 		<RecoilRoot>
 			<ToastProvider>
+				<title>Daily ILS Demo</title>
 				<Component {...pageProps} />
 			</ToastProvider>
 		</RecoilRoot>

@@ -17,11 +17,13 @@ interface Props {
 	isScreen?: boolean;
 	aspectRatio?: number;
 	showBorder?: boolean;
+	isMobile?: boolean;
 }
 
 export const Tile = memo(
 	({
 		aspectRatio = 16 / 9,
+		isMobile = false,
 		isScreen = false,
 		sessionId,
 		showBorder = false,
@@ -89,7 +91,11 @@ export const Tile = memo(
 									objectPosition: 'center',
 								}}
 							/>
-							<TileInfo sessionId={sessionId} isSpeaking={isSpeaking} />
+							<TileInfo
+								isMobile={isMobile}
+								sessionId={sessionId}
+								isSpeaking={isSpeaking}
+							/>
 						</>
 					) : (
 						<Box

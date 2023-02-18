@@ -38,7 +38,7 @@ const StyledButton = styled('button', {
 		variant: {
 			outline: {
 				border: '1px solid $border',
-				background: '$background',
+				background: 'transparent',
 				color: '$baseText',
 			},
 			primary: {
@@ -68,6 +68,10 @@ const StyledButton = styled('button', {
 			orange: {
 				backgroundColor: '$orangeLight',
 				color: '$orange',
+			},
+			transparent: {
+				backgroundColor: 'rgba(18, 26, 36, 0.3)',
+				color: '$background',
 			},
 		},
 
@@ -105,6 +109,11 @@ const StyledButton = styled('button', {
 				width: '100%',
 			},
 		},
+		rounded: {
+			true: {
+				br: '$pill',
+			},
+		},
 	},
 	defaultVariants: {
 		size: 'medium',
@@ -121,10 +130,12 @@ export type ButtonVariant =
 	| 'ghost'
 	| 'cyan'
 	| 'outline'
-	| 'orange';
+	| 'orange'
+	| 'transparent';
 
 interface Props extends React.ComponentPropsWithRef<'button'> {
 	size?: 'small' | 'medium' | 'icon' | 'xs' | 'reaction';
+	rounded?: boolean;
 	variant?: ButtonVariant;
 	disabled?: boolean;
 	fullWidth?: boolean;
@@ -141,6 +152,7 @@ export const Button = React.forwardRef<
 			css,
 			disabled,
 			fullWidth = false,
+			rounded = false,
 			size = 'medium',
 			variant = 'primary',
 			...rest
@@ -154,6 +166,7 @@ export const Button = React.forwardRef<
 				disabled={disabled}
 				fullWidth={fullWidth}
 				ref={ref}
+				rounded={rounded}
 				css={css}
 				{...rest}
 			>
