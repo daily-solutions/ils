@@ -1,8 +1,3 @@
-import {
-	useLocalSessionId,
-	useParticipantProperty,
-} from '@daily-co/daily-react';
-
 import { useSidebar } from '../../../contexts/UIState';
 import { useMediaQuery } from '../../../hooks/useMediaQuery';
 import { Box } from '../../../ui/Box';
@@ -14,8 +9,6 @@ import { Chat } from './Chat';
 import { People } from './People';
 
 export const Sidebar = () => {
-	const localSessionId = useLocalSessionId();
-	const isOwner = useParticipantProperty(localSessionId as string, 'owner');
 	const [sidebar, setSidebar] = useSidebar();
 	const md = useMediaQuery('(min-width: 800px)');
 
@@ -31,34 +24,30 @@ export const Sidebar = () => {
 				padding: 0,
 			}}
 		>
-			{isOwner ? (
-				<Tabs
-					value={sidebar}
-					onValueChange={(value: string) =>
-						setSidebar(value as 'chat' | 'people')
-					}
-				>
-					<Box css={{ p: '$3' }}>
-						<TabsList aria-label="Sidebar">
-							<TabsTrigger value="chat">
-								<Icon icon="chat" />
-							</TabsTrigger>
-							<TabsTrigger value="people">
-								<Icon icon="user" />
-							</TabsTrigger>
-						</TabsList>
-					</Box>
-					<Divider css={{ mt: '$2' }} />
-					<TabsContent value="chat">
-						<Chat />
-					</TabsContent>
-					<TabsContent value="people">
-						<People />
-					</TabsContent>
-				</Tabs>
-			) : (
-				<Chat withHeader />
-			)}
+			<Tabs
+				value={sidebar}
+				onValueChange={(value: string) =>
+					setSidebar(value as 'chat' | 'people')
+				}
+			>
+				<Box css={{ p: '$3' }}>
+					<TabsList aria-label="Sidebar">
+						<TabsTrigger value="chat">
+							<Icon icon="chat" />
+						</TabsTrigger>
+						<TabsTrigger value="people">
+							<Icon icon="user" />
+						</TabsTrigger>
+					</TabsList>
+				</Box>
+				<Divider css={{ mt: '$2' }} />
+				<TabsContent value="chat">
+					<Chat />
+				</TabsContent>
+				<TabsContent value="people">
+					<People />
+				</TabsContent>
+			</Tabs>
 		</Card>
 	);
 };

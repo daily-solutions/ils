@@ -1,6 +1,6 @@
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import type { CSS } from '@stitches/react';
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 import { keyframes, styled } from '../styles/stitches.config';
 import { Box } from './Box';
@@ -67,8 +67,8 @@ const StyledCloseButton = styled(DialogPrimitive.Close, {});
 type DialogContentPrimitiveProps = React.ComponentProps<
 	typeof DialogPrimitive.Content
 >;
-type DialogContentProps = DialogContentPrimitiveProps & {
-	title: string;
+type DialogContentProps = Omit<DialogContentPrimitiveProps, 'title'> & {
+	title: ReactNode;
 	showCloseButton?: boolean;
 	css?: CSS;
 };
@@ -107,7 +107,7 @@ DialogContent.displayName = 'DialogContent';
 interface Props {
 	open: boolean;
 	onClose: (value: boolean) => void;
-	title: string;
+	title: ReactNode;
 	showCloseButton?: boolean;
 	css?: CSS;
 }

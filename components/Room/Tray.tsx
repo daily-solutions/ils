@@ -8,6 +8,7 @@ import { Flex } from '../../ui/Flex';
 import { AudioControl } from './Tray/AudioControl';
 import { ChatControl } from './Tray/ChatControl';
 import { PeopleControl } from './Tray/PeopleControl';
+import { PollControl } from './Tray/PollControl';
 import { ReactionsControl } from './Tray/ReactionsControl';
 import { RecordingControl } from './Tray/RecordingControl';
 import { RequestStageControl } from './Tray/RequestStageControl';
@@ -33,6 +34,7 @@ export const Tray = () => {
 				<AudioControl />
 				<ChatControl />
 				<PeopleControl />
+				<PollControl />
 				<RecordingControl />
 				<ReactionsControl />
 				<SettingsControl />

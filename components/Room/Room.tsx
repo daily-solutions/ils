@@ -3,7 +3,8 @@ import React from 'react';
 
 import { Box } from '../../ui/Box';
 import { Flex } from '../../ui/Flex';
-import { InviteToJoin } from '../Modal';
+import { CreatePoll, InviteToJoin } from '../Modal';
+import { ViewPoll } from '../Modal/ViewPoll';
 import { EmojiReactions } from './EmojiReactions';
 import { Sidebar } from './Sidebar';
 import { Tray } from './Tray';
@@ -31,6 +32,8 @@ export const Room = () => {
 			<DailyAudio />
 			<EmojiReactions />
 			<InviteToJoin />
+			<CreatePoll />
+			<ViewPoll />
 		</>
 	);
 };

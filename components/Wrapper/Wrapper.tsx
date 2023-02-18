@@ -13,6 +13,7 @@ import React, { memo, useCallback, useEffect } from 'react';
 import { useMeetingState } from '../../contexts/UIState';
 import { ChatAppMessage, useChat } from '../../hooks/useChat';
 import { useDailyViewers } from '../../hooks/useDailyViewers';
+import { PollAppMessage, usePolls } from '../../hooks/usePolls';
 import {
 	EmojiReactionsAppMessage,
 	useReactions,
@@ -20,7 +21,11 @@ import {
 import { StageAppMessage, useStage } from '../../hooks/useStage';
 import { ToastContainer } from './ToastContainer';
 
-type AppMessage = StageAppMessage | ChatAppMessage | EmojiReactionsAppMessage;
+type AppMessage =
+	| StageAppMessage
+	| ChatAppMessage
+	| EmojiReactionsAppMessage
+	| PollAppMessage;
 
 export const Wrapper = memo(({ children }: React.PropsWithChildren<{}>) => {
 	useDailyViewers();
@@ -30,32 +35,7 @@ export const Wrapper = memo(({ children }: React.PropsWithChildren<{}>) => {
 	const { onAppMessage: onStageAppMessage } = useStage();
 	const { onAppMessage: onChatAppMessage } = useChat();
 	const { onAppMessage: onEmojiReactionsMessage } = useReactions();
-
-	const handlePreAuth = useCallback(async () => {
-		if (!daily) return;
-
-		// @ts-ignore
-		const { token, url } = daily.properties;
-		await daily.preAuth({ url, token });
-		const room = (await daily.room()) as DailyRoomInfo;
-		if (room?.id) {
-			const { config, domainConfig, tokenConfig } = room;
-			const enablePrejoinUI =
-				tokenConfig?.enable_prejoin_ui ??
-				config?.enable_prejoin_ui ??
-				domainConfig?.enable_prejoin_ui;
-			if (enablePrejoinUI) setMeetingState('lobby');
-			else await daily.join();
-		}
-	}, [daily, setMeetingState]);
-
-	useEffect(() => {
-		if (!daily || meetingState !== 'new') return;
-
-		handlePreAuth();
-		// @ts-ignore
-		window['callObject'] = daily;
-	}, [daily, handlePreAuth, meetingState]);
+	const { onAppMessage: onPollAppMessage } = usePolls();
 
 	useThrottledDailyEvent(
 		['joining-meeting', 'joined-meeting', 'left-meeting'],
@@ -99,6 +79,12 @@ export const Wrapper = memo(({ children }: React.PropsWithChildren<{}>) => {
 							ev as DailyEventObjectAppMessage<EmojiReactionsAppMessage>
 						);
 						break;
+					case 'poll':
+						onPollAppMessage(ev as DailyEventObjectAppMessage<PollAppMessage>);
+						break;
+					case 'vote-poll':
+						onPollAppMessage(ev as DailyEventObjectAppMessage<PollAppMessage>);
+						break;
 					default:
 						onStageAppMessage(
 							ev as DailyEventObjectAppMessage<StageAppMessage>
@@ -106,9 +92,40 @@ export const Wrapper = memo(({ children }: React.PropsWithChildren<{}>) => {
 						break;
 				}
 			},
-			[onChatAppMessage, onEmojiReactionsMessage, onStageAppMessage]
+			[
+				onChatAppMessage,
+				onEmojiReactionsMessage,
+				onPollAppMessage,
+				onStageAppMessage,
+			]
 		),
 	});
+
+	const handlePreAuth = useCallback(async () => {
+		if (!daily) return;
+
+		// @ts-ignore
+		const { token, url } = daily.properties;
+		await daily.preAuth({ url, token });
+		const room = (await daily.room()) as DailyRoomInfo;
+		if (room?.id) {
+			const { config, domainConfig, tokenConfig } = room;
+			const enablePrejoinUI =
+				tokenConfig?.enable_prejoin_ui ??
+				config?.enable_prejoin_ui ??
+				domainConfig?.enable_prejoin_ui;
+			if (enablePrejoinUI) setMeetingState('lobby');
+			else await daily.join();
+		}
+	}, [daily, setMeetingState]);
+
+	useEffect(() => {
+		if (!daily || meetingState !== 'new') return;
+
+		handlePreAuth();
+		// @ts-ignore
+		window['callObject'] = daily;
+	}, [daily, handlePreAuth, meetingState]);
 
 	return (
 		<>

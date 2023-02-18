@@ -44,7 +44,7 @@ export const ChatReact = ({ id }: Props) => {
 						transition: 'visibility 0.3s linear,opacity 0.3s linear',
 					}}
 				>
-					<Icon icon="plus" size={15} />
+					<Icon icon="plus" />
 				</Button>
 			</EmojiReactionsPopover>
 		</Box>

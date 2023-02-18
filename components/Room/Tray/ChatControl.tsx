@@ -15,7 +15,7 @@ export const ChatControl = () => {
 			mutedVariant="inverse"
 			onClick={() => setSidebar(isEnabled ? null : 'chat')}
 		>
-			<Icon icon="chat_bubble" size={16} />
+			<Icon icon="chat" />
 		</TrayButton>
 	);
 };

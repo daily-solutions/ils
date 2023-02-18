@@ -85,7 +85,10 @@ export const Participants = () => {
 
 	return (
 		<Box css={{ p: '$4' }}>
-			<Flex css={{ flexFlow: 'column wrap', rowGap: '$3' }}>
+			<Text size={0} css={{ color: '$muted' }}>
+				Presenters
+			</Text>
+			<Flex css={{ flexFlow: 'column wrap', rowGap: '$3', mt: '$2' }}>
 				{participantIds.length > 0 ? (
 					participantIds.map((p) => <Participant sessionId={p} key={p} />)
 				) : (

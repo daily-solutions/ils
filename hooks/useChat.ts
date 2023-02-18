@@ -33,11 +33,16 @@ type ChatMsg = {
 	userName: string;
 	avatar: string;
 	reactions: Record<Emoji, string[]>;
+	poll?: {
+		question: string;
+		options: string[];
+		votes: Record<string, string[]>;
+	};
 };
 
 export type ChatAppMessage = ChatMsg | ReactionMsg;
 
-const getReactions = () => {
+export const getReactions = () => {
 	return {
 		'👏': [],
 		'👍': [],

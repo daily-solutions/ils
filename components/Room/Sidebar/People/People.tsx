@@ -20,13 +20,13 @@ export const People = () => {
 				<Tabs defaultValue="participants">
 					<TabsList variant="secondary" aria-label="ParticipantTabs">
 						<TabsTrigger variant="secondary" value="participants">
-							People
+							Presenters
 						</TabsTrigger>
 						<TabsTrigger variant="secondary" value="viewers">
 							Viewers
 						</TabsTrigger>
 						<TabsTrigger variant="secondary" value="requested">
-							Requested
+							Requests
 						</TabsTrigger>
 					</TabsList>
 					<Divider css={{ mt: '$2' }} />

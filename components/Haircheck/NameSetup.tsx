@@ -122,7 +122,7 @@ export const NameSetup = memo(({ hasPermission, onContinue }: Props) => {
 							}}
 						>
 							<Text>{hasPermission ? 'Continue' : 'Join stream'}</Text>
-							<Icon size={12} icon="arrow_right" />
+							<Icon icon="arrow_right" />
 						</Flex>
 					</Button>
 				</Box>

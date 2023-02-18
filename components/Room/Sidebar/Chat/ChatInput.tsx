@@ -10,12 +10,13 @@ export const ChatInput = memo(() => {
 	const { sendMessage } = useChat();
 
 	const handleSendMessage = useCallback(() => {
+		if (message === '') return;
 		sendMessage(message);
 		setMessage('');
 	}, [message, sendMessage]);
 
 	return (
-		<Box css={{ p: '$4', marginTop: 'auto' }}>
+		<Box css={{ p: '$3 $4', marginTop: 'auto' }}>
 			<form
 				onSubmit={(e) => {
 					e.preventDefault();
@@ -24,9 +25,10 @@ export const ChatInput = memo(() => {
 			>
 				<Input
 					autoFocus
+					iconRight="arrow_right"
 					value={message}
 					onChange={(e) => setMessage(e.target.value)}
-					placeholder="Enter your message"
+					placeholder="Type a message..."
 				/>
 			</form>
 		</Box>

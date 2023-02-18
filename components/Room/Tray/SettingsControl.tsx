@@ -13,7 +13,7 @@ export const SettingsControl = () => {
 			<PopoverTrigger asChild>
 				<Box>
 					<TrayButton>
-						<Icon icon="settings" size={20} />
+						<Icon icon="settings" />
 					</TrayButton>
 				</Box>
 			</PopoverTrigger>
