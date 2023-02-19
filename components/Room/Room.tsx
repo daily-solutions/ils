@@ -2,7 +2,6 @@ import { DailyAudio } from '@daily-co/daily-react';
 import React from 'react';
 
 import { useMediaQuery } from '../../hooks/useMediaQuery';
-import { Box } from '../../ui/Box';
 import { Flex } from '../../ui/Flex';
 import { CreatePoll, InviteToJoin } from '../Modal';
 import { ViewPoll } from '../Modal/ViewPoll';
@@ -27,9 +26,7 @@ export const Room = () => {
 						height: '100%',
 					}}
 				>
-					<Box css={{ flex: 1, p: '$5' }}>
-						<View />
-					</Box>
+					<View />
 					<Tray />
 				</Flex>
 				<Sidebar />

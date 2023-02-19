@@ -103,6 +103,9 @@ const StyledButton = styled('button', {
 				p: '$4 $2',
 				width: 'auto',
 			},
+			pagination: {
+				p: '$1',
+			},
 		},
 		fullWidth: {
 			true: {
@@ -134,7 +137,7 @@ export type ButtonVariant =
 	| 'transparent';
 
 interface Props extends React.ComponentPropsWithRef<'button'> {
-	size?: 'small' | 'medium' | 'icon' | 'xs' | 'reaction';
+	size?: 'small' | 'medium' | 'icon' | 'xs' | 'reaction' | 'pagination';
 	rounded?: boolean;
 	variant?: ButtonVariant;
 	disabled?: boolean;
