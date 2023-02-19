@@ -26,6 +26,8 @@ export const View = () => {
 	return (
 		<Grid
 			css={{
+				alignItems: 'center',
+				justifyContent: 'center',
 				width: '100dvw',
 				height: '100dvh',
 				gridTemplateColumns: `repeat(${cols}, 1fr)`,
