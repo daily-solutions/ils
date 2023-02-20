@@ -1,4 +1,5 @@
 import { DailyVideo, useParticipantProperty } from '@daily-co/daily-react';
+import { CSS } from '@stitches/react';
 import React, {
 	memo,
 	useCallback,
@@ -18,11 +19,15 @@ interface Props {
 	aspectRatio?: number;
 	showBorder?: boolean;
 	isMobile?: boolean;
+	fit?: React.ComponentProps<typeof DailyVideo>['fit'];
+	css?: CSS;
 }
 
 export const Tile = memo(
 	({
 		aspectRatio = 16 / 9,
+		css,
+		fit = 'contain',
 		isMobile = false,
 		isScreen = false,
 		sessionId,
@@ -60,6 +65,7 @@ export const Tile = memo(
 			<Box
 				ref={tileRef}
 				css={{
+					...css,
 					position: 'relative',
 					width: '100%',
 					overflow: 'hidden',
@@ -77,7 +83,7 @@ export const Tile = memo(
 						<>
 							<DailyVideo
 								ref={videoRef}
-								fit="cover"
+								fit={fit}
 								automirror
 								sessionId={sessionId}
 								type={isScreen ? 'screenVideo' : 'video'}

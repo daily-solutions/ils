@@ -16,9 +16,9 @@ export const BottomTray = () => {
 				alignItems: 'center',
 				justifyContent: 'space-between',
 				position: 'absolute',
-				bottom: 10,
+				bottom: 0,
 				width: '100%',
-				px: '$3',
+				p: '$3',
 			}}
 		>
 			<Flex css={{ gap: '$2' }}>

@@ -147,6 +147,7 @@ export const View = () => {
 				>
 					{currentIds.map((participantId) => (
 						<Tile
+							fit="cover"
 							aspectRatio={DEFAULT_MOBILE_ASPECT_RATIO}
 							sessionId={participantId}
 							key={participantId}

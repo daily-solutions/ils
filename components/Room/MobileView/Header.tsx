@@ -8,7 +8,7 @@ export const Header = () => {
 				zIndex: 99,
 				position: 'absolute',
 				width: '100%',
-				top: 50,
+				top: 20,
 				justifyContent: 'flex-end',
 				px: '$2',
 			}}
