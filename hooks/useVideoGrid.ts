@@ -117,8 +117,11 @@ export const useVideoGrid = ({
 	 * Calculates the session ids rendered on the current page.
 	 */
 	const currentIds = useMemo(() => {
-		return sessionIds.length - currentPage * pageSize > 0
-			? sessionIds.slice((currentPage - 1) * pageSize, currentPage * pageSize)
+		return sessionIds.length - Math.max(currentPage, 1) * pageSize > 0
+			? sessionIds.slice(
+					(Math.max(currentPage, 1) - 1) * pageSize,
+					currentPage * pageSize
+			  )
 			: sessionIds.slice(-pageSize);
 	}, [currentPage, pageSize, sessionIds]);
 

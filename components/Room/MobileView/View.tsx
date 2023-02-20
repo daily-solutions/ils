@@ -60,13 +60,16 @@ export const View = () => {
 		width: dimensions.width,
 		height: dimensions.height,
 		tileAspectRatio: DEFAULT_MOBILE_ASPECT_RATIO,
+		minTileWidth: 200,
 		gap: 1,
 		sessionIds: participantIds,
+		minCountPerPage: 1,
 		maxCountPerPage: 2,
 	});
 
 	useEffect(() => {
 		if (!viewRef.current) return;
+		viewRef.current.style.setProperty('--grid-gap', '1px');
 		viewRef.current.style.setProperty('--grid-columns', columns.toString());
 		viewRef.current.style.setProperty('--grid-width', `${containerWidth}px`);
 		viewRef.current.style.setProperty('--grid-height', `${containerHeight}px`);
@@ -135,7 +138,7 @@ export const View = () => {
 						justifyContent: 'center',
 						margin: 'auto',
 						width: '100%',
-						gap: '1px',
+						gap: 'var(--grid-gap, 1px)',
 						maxHeight: 'var(--grid-height, 100%)',
 						maxWidth: 'var(--grid-width, 100%)',
 						overflow: 'hidden',
@@ -156,7 +159,7 @@ export const View = () => {
 		} else
 			return (
 				<Box>
-					<h3>Please wait till a host joins your call</h3>
+					<h4>Please wait till a host joins your call</h4>
 				</Box>
 			);
 	}, [currentIds]);
