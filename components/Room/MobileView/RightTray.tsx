@@ -28,7 +28,6 @@ export const RightTray = () => {
 				bottom: 80,
 				width: '100%',
 				px: '$3',
-				zIndex: 101,
 			}}
 		>
 			<Flex css={{ flexFlow: 'column', gap: '$4', color: '$dark' }}>
