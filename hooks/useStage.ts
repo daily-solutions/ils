@@ -152,7 +152,11 @@ export const useStage = () => {
 					break;
 				case 'remove-from-stage':
 					if (localSessionId === ev.data?.sessionId) {
-						daily?.setUserData({ ...(userData as any), onStage: false });
+						daily?.setUserData({
+							...(userData as any),
+							onStage: false,
+							invited: false,
+						});
 						const participant = daily?.participants()?.[ev.fromId];
 						toaster.notify('light', {
 							title: 'You were removed from the stage',

@@ -2,6 +2,10 @@ import { DailyParticipant } from '@daily-co/daily-js';
 import { useParticipantIds } from '@daily-co/daily-react';
 import { useCallback } from 'react';
 
+const isParticipantOnStage = (p: DailyParticipant) => {
+	return p.owner || (p.userData as any)?.['onStage'];
+};
+
 export const useParticipants = (
 	onStage: boolean = true,
 	sort: 'joined_at' | 'user_name' = 'joined_at'
@@ -11,7 +15,7 @@ export const useParticipants = (
 			(p: DailyParticipant) =>
 				Boolean(
 					p?.permissions?.canSend &&
-						(onStage ? p.owner || (p?.userData as any)?.['onStage'] : true)
+						(onStage ? isParticipantOnStage(p) : !isParticipantOnStage(p))
 				),
 			[onStage]
 		),
