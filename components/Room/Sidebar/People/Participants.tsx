@@ -1,11 +1,10 @@
-import { DailyParticipant } from '@daily-co/daily-js';
 import {
 	useLocalSessionId,
-	useParticipantIds,
 	useParticipantProperty,
 } from '@daily-co/daily-react';
 import React, { memo, useCallback, useMemo } from 'react';
 
+import { useParticipants } from '../../../../hooks/useParticipants';
 import { useStage } from '../../../../hooks/useStage';
 import { Badge } from '../../../../ui/Badge';
 import { Box } from '../../../../ui/Box';
@@ -75,13 +74,7 @@ const Participant = memo(({ sessionId }: ParticipantProps) => {
 Participant.displayName = 'Participant';
 
 export const Participants = () => {
-	const participantIds = useParticipantIds({
-		filter: useCallback(
-			(p: DailyParticipant) => Boolean(p?.permissions?.canSend),
-			[]
-		),
-		sort: 'user_name',
-	});
+	const participantIds = useParticipants(false, 'user_name');
 
 	return (
 		<Box css={{ p: '$4' }}>

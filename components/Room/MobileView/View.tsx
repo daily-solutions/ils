@@ -1,5 +1,4 @@
-import { DailyParticipant } from '@daily-co/daily-js';
-import { useLocalSessionId, useParticipantIds } from '@daily-co/daily-react';
+import { useLocalSessionId } from '@daily-co/daily-react';
 import React, {
 	useCallback,
 	useEffect,
@@ -9,6 +8,7 @@ import React, {
 } from 'react';
 
 import { useCamSubscriptions } from '../../../hooks/useCamSubscriptions';
+import { useParticipants } from '../../../hooks/useParticipants';
 import { useResizeObserver } from '../../../hooks/useResizeObserver';
 import { useVideoGrid } from '../../../hooks/useVideoGrid';
 import { Box } from '../../../ui/Box';
@@ -21,16 +21,7 @@ const DEFAULT_MOBILE_ASPECT_RATIO = 4 / 3;
 export const View = () => {
 	const localSessionId = useLocalSessionId();
 	const viewRef = useRef<HTMLDivElement>(null);
-	const participantIds = useParticipantIds({
-		filter: useCallback(
-			(p: DailyParticipant) =>
-				Boolean(
-					p?.permissions?.canSend &&
-						(p.owner || (p?.userData as any)?.['onStage'])
-				),
-			[]
-		),
-	});
+	const participantIds = useParticipants();
 
 	const [dimensions, setDimensions] = useState({
 		width: 1,
