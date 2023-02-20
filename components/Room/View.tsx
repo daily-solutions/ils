@@ -163,7 +163,7 @@ export const View = () => {
 	}, [currentIds, threshold, localSessionId, topology, updateReceiveSettings]);
 
 	const tiles = useMemo(() => {
-		if (participantIds.length > 0) {
+		if (currentIds.length > 0) {
 			return (
 				<Flex
 					css={{
@@ -179,11 +179,11 @@ export const View = () => {
 						transition: 'height 100ms ease, width 100ms ease',
 					}}
 				>
-					{participantIds.map((participantId) => (
+					{currentIds.map((participantId) => (
 						<Tile
 							sessionId={participantId}
 							key={participantId}
-							showBorder={participantIds.length > 1}
+							showBorder={currentIds.length > 1}
 						/>
 					))}
 				</Flex>
@@ -194,7 +194,7 @@ export const View = () => {
 					<h3>Please wait till a host joins your call</h3>
 				</Box>
 			);
-	}, [participantIds]);
+	}, [currentIds]);
 
 	return (
 		<Box

@@ -14,14 +14,14 @@ interface Props {
 }
 
 export const useVideoGrid = ({
-	width,
-	height,
 	gap = 1,
-	tileAspectRatio = DEFAULT_ASPECT_RATIO,
+	height,
+	maxCountPerPage = 25,
+	minCountPerPage = 1,
 	minTileWidth = 1,
 	sessionIds,
-	minCountPerPage = 1,
-	maxCountPerPage = 25,
+	tileAspectRatio = DEFAULT_ASPECT_RATIO,
+	width,
 }: Props) => {
 	const [currentPage, setCurrentPage] = useState(1);
 

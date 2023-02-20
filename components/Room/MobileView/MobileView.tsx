@@ -15,8 +15,8 @@ export const MobileView = () => {
 				height: '100dvh',
 				alignItems: 'center',
 				justifyContent: 'center',
-				background: '$dark',
-				color: '$primaryText',
+				background: '$background',
+				color: '$baseText',
 			}}
 		>
 			<Header />
