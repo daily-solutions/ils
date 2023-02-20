@@ -54,6 +54,10 @@ const StyledContent = styled(DialogPrimitive.Content, {
 	'&:focus': {
 		outline: 'none',
 	},
+
+	'@media (max-width: 480px)': {
+		width: '95%',
+	},
 });
 
 const StyledHeader = styled('div', {

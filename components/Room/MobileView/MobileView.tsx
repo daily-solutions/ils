@@ -1,6 +1,7 @@
 import { DailyAudio } from '@daily-co/daily-react';
 
 import { Flex } from '../../../ui/Flex';
+import { CreatePoll } from '../../Modal';
 import { EmojiReactions } from '../EmojiReactions';
 import { BottomTray } from './BottomTray';
 import { Header } from './Header';
@@ -25,6 +26,7 @@ export const MobileView = () => {
 			<RightTray />
 			<EmojiReactions />
 			<DailyAudio />
+			<CreatePoll />
 		</Flex>
 	);
 };

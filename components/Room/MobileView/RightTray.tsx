@@ -1,10 +1,12 @@
 import React, { useCallback } from 'react';
 
+import { usePoll } from '../../../contexts/UIState';
 import { Flex } from '../../../ui/Flex';
 import { Icon } from '../../../ui/Icon';
 import { TrayButton } from '../../TrayButton';
 
 export const RightTray = () => {
+	const [, setPoll] = usePoll();
 	const handleShare = useCallback(async () => {
 		const sharedData = {
 			title: 'Daily ILS Demo',
@@ -31,7 +33,11 @@ export const RightTray = () => {
 				<TrayButton variant="transparent" label="Chat">
 					<Icon icon="chat" />
 				</TrayButton>
-				<TrayButton variant="transparent" label="Poll">
+				<TrayButton
+					variant="transparent"
+					label="Poll"
+					onClick={() => setPoll((p) => !p)}
+				>
 					<Icon icon="poll" />
 				</TrayButton>
 				<TrayButton variant="transparent" label="Share" onClick={handleShare}>
