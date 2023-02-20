@@ -21,7 +21,7 @@ export const EmojiReactionsPopover = ({
 	return (
 		<Popover open={open} onOpenChange={setOpen}>
 			<PopoverTrigger asChild>{children}</PopoverTrigger>
-			<PopoverContent css={{ p: '$4' }}>
+			<PopoverContent css={{ p: '$4', zIndex: 999 }}>
 				<Grid
 					css={{
 						gridGap: '$4',

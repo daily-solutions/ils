@@ -3,8 +3,7 @@ import React from 'react';
 
 import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { Flex } from '../../ui/Flex';
-import { CreatePoll, InviteToJoin } from '../Modal';
-import { ViewPoll } from '../Modal/ViewPoll';
+import { Modals } from '../Modal';
 import { EmojiReactions } from './EmojiReactions';
 import { MobileView } from './MobileView';
 import { Sidebar } from './Sidebar';
@@ -13,29 +12,29 @@ import { View } from './View';
 
 export const Room = () => {
 	const isMobile = useMediaQuery('(max-width: 480px)');
-	return isMobile ? (
-		<MobileView />
-	) : (
+	return (
 		<>
-			<Flex css={{ width: '100dvw', height: '100dvh' }}>
-				<Flex
-					css={{
-						flexDirection: 'column',
-						flex: 1,
-						width: '100%',
-						height: '100%',
-					}}
-				>
-					<View />
-					<Tray />
+			{isMobile ? (
+				<MobileView />
+			) : (
+				<Flex css={{ width: '100dvw', height: '100dvh' }}>
+					<Flex
+						css={{
+							flexDirection: 'column',
+							flex: 1,
+							width: '100%',
+							height: '100%',
+						}}
+					>
+						<View />
+						<Tray />
+					</Flex>
+					<Sidebar />
 				</Flex>
-				<Sidebar />
-			</Flex>
+			)}
 			<DailyAudio />
 			<EmojiReactions />
-			<InviteToJoin />
-			<CreatePoll />
-			<ViewPoll />
+			<Modals />
 		</>
 	);
 };

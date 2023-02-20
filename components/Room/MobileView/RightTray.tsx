@@ -1,12 +1,13 @@
 import React, { useCallback } from 'react';
 
-import { usePoll } from '../../../contexts/UIState';
+import { usePoll, useSidebar } from '../../../contexts/UIState';
 import { Flex } from '../../../ui/Flex';
 import { Icon } from '../../../ui/Icon';
 import { TrayButton } from '../../TrayButton';
 
 export const RightTray = () => {
 	const [, setPoll] = usePoll();
+	const [, setSidebar] = useSidebar();
 	const handleShare = useCallback(async () => {
 		const sharedData = {
 			title: 'Daily ILS Demo',
@@ -27,10 +28,15 @@ export const RightTray = () => {
 				bottom: 80,
 				width: '100%',
 				px: '$3',
+				zIndex: 101,
 			}}
 		>
 			<Flex css={{ flexFlow: 'column', gap: '$4', color: '$dark' }}>
-				<TrayButton variant="transparent" label="Chat">
+				<TrayButton
+					variant="transparent"
+					label="Chat"
+					onClick={() => setSidebar((s) => (s ? null : 'chat'))}
+				>
 					<Icon icon="chat" />
 				</TrayButton>
 				<TrayButton

@@ -19,9 +19,10 @@ export const Sidebar = () => {
 			css={{
 				position: md ? 'initial' : 'absolute',
 				width: md ? '20rem' : '100%',
-				height: md ? 'auto' : 'calc(100% - 80px)',
+				height: md ? 'auto' : '100%',
 				boxShadow: '0px 0px 20px 5px rgba(0, 0, 0, 0.05)',
 				padding: 0,
+				zIndex: 100,
 			}}
 		>
 			<Tabs

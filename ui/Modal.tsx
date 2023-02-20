@@ -31,7 +31,7 @@ const StyledOverlay = styled(DialogPrimitive.Overlay, {
 });
 
 const StyledContent = styled(DialogPrimitive.Content, {
-	zIndex: 10,
+	zIndex: 1000,
 	position: 'fixed',
 	top: '50%',
 	left: '50%',
