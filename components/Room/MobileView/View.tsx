@@ -1,4 +1,3 @@
-import { useLocalSessionId } from '@daily-co/daily-react';
 import React, {
 	useCallback,
 	useEffect,
@@ -7,9 +6,9 @@ import React, {
 	useState,
 } from 'react';
 
-import { useCamSubscriptions } from '../../../hooks/useCamSubscriptions';
 import { useParticipants } from '../../../hooks/useParticipants';
 import { useResizeObserver } from '../../../hooks/useResizeObserver';
+import { useTrackSubscriptions } from '../../../hooks/useTrackSubscriptions';
 import { useVideoGrid } from '../../../hooks/useVideoGrid';
 import { Box } from '../../../ui/Box';
 import { Flex } from '../../../ui/Flex';
@@ -19,7 +18,6 @@ import { PaginationButton } from '../PaginationButton';
 const DEFAULT_MOBILE_ASPECT_RATIO = 4 / 3;
 
 export const View = () => {
-	const localSessionId = useLocalSessionId();
 	const viewRef = useRef<HTMLDivElement>(null);
 	const participantIds = useParticipants();
 
@@ -66,58 +64,12 @@ export const View = () => {
 		viewRef.current.style.setProperty('--grid-height', `${containerHeight}px`);
 	}, [columns, containerHeight, containerWidth]);
 
-	const camSubscriptions = useMemo(() => {
-		const maxSubs = 3 * pageSize;
-
-		let renderedOrBufferedIds: string[];
-		switch (currentPage) {
-			case 1:
-				renderedOrBufferedIds = participantIds.slice(
-					0,
-					Math.min(maxSubs, 2 * pageSize)
-				);
-				break;
-			case Math.ceil(participantIds.length / pageSize):
-				renderedOrBufferedIds = participantIds.slice(
-					-Math.min(maxSubs, 2 * pageSize)
-				);
-				break;
-			default:
-				{
-					const buffer = Math.floor((maxSubs - pageSize) / 2);
-					const min = Math.max(0, (currentPage - 1) * pageSize - buffer);
-					const max = Math.min(
-						participantIds.length,
-						currentPage * pageSize + buffer
-					);
-					renderedOrBufferedIds = participantIds.slice(min, max);
-				}
-				break;
-		}
-
-		const subscribedIds: string[] = [];
-		const stagedIds: string[] = [];
-
-		for (const id of renderedOrBufferedIds) {
-			if (id !== localSessionId) {
-				if (currentIds.includes(id)) {
-					subscribedIds.push(id);
-				} else {
-					stagedIds.push(id);
-				}
-			}
-		}
-
-		return {
-			subscribedIds,
-			stagedIds,
-		};
-	}, [pageSize, currentPage, participantIds, localSessionId, currentIds]);
-
-	useCamSubscriptions(
-		camSubscriptions?.subscribedIds,
-		camSubscriptions?.stagedIds
-	);
+	useTrackSubscriptions({
+		currentIds,
+		currentPage,
+		pageSize,
+		participantIds,
+	});
 
 	const tiles = useMemo(() => {
 		if (currentIds.length > 0) {
