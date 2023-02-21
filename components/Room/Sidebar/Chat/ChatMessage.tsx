@@ -1,8 +1,9 @@
 import Avatar from 'boring-avatars';
 import Image from 'next/image';
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 
-import { useMessage } from '../../../../contexts/UIState';
+import { useMessage, useSidebar } from '../../../../contexts/UIState';
+import { useMediaQuery } from '../../../../hooks/useMediaQuery';
 import { usePolls } from '../../../../hooks/usePolls';
 import Poll from '../../../../public/poll.svg';
 import { Badge } from '../../../../ui/Badge';
@@ -22,13 +23,21 @@ const TextMessage = ({ message }: { message: string }) => {
 };
 
 const PollMessage = ({ id, question }: { id: string; question: string }) => {
+	const [, setSidebar] = useSidebar();
+	const md = useMediaQuery('(min-width: 800px)');
 	const { viewPoll } = usePolls();
+
+	const handleViewPoll = useCallback(() => {
+		if (!md) setSidebar(null);
+		viewPoll(id);
+	}, [id, md, setSidebar, viewPoll]);
+
 	return (
 		<Flex css={{ flexFlow: 'column wrap', gap: '$4' }}>
 			<Text size={2} css={{ color: '$baseText', lineHeight: '130%' }}>
 				{question}
 			</Text>
-			<Button fullWidth variant="orange" onClick={() => viewPoll(id)}>
+			<Button fullWidth variant="orange" onClick={handleViewPoll}>
 				View poll
 			</Button>
 		</Flex>
