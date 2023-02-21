@@ -52,7 +52,7 @@ export const View = () => {
 		height: dimensions.height,
 		tileAspectRatio: DEFAULT_MOBILE_ASPECT_RATIO,
 		minTileWidth: 200,
-		gap: 1,
+		gap: 0,
 		sessionIds: participantIds,
 		minCountPerPage: 1,
 		maxCountPerPage: 2,
@@ -60,7 +60,7 @@ export const View = () => {
 
 	useEffect(() => {
 		if (!viewRef.current) return;
-		viewRef.current.style.setProperty('--grid-gap', '1px');
+		viewRef.current.style.setProperty('--grid-gap', '0px');
 		viewRef.current.style.setProperty('--grid-columns', columns.toString());
 		viewRef.current.style.setProperty('--grid-width', `${containerWidth}px`);
 		viewRef.current.style.setProperty('--grid-height', `${containerHeight}px`);

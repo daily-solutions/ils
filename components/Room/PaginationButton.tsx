@@ -24,7 +24,7 @@ export const PaginationButton = ({ isPrev = true, onClick }: Props) => {
 			}}
 		>
 			<Button
-				variant="outline"
+				variant="inverse"
 				size="pagination"
 				onClick={onClick}
 				css={{

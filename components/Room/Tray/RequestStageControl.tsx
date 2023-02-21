@@ -53,7 +53,7 @@ export const RequestStageControl = () => {
 			variant={isRequesting ? 'danger' : 'primary'}
 			onClick={handleToggleRequest}
 		>
-			{isRequesting ? 'Cancel request' : 'Join the stage'}
+			{isRequesting ? 'Cancel' : 'Ask a question'}
 		</Button>
 	);
 };

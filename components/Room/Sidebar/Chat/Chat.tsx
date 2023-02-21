@@ -47,7 +47,7 @@ export const Chat = ({ withHeader = false }: Props) => {
 				>
 					<Text>Chat</Text>
 					<Button
-						variant="outline"
+						variant="ghost"
 						size="pagination"
 						onClick={() => setSidebar(null)}
 					>

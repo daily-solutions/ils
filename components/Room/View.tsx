@@ -68,6 +68,7 @@ export const View = () => {
 		minTileWidth: 280,
 		gap: 1,
 		sessionIds: participantIds,
+		maxCountPerPage: 6,
 	});
 
 	useEffect(() => {

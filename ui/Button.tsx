@@ -59,7 +59,7 @@ const StyledButton = styled('button', {
 			},
 			ghost: {
 				backgroundColor: 'transparent',
-				color: '$primary',
+				color: '$baseText',
 			},
 			cyan: {
 				backgroundColor: '$cyanLight',

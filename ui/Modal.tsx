@@ -94,8 +94,8 @@ const DialogContent = React.forwardRef<
 					<DialogTitle>{title}</DialogTitle>
 					{showCloseButton && (
 						<StyledCloseButton asChild>
-							<Button size="reaction" variant="outline">
-								<Icon icon="cross" size={15} />
+							<Button size="reaction" variant="ghost">
+								<Icon icon="cross" />
 							</Button>
 						</StyledCloseButton>
 					)}
