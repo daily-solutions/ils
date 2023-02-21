@@ -12,6 +12,7 @@ import { Icon } from '../../../ui/Icon';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../../ui/Tabs';
 import { Chat } from './Chat';
 import { People } from './People';
+import { Participants } from './People/Participants';
 
 export const Sidebar = () => {
 	const localSessionId = useLocalSessionId();
@@ -58,7 +59,13 @@ export const Sidebar = () => {
 					</TabsContent>
 				</Tabs>
 			) : (
-				<Chat withHeader />
+				<>
+					{sidebar === 'chat' ? (
+						<Chat withHeader />
+					) : (
+						<Participants withHeader />
+					)}
+				</>
 			)}
 		</Card>
 	);
