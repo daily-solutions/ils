@@ -11,6 +11,10 @@ import { useStage } from '../../../hooks/useStage';
 import { Button } from '../../../ui/Button';
 import { Flex } from '../../../ui/Flex';
 import { TrayButton } from '../../TrayButton';
+import { AudioControl } from '../Tray/AudioControl';
+import { ReactionsControl } from '../Tray/ReactionsControl';
+import { SettingsControl } from '../Tray/SettingsControl';
+import { VideoControl } from '../Tray/VideoControl';
 
 const mobileEmojis: Emoji[] = ['❤️', '👍', '🔥'];
 
@@ -63,14 +67,24 @@ export const BottomTray = () => {
 			}}
 		>
 			<Flex css={{ gap: '$2' }}>
-				{mobileEmojis.map((e) => (
-					<TrayButton variant="outline" key={e} onClick={() => react(e)}>
-						{e}
-					</TrayButton>
-				))}
+				{isOnStage ? (
+					<Flex css={{ gap: '$2' }}>
+						<VideoControl />
+						<AudioControl />
+						<SettingsControl />
+						<ReactionsControl />
+					</Flex>
+				) : (
+					mobileEmojis.map((e) => (
+						<TrayButton variant="outline" key={e} onClick={() => react(e)}>
+							{e}
+						</TrayButton>
+					))
+				)}
 			</Flex>
 			<Button
 				rounded
+				size={isOnStage ? 'small' : 'medium'}
 				variant={isOnStage || isRequesting ? 'danger' : 'primary'}
 				onClick={handleToggleRequest}
 			>
