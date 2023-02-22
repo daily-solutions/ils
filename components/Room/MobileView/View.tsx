@@ -8,7 +8,6 @@ import React, {
 
 import { useParticipants } from '../../../hooks/useParticipants';
 import { useResizeObserver } from '../../../hooks/useResizeObserver';
-import { useTrackSubscriptions } from '../../../hooks/useTrackSubscriptions';
 import { useVideoGrid } from '../../../hooks/useVideoGrid';
 import { Box } from '../../../ui/Box';
 import { Flex } from '../../../ui/Flex';
@@ -42,7 +41,6 @@ export const View = () => {
     currentIds,
     currentPage,
     nextPage,
-    pageSize,
     prevPage,
     totalPages,
   } = useVideoGrid({
@@ -63,13 +61,6 @@ export const View = () => {
     viewRef.current.style.setProperty('--grid-width', `${containerWidth}px`);
     viewRef.current.style.setProperty('--grid-height', `${containerHeight}px`);
   }, [columns, containerHeight, containerWidth]);
-
-  useTrackSubscriptions({
-    currentIds,
-    currentPage,
-    pageSize,
-    participantIds,
-  });
 
   const tiles = useMemo(() => {
     if (currentIds.length > 0) {

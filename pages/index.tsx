@@ -18,7 +18,7 @@ const Home: NextPage = () => {
     const co = DailyIframe.createCallObject({
       url: `https://${process.env.NEXT_PUBLIC_DAILY_DOMAIN}.daily.co/${process.env.NEXT_PUBLIC_DAILY_ROOM}`,
       token,
-      subscribeToTracksAutomatically: false,
+      subscribeToTracksAutomatically: true,
       dailyConfig: {
         avoidEval: true,
         experimentalChromeVideoMuteLightOff: true,
