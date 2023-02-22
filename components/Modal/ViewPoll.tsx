@@ -1,11 +1,10 @@
 import { useLocalSessionId } from '@daily-co/daily-react';
 import Image from 'next/image';
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 
 import { useMessage, useViewPoll } from '../../contexts/UIState';
 import { usePolls } from '../../hooks/usePolls';
 import Poll from '../../public/poll.svg';
-import { Badge } from '../../ui/Badge';
 import { Box } from '../../ui/Box';
 import { Button } from '../../ui/Button';
 import { Flex } from '../../ui/Flex';
@@ -18,8 +17,12 @@ interface Props {
   option: string;
   onVote: (option: string) => void;
   selectedVote: boolean;
-  votes: string[];
+}
+
+interface PollResultsProps {
+  option: string;
   totalVotes: number;
+  votes: number;
 }
 
 const votePercentage = (votes: number, totalVotes: number) => {
@@ -27,13 +30,24 @@ const votePercentage = (votes: number, totalVotes: number) => {
   return isNaN(percentage) ? 0 : percentage;
 };
 
-const PollOption = ({
-  onVote,
-  option,
-  selectedVote,
-  totalVotes,
-  votes,
-}: Props) => {
+const PollResult = ({ option, totalVotes, votes }: PollResultsProps) => {
+  return (
+    <Flex
+      css={{
+        flexFlow: 'column wrap',
+        gap: '$3',
+      }}
+    >
+      <Text>{option}</Text>
+      <Flex css={{ alignItems: 'center', gap: '$2' }}>
+        <Progress value={votes / totalVotes} css={{ width: '100%' }} />
+        <Text>{votePercentage(votes, totalVotes)}%</Text>
+      </Flex>
+    </Flex>
+  );
+};
+
+const PollOption = ({ onVote, option, selectedVote }: Props) => {
   return (
     <Flex
       css={{
@@ -42,13 +56,7 @@ const PollOption = ({
         gap: '$5',
       }}
     >
-      <Flex css={{ flexFlow: 'column wrap', gap: '$4', width: '100%' }}>
-        <Flex css={{ alignItems: 'center', gap: '$1' }}>
-          <Text>{option}</Text>
-          <Badge size="xs">{votePercentage(votes.length, totalVotes)}%</Badge>
-        </Flex>
-        <Progress value={votes.length / totalVotes} />
-      </Flex>
+      <Text>{option}</Text>
       <Button
         size="small"
         onClick={() => onVote(option)}
@@ -68,6 +76,8 @@ export const ViewPoll = () => {
   const localSessionId = useLocalSessionId();
   const [viewPoll, setViewPoll] = useViewPoll();
   const message = useMessage(viewPoll as string);
+
+  const [vote, setVote] = useState<string | null>(null);
 
   const { voteToPoll } = usePolls();
 
@@ -118,20 +128,51 @@ export const ViewPoll = () => {
         </Flex>
       }
     >
-      <Box>
-        <Flex css={{ flexFlow: 'column wrap', gap: '$5', mb: '$6' }}>
-          {options.map((o) => (
-            <PollOption
-              option={o}
-              key={o}
-              selectedVote={o === myVote}
-              onVote={(option) => voteToPoll(viewPoll as string, option)}
-              votes={votes[o]}
-              totalVotes={votesCount}
-            />
-          ))}
-        </Flex>
-      </Box>
+      <>
+        {!myVote ? (
+          <Box>
+            <Flex css={{ flexFlow: 'column wrap', gap: '$5', mb: '$6' }}>
+              {options.map((o) => (
+                <PollOption
+                  option={o}
+                  key={o}
+                  selectedVote={o === vote}
+                  onVote={(option) => setVote(option)}
+                />
+              ))}
+            </Flex>
+            <Flex
+              css={{
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                py: '$5',
+                borderTop: '1px solid $disabled',
+              }}
+            >
+              <Text role="button" css={{ color: '$muted', cursor: 'pointer' }}>
+                Skip (show results)
+              </Text>
+              <Button
+                disabled={!vote}
+                onClick={() => voteToPoll(viewPoll as string, vote as string)}
+              >
+                Confirm selection
+              </Button>
+            </Flex>
+          </Box>
+        ) : (
+          <Flex css={{ flexFlow: 'column wrap', gap: '$5', mb: '$6' }}>
+            {options.map((o) => (
+              <PollResult
+                option={o}
+                key={o}
+                totalVotes={votesCount}
+                votes={votes[o]?.length}
+              />
+            ))}
+          </Flex>
+        )}
+      </>
     </Modal>
   );
 };
