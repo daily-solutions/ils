@@ -1,1 +1,1 @@
-export { MobileView } from './MobileView';
+export { default } from './MobileView';
