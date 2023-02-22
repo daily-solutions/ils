@@ -71,8 +71,8 @@ export const BottomTray = () => {
           <Flex css={{ gap: '$2' }}>
             <VideoControl />
             <AudioControl />
-            <SettingsControl />
             <ReactionsControl />
+            <SettingsControl />
           </Flex>
         ) : (
           mobileEmojis.map((e) => (

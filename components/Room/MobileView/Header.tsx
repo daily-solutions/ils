@@ -5,7 +5,7 @@ export const Header = () => {
   return (
     <Flex
       css={{
-        zIndex: 99,
+        zIndex: 90,
         position: 'absolute',
         width: '100%',
         top: 20,

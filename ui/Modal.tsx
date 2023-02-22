@@ -20,7 +20,7 @@ const overlayShow = keyframes({
 const Dialog = DialogPrimitive.Root;
 
 const StyledOverlay = styled(DialogPrimitive.Overlay, {
-  zIndex: 2,
+  zIndex: 1000,
   backgroundColor: 'rgba(0, 0, 0, .15)',
   position: 'fixed',
   top: 0,
@@ -38,9 +38,8 @@ const StyledContent = styled(DialogPrimitive.Content, {
   transform: 'translate(-50%, -50%)',
   width: '100%',
   maxWidth: 500,
-  maxHeight: '85vh',
+  maxHeight: '100%',
   padding: '$4 $6',
-  marginTop: '-5vh',
   background: '$background',
 
   // Among other things, prevents text alignment inconsistencies when dialog can't be centered in the viewport evenly.
