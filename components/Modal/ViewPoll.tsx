@@ -5,6 +5,7 @@ import React, { useMemo, useState } from 'react';
 import { useMessage, useViewPoll } from '../../contexts/UIState';
 import { usePolls } from '../../hooks/usePolls';
 import Poll from '../../public/poll.svg';
+import { Badge } from '../../ui/Badge';
 import { Box } from '../../ui/Box';
 import { Button } from '../../ui/Button';
 import { Flex } from '../../ui/Flex';
@@ -23,6 +24,7 @@ interface PollResultsProps {
   option: string;
   totalVotes: number;
   votes: number;
+  myVote: boolean;
 }
 
 const votePercentage = (votes: number, totalVotes: number) => {
@@ -30,7 +32,12 @@ const votePercentage = (votes: number, totalVotes: number) => {
   return isNaN(percentage) ? 0 : percentage;
 };
 
-const PollResult = ({ option, totalVotes, votes }: PollResultsProps) => {
+const PollResult = ({
+  myVote,
+  option,
+  totalVotes,
+  votes,
+}: PollResultsProps) => {
   return (
     <Flex
       css={{
@@ -38,9 +45,19 @@ const PollResult = ({ option, totalVotes, votes }: PollResultsProps) => {
         gap: '$3',
       }}
     >
-      <Text>{option}</Text>
       <Flex css={{ alignItems: 'center', gap: '$2' }}>
-        <Progress value={votes / totalVotes} css={{ width: '100%' }} />
+        <Text>{option}</Text>
+        {myVote && <Badge size="xs">You voted</Badge>}
+      </Flex>
+      <Flex css={{ alignItems: 'center', gap: '$2' }}>
+        <Progress
+          color={myVote ? 'primary' : 'cyan'}
+          value={1}
+          css={{ width: `${votePercentage(votes, totalVotes)}%` }}
+        />
+        <Box
+          css={{ height: 8, width: 8, background: '$secondary', br: '$round' }}
+        />
         <Text>{votePercentage(votes, totalVotes)}%</Text>
       </Flex>
     </Flex>
@@ -93,7 +110,7 @@ export const ViewPoll = () => {
     const votes = { ...message?.poll?.votes };
     return Object.keys(votes).find((key) =>
       votes[key].includes(localSessionId as string)
-    );
+    ) as string;
   }, [localSessionId, message?.poll?.votes]);
 
   const votesCount = useMemo(
@@ -128,51 +145,47 @@ export const ViewPoll = () => {
         </Flex>
       }
     >
-      <>
-        {!myVote ? (
-          <Box>
-            <Flex css={{ flexFlow: 'column wrap', gap: '$5', mb: '$6' }}>
-              {options.map((o) => (
-                <PollOption
-                  option={o}
-                  key={o}
-                  selectedVote={o === vote}
-                  onVote={(option) => setVote(option)}
-                />
-              ))}
-            </Flex>
-            <Flex
-              css={{
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                py: '$5',
-                borderTop: '1px solid $disabled',
-              }}
-            >
-              <Text role="button" css={{ color: '$muted', cursor: 'pointer' }}>
-                Skip (show results)
-              </Text>
-              <Button
-                disabled={!vote}
-                onClick={() => voteToPoll(viewPoll as string, vote as string)}
-              >
-                Confirm selection
-              </Button>
-            </Flex>
-          </Box>
-        ) : (
-          <Flex css={{ flexFlow: 'column wrap', gap: '$5', mb: '$6' }}>
-            {options.map((o) => (
+      <Box>
+        <Flex css={{ flexFlow: 'column wrap', gap: '$5', mb: '$6' }}>
+          {options.map((o) =>
+            !myVote ? (
+              <PollOption
+                option={o}
+                key={o}
+                selectedVote={o === vote}
+                onVote={(option) => setVote(option)}
+              />
+            ) : (
               <PollResult
                 option={o}
                 key={o}
                 totalVotes={votesCount}
                 votes={votes[o]?.length}
+                myVote={myVote === o}
               />
-            ))}
-          </Flex>
-        )}
-      </>
+            )
+          )}
+        </Flex>
+        <Flex
+          css={{
+            alignItems: 'center',
+            justifyContent: 'flex-end',
+            pt: '$5',
+            borderTop: '1px solid $disabled',
+          }}
+        >
+          {!myVote ? (
+            <Button
+              disabled={!vote}
+              onClick={() => voteToPoll(viewPoll as string, vote as string)}
+            >
+              Confirm selection
+            </Button>
+          ) : (
+            <Button onClick={() => setViewPoll(null)}>Exit results</Button>
+          )}
+        </Flex>
+      </Box>
     </Modal>
   );
 };
