@@ -12,6 +12,7 @@ import { Button } from '../../../ui/Button';
 import { Flex } from '../../../ui/Flex';
 import { TrayButton } from '../../TrayButton';
 import { AudioControl } from '../Tray/AudioControl';
+import { PeopleControl } from '../Tray/PeopleControl';
 import { ReactionsControl } from '../Tray/ReactionsControl';
 import { SettingsControl } from '../Tray/SettingsControl';
 import { VideoControl } from '../Tray/VideoControl';
@@ -22,7 +23,10 @@ export const BottomTray = () => {
   const { react } = useReactions();
 
   const localSessionId = useLocalSessionId();
-  const userData = useParticipantProperty(localSessionId as string, 'userData');
+  const [userData, isOwner] = useParticipantProperty(localSessionId as string, [
+    'userData',
+    'owner',
+  ]);
   const isOnStage = useIsOnStage();
   const [, setInvited] = useInviteToJoin();
 
@@ -59,18 +63,19 @@ export const BottomTray = () => {
     <Flex
       css={{
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: isOwner ? 'center' : 'space-between',
         position: 'absolute',
         bottom: 0,
         width: '100%',
         p: '$3',
       }}
     >
-      <Flex css={{ gap: '$2' }}>
+      <Flex css={{ alignItems: 'center', justifyContent: 'center', gap: '$2' }}>
         {isOnStage ? (
-          <Flex css={{ gap: '$2' }}>
+          <Flex css={{ alignItems: 'center', gap: '$2' }}>
             <VideoControl />
             <AudioControl />
+            <PeopleControl />
             <ReactionsControl />
             <SettingsControl />
           </Flex>
@@ -82,20 +87,22 @@ export const BottomTray = () => {
           ))
         )}
       </Flex>
-      <Button
-        rounded
-        size={isOnStage ? 'small' : 'medium'}
-        variant={isOnStage || isRequesting ? 'danger' : 'primary'}
-        onClick={handleToggleRequest}
-      >
-        {isOnStage
-          ? 'Leave stage'
-          : isInvited
-          ? 'Join'
-          : isRequesting
-          ? 'Cancel'
-          : 'Ask a question'}
-      </Button>
+      {!isOwner && (
+        <Button
+          rounded
+          size={isOnStage ? 'small' : 'medium'}
+          variant={isOnStage || isRequesting ? 'danger' : 'primary'}
+          onClick={handleToggleRequest}
+        >
+          {isOnStage
+            ? 'Leave stage'
+            : isInvited
+            ? 'Join'
+            : isRequesting
+            ? 'Cancel'
+            : 'Ask a question'}
+        </Button>
+      )}
     </Flex>
   );
 };

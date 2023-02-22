@@ -2,6 +2,7 @@ import * as ToastPrimitive from '@radix-ui/react-toast';
 import Avatar from 'boring-avatars';
 import React, { memo } from 'react';
 
+import { useMediaQuery } from '../hooks/useMediaQuery';
 import { keyframes, styled } from '../styles/stitches.config';
 import { Flex } from './Flex';
 
@@ -130,6 +131,8 @@ export const Toast = ({
   title = '',
   variant = 'light',
 }: React.PropsWithChildren<Props>) => {
+  const isMobile = useMediaQuery('(max-width: 480px)');
+
   return (
     <StyledToastRoot
       open={open}
@@ -139,7 +142,14 @@ export const Toast = ({
       variant={variant}
     >
       {avatar ? (
-        <Flex css={{ gap: '$4' }}>
+        <Flex
+          css={{
+            gap: '$4',
+            alignItems: isMobile ? 'center' : 'flex-start',
+            justifyContent: 'center',
+            flexDirection: isMobile ? 'column' : 'row',
+          }}
+        >
           <Avatar
             variant="beam"
             size={56}
