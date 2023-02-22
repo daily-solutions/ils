@@ -15,7 +15,7 @@ export const useActiveSpeakerId = ({ ignoreLocal = false }: Props) => {
     useCallback(
       (ev: DailyEventObjectActiveSpeakerChange) => {
         const activeSpeakerId = ev.activeSpeaker.peerId;
-        if (!activeSpeakerId) return;
+        if (!activeSpeakerId) setSpeakerId(null);
 
         if (ignoreLocal && activeSpeakerId === localSessionId) {
           setSpeakerId(null);
