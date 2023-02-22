@@ -5,15 +5,15 @@ import { Icon } from '../../../ui/Icon';
 import { TrayButton } from '../../TrayButton';
 
 export const PollControl = () => {
-	const [show, setShow] = usePoll();
+  const [show, setShow] = usePoll();
 
-	return (
-		<TrayButton
-			muted={show}
-			mutedVariant="inverse"
-			onClick={() => setShow(true)}
-		>
-			<Icon icon="poll" />
-		</TrayButton>
-	);
+  return (
+    <TrayButton
+      muted={show}
+      mutedVariant="inverse"
+      onClick={() => setShow(true)}
+    >
+      <Icon icon="poll" />
+    </TrayButton>
+  );
 };

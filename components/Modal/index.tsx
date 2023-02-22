@@ -3,11 +3,11 @@ import { InviteToJoin } from './InviteToJoin';
 import { ViewPoll } from './ViewPoll';
 
 export const Modals = () => {
-	return (
-		<>
-			<CreatePoll />
-			<ViewPoll />
-			<InviteToJoin />
-		</>
-	);
+  return (
+    <>
+      <CreatePoll />
+      <ViewPoll />
+      <InviteToJoin />
+    </>
+  );
 };

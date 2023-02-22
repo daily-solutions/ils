@@ -17,33 +17,33 @@ import { VideoControl } from './Tray/VideoControl';
 import { ViewerCount } from './Tray/ViewerCount';
 
 export const Tray = () => {
-	const md = useMediaQuery('(min-width: 800px)');
-	return (
-		<Flex
-			css={{
-				alignItems: 'center',
-				justifyContent: 'space-between',
-				p: '$5',
-				height: '80px',
-				width: '100%',
-			}}
-		>
-			{md && <Image src={Logo} alt="Daily Logo" />}
-			<Flex css={{ alignItems: 'center', justifyContent: 'center', gap: '$2' }}>
-				<VideoControl />
-				<AudioControl />
-				<ChatControl />
-				<PeopleControl />
-				<PollControl />
-				<RecordingControl />
-				<ReactionsControl />
-				<SettingsControl />
-			</Flex>
-			<Flex css={{ alignItems: 'center', justifyContent: 'center', gap: '$2' }}>
-				<RequestStageControl />
-				<Divider />
-				<ViewerCount />
-			</Flex>
-		</Flex>
-	);
+  const md = useMediaQuery('(min-width: 800px)');
+  return (
+    <Flex
+      css={{
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        p: '$5',
+        height: '80px',
+        width: '100%',
+      }}
+    >
+      {md && <Image src={Logo} alt="Daily Logo" />}
+      <Flex css={{ alignItems: 'center', justifyContent: 'center', gap: '$2' }}>
+        <VideoControl />
+        <AudioControl />
+        <ChatControl />
+        <PeopleControl />
+        <PollControl />
+        <RecordingControl />
+        <ReactionsControl />
+        <SettingsControl />
+      </Flex>
+      <Flex css={{ alignItems: 'center', justifyContent: 'center', gap: '$2' }}>
+        <RequestStageControl />
+        <Divider />
+        <ViewerCount />
+      </Flex>
+    </Flex>
+  );
 };

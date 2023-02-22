@@ -5,17 +5,17 @@ import { Icon } from '../../../ui/Icon';
 import { TrayButton } from '../../TrayButton';
 
 export const ChatControl = () => {
-	const [sidebar, setSidebar] = useSidebar();
+  const [sidebar, setSidebar] = useSidebar();
 
-	const isEnabled = useMemo(() => sidebar === 'chat', [sidebar]);
+  const isEnabled = useMemo(() => sidebar === 'chat', [sidebar]);
 
-	return (
-		<TrayButton
-			muted={isEnabled}
-			mutedVariant="inverse"
-			onClick={() => setSidebar(isEnabled ? null : 'chat')}
-		>
-			<Icon icon="chat" />
-		</TrayButton>
-	);
+  return (
+    <TrayButton
+      muted={isEnabled}
+      mutedVariant="inverse"
+      onClick={() => setSidebar(isEnabled ? null : 'chat')}
+    >
+      <Icon icon="chat" />
+    </TrayButton>
+  );
 };

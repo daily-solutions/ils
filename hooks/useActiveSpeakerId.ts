@@ -3,27 +3,27 @@ import { useDailyEvent, useLocalSessionId } from '@daily-co/daily-react';
 import { useCallback, useState } from 'react';
 
 interface Props {
-	ignoreLocal?: boolean;
+  ignoreLocal?: boolean;
 }
 
 export const useActiveSpeakerId = ({ ignoreLocal = false }: Props) => {
-	const localSessionId = useLocalSessionId();
-	const [speakerId, setSpeakerId] = useState<string | null>(null);
+  const localSessionId = useLocalSessionId();
+  const [speakerId, setSpeakerId] = useState<string | null>(null);
 
-	useDailyEvent(
-		'active-speaker-change',
-		useCallback(
-			(ev: DailyEventObjectActiveSpeakerChange) => {
-				const activeSpeakerId = ev.activeSpeaker.peerId;
-				if (!activeSpeakerId) return;
+  useDailyEvent(
+    'active-speaker-change',
+    useCallback(
+      (ev: DailyEventObjectActiveSpeakerChange) => {
+        const activeSpeakerId = ev.activeSpeaker.peerId;
+        if (!activeSpeakerId) return;
 
-				if (ignoreLocal && activeSpeakerId === localSessionId) {
-					setSpeakerId(null);
-				} else setSpeakerId(activeSpeakerId);
-			},
-			[ignoreLocal, localSessionId]
-		)
-	);
+        if (ignoreLocal && activeSpeakerId === localSessionId) {
+          setSpeakerId(null);
+        } else setSpeakerId(activeSpeakerId);
+      },
+      [ignoreLocal, localSessionId]
+    )
+  );
 
-	return speakerId;
+  return speakerId;
 };

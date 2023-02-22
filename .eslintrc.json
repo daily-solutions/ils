@@ -1,32 +1,32 @@
 {
-	"extends": ["next/core-web-vitals"],
-	"plugins": [
-		"simple-import-sort",
-		"sort-destructure-keys",
-		"prettier",
-		"unused-imports"
-	],
-	"rules": {
-		"prettier/prettier": "error",
-		"simple-import-sort/imports": "error",
-		"simple-import-sort/exports": "error",
-		"react-hooks/exhaustive-deps": ["warn"],
-		"sort-destructure-keys/sort-destructure-keys": [
-			"error",
-			{
-				"caseSensitive": false
-			}
-		],
-		"no-duplicate-imports": ["error", { "includeExports": true }],
-		"unused-imports/no-unused-imports": "error",
-		"unused-imports/no-unused-vars": [
-			"warn",
-			{
-				"vars": "all",
-				"varsIgnorePattern": "^_",
-				"args": "after-used",
-				"argsIgnorePattern": "^_"
-			}
-		]
-	}
+  "extends": ["next/core-web-vitals"],
+  "plugins": [
+    "simple-import-sort",
+    "sort-destructure-keys",
+    "prettier",
+    "unused-imports"
+  ],
+  "rules": {
+    "prettier/prettier": "error",
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
+    "react-hooks/exhaustive-deps": ["warn"],
+    "sort-destructure-keys/sort-destructure-keys": [
+      "error",
+      {
+        "caseSensitive": false
+      }
+    ],
+    "no-duplicate-imports": ["error", { "includeExports": true }],
+    "unused-imports/no-unused-imports": "error",
+    "unused-imports/no-unused-vars": [
+      "warn",
+      {
+        "vars": "all",
+        "varsIgnorePattern": "^_",
+        "args": "after-used",
+        "argsIgnorePattern": "^_"
+      }
+    ]
+  }
 }

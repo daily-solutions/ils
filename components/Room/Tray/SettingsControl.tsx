@@ -6,22 +6,22 @@ import { Devices } from '../../Haircheck/Devices';
 import { TrayButton } from '../../TrayButton';
 
 export const SettingsControl = () => {
-	const isOnStage = useIsOnStage();
+  const isOnStage = useIsOnStage();
 
-	return (
-		<Popover>
-			<PopoverTrigger asChild>
-				<Box>
-					<TrayButton>
-						<Icon icon="settings" />
-					</TrayButton>
-				</Box>
-			</PopoverTrigger>
-			<PopoverContent>
-				<Box css={{ p: '$2 $4' }}>
-					<Devices audioVideo={isOnStage} />
-				</Box>
-			</PopoverContent>
-		</Popover>
-	);
+  return (
+    <Popover>
+      <PopoverTrigger asChild>
+        <Box>
+          <TrayButton>
+            <Icon icon="settings" />
+          </TrayButton>
+        </Box>
+      </PopoverTrigger>
+      <PopoverContent>
+        <Box css={{ p: '$2 $4' }}>
+          <Devices audioVideo={isOnStage} />
+        </Box>
+      </PopoverContent>
+    </Popover>
+  );
 };

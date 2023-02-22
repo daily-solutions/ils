@@ -11,66 +11,66 @@ import { ChatInput } from './ChatInput';
 import { ChatMessage } from './ChatMessage';
 
 interface Props {
-	withHeader?: boolean;
+  withHeader?: boolean;
 }
 
 export const Chat = ({ withHeader = false }: Props) => {
-	const [, setSidebar] = useSidebar();
-	const chatRef = useRef<HTMLDivElement>(null);
-	const [messages] = useMessages();
+  const [, setSidebar] = useSidebar();
+  const chatRef = useRef<HTMLDivElement>(null);
+  const [messages] = useMessages();
 
-	useEffect(() => {
-		const chat = chatRef.current;
-		if (!chat) return;
+  useEffect(() => {
+    const chat = chatRef.current;
+    if (!chat) return;
 
-		if (chat.scrollTop !== chat.scrollHeight)
-			chat.scrollTop = chat.scrollHeight;
-	}, [messages]);
+    if (chat.scrollTop !== chat.scrollHeight)
+      chat.scrollTop = chat.scrollHeight;
+  }, [messages]);
 
-	return (
-		<Flex
-			css={{
-				flexDirection: 'column',
-				height: '100%',
-				width: '100%',
-				maxHeight: withHeader ? 'calc(100% - 15px)' : 'calc(100dvh - 100px)',
-			}}
-		>
-			{withHeader && (
-				<Flex
-					css={{
-						height: '44px',
-						alignItems: 'center',
-						justifyContent: 'space-between',
-						p: '$1 $4',
-					}}
-				>
-					<Text>Chat</Text>
-					<Button
-						variant="ghost"
-						size="pagination"
-						onClick={() => setSidebar(null)}
-					>
-						<Icon icon="cross" />
-					</Button>
-				</Flex>
-			)}
-			{withHeader && <Divider />}
-			<Box
-				ref={chatRef}
-				css={{
-					flex: 1,
-					p: '$2 0',
-					overflowY: 'auto',
-					scrollBehavior: 'smooth',
-				}}
-			>
-				{messages.map((message) => (
-					<ChatMessage key={message.id} id={message.id} />
-				))}
-			</Box>
-			<Divider />
-			<ChatInput />
-		</Flex>
-	);
+  return (
+    <Flex
+      css={{
+        flexDirection: 'column',
+        height: '100%',
+        width: '100%',
+        maxHeight: withHeader ? 'calc(100% - 15px)' : 'calc(100dvh - 100px)',
+      }}
+    >
+      {withHeader && (
+        <Flex
+          css={{
+            height: '44px',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            p: '$1 $4',
+          }}
+        >
+          <Text>Chat</Text>
+          <Button
+            variant="ghost"
+            size="pagination"
+            onClick={() => setSidebar(null)}
+          >
+            <Icon icon="cross" />
+          </Button>
+        </Flex>
+      )}
+      {withHeader && <Divider />}
+      <Box
+        ref={chatRef}
+        css={{
+          flex: 1,
+          p: '$2 0',
+          overflowY: 'auto',
+          scrollBehavior: 'smooth',
+        }}
+      >
+        {messages.map((message) => (
+          <ChatMessage key={message.id} id={message.id} />
+        ))}
+      </Box>
+      <Divider />
+      <ChatInput />
+    </Flex>
+  );
 };

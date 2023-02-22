@@ -11,30 +11,30 @@ import { Tray } from './Tray';
 import { View } from './View';
 
 export const Room = () => {
-	const isMobile = useMediaQuery('(max-width: 480px)');
-	return (
-		<>
-			{isMobile ? (
-				<MobileView />
-			) : (
-				<Flex css={{ width: '100dvw', height: '100dvh' }}>
-					<Flex
-						css={{
-							flexDirection: 'column',
-							flex: 1,
-							width: '100%',
-							height: '100%',
-						}}
-					>
-						<View />
-						<Tray />
-					</Flex>
-					<Sidebar />
-				</Flex>
-			)}
-			<DailyAudio />
-			<EmojiReactions />
-			<Modals />
-		</>
-	);
+  const isMobile = useMediaQuery('(max-width: 480px)');
+  return (
+    <>
+      {isMobile ? (
+        <MobileView />
+      ) : (
+        <Flex css={{ width: '100dvw', height: '100dvh' }}>
+          <Flex
+            css={{
+              flexDirection: 'column',
+              flex: 1,
+              width: '100%',
+              height: '100%',
+            }}
+          >
+            <View />
+            <Tray />
+          </Flex>
+          <Sidebar />
+        </Flex>
+      )}
+      <DailyAudio />
+      <EmojiReactions />
+      <Modals />
+    </>
+  );
 };
