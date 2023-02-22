@@ -1,4 +1,5 @@
 import { Flex } from '../../../ui/Flex';
+import { ToastViewport } from '../../../ui/Toast';
 import { Sidebar } from '../Sidebar';
 import { BottomTray } from './BottomTray';
 import { Header } from './Header';
@@ -22,6 +23,7 @@ const MobileView = () => {
       <BottomTray />
       <RightTray />
       <Sidebar />
+      <ToastViewport />
     </Flex>
   );
 };
