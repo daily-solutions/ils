@@ -11,9 +11,13 @@ import { TrayButton } from '../../TrayButton';
 
 interface Props {
   ignoreOnStage?: boolean;
+  disabled?: boolean;
 }
 
-export const VideoControl = ({ ignoreOnStage = false }: Props) => {
+export const VideoControl = ({
+  disabled = false,
+  ignoreOnStage = false,
+}: Props) => {
   const daily = useDaily();
   const localSessionId = useLocalSessionId();
   const video = useParticipantProperty(localSessionId as string, 'video');
@@ -26,7 +30,11 @@ export const VideoControl = ({ ignoreOnStage = false }: Props) => {
 
   if (!isOnStage) return null;
   return (
-    <TrayButton muted={!video} onClick={() => handleToggleVideo(!video)}>
+    <TrayButton
+      muted={!video}
+      disabled={disabled}
+      onClick={() => handleToggleVideo(!video)}
+    >
       <Icon icon={video ? 'cam' : 'cam_muted'} />
     </TrayButton>
   );

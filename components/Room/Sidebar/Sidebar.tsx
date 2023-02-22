@@ -31,6 +31,7 @@ export const Sidebar = () => {
         boxShadow: '0px 0px 20px 5px rgba(0, 0, 0, 0.05)',
         padding: 0,
         zIndex: 100,
+        br: '$none',
       }}
     >
       {isOwner ? (

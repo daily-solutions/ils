@@ -1,5 +1,5 @@
-import { useDaily, useLocalSessionId } from '@daily-co/daily-react';
-import React, { memo, useCallback, useEffect } from 'react';
+import { useDaily, useDevices, useLocalSessionId } from '@daily-co/daily-react';
+import React, { memo, useCallback, useEffect, useMemo } from 'react';
 
 import { useMeetingState } from '../../contexts/UIState';
 import { Box } from '../../ui/Box';
@@ -9,11 +9,19 @@ import { Flex } from '../../ui/Flex';
 import { AudioControl, VideoControl } from '../Room';
 import { Tile } from '../Tile';
 import { Devices } from './Devices';
+import { Permissions } from './Permissions';
 
 export const Setup = memo(() => {
   const daily = useDaily();
   const localSessionId = useLocalSessionId();
   const [, setMeetingState] = useMeetingState();
+
+  const { camState, micState } = useDevices();
+
+  const granted = useMemo(
+    () => camState === 'granted' || micState === 'granted',
+    [camState, micState]
+  );
 
   useEffect(() => {
     if (!daily) return;
@@ -30,25 +38,35 @@ export const Setup = memo(() => {
 
   return (
     <Box css={{ width: '100%', height: '100%' }}>
-      <Tile sessionId={localSessionId as string} />
+      {granted ? (
+        <Tile sessionId={localSessionId as string} />
+      ) : (
+        <Permissions />
+      )}
       <Flex
         css={{
           alignItems: 'center',
           justifyContent: 'space-between',
-          mt: '$5',
-          px: '$3',
+          p: '$3',
+          borderTop: '1px solid $disabled',
         }}
       >
         <Flex css={{ gap: '$2' }}>
-          <VideoControl />
-          <AudioControl />
+          <VideoControl disabled={!granted} />
+          <AudioControl disabled={!granted} />
         </Flex>
-        <Button onClick={handleJoin}>Join</Button>
+        <Button disabled={!granted} onClick={handleJoin}>
+          Join
+        </Button>
       </Flex>
-      <Divider css={{ mt: '$4' }} />
-      <Box css={{ p: '$5' }}>
-        <Devices />
-      </Box>
+      {granted && (
+        <>
+          <Divider />
+          <Box css={{ p: '$5' }}>
+            <Devices />
+          </Box>
+        </>
+      )}
     </Box>
   );
 });
