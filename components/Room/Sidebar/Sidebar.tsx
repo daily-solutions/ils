@@ -1,6 +1,6 @@
 import {
-	useLocalSessionId,
-	useParticipantProperty,
+  useLocalSessionId,
+  useParticipantProperty,
 } from '@daily-co/daily-react';
 
 import { useSidebar } from '../../../contexts/UIState';
@@ -15,58 +15,58 @@ import { People } from './People';
 import { Participants } from './People/Participants';
 
 export const Sidebar = () => {
-	const localSessionId = useLocalSessionId();
-	const isOwner = useParticipantProperty(localSessionId as string, 'owner');
-	const [sidebar, setSidebar] = useSidebar();
-	const md = useMediaQuery('(min-width: 800px)');
+  const localSessionId = useLocalSessionId();
+  const isOwner = useParticipantProperty(localSessionId as string, 'owner');
+  const [sidebar, setSidebar] = useSidebar();
+  const md = useMediaQuery('(min-width: 800px)');
 
-	if (!sidebar) return null;
+  if (!sidebar) return null;
 
-	return (
-		<Card
-			css={{
-				position: md ? 'initial' : 'absolute',
-				width: md ? '20rem' : '100%',
-				height: md ? 'auto' : '100%',
-				boxShadow: '0px 0px 20px 5px rgba(0, 0, 0, 0.05)',
-				padding: 0,
-				zIndex: 100,
-			}}
-		>
-			{isOwner ? (
-				<Tabs
-					value={sidebar}
-					onValueChange={(value: string) =>
-						setSidebar(value as 'chat' | 'people')
-					}
-				>
-					<Box css={{ p: '$3' }}>
-						<TabsList aria-label="Sidebar">
-							<TabsTrigger value="chat">
-								<Icon icon="chat" />
-							</TabsTrigger>
-							<TabsTrigger value="people">
-								<Icon icon="user" />
-							</TabsTrigger>
-						</TabsList>
-					</Box>
-					<Divider css={{ mt: '$2' }} />
-					<TabsContent value="chat">
-						<Chat />
-					</TabsContent>
-					<TabsContent value="people">
-						<People />
-					</TabsContent>
-				</Tabs>
-			) : (
-				<>
-					{sidebar === 'chat' ? (
-						<Chat withHeader />
-					) : (
-						<Participants withHeader />
-					)}
-				</>
-			)}
-		</Card>
-	);
+  return (
+    <Card
+      css={{
+        position: md ? 'initial' : 'absolute',
+        width: md ? '20rem' : '100%',
+        height: md ? 'auto' : '100%',
+        boxShadow: '0px 0px 20px 5px rgba(0, 0, 0, 0.05)',
+        padding: 0,
+        zIndex: 100,
+      }}
+    >
+      {isOwner ? (
+        <Tabs
+          value={sidebar}
+          onValueChange={(value: string) =>
+            setSidebar(value as 'chat' | 'people')
+          }
+        >
+          <Box css={{ p: '$3' }}>
+            <TabsList aria-label="Sidebar">
+              <TabsTrigger value="chat">
+                <Icon icon="chat" />
+              </TabsTrigger>
+              <TabsTrigger value="people">
+                <Icon icon="user" />
+              </TabsTrigger>
+            </TabsList>
+          </Box>
+          <Divider css={{ mt: '$2' }} />
+          <TabsContent value="chat">
+            <Chat />
+          </TabsContent>
+          <TabsContent value="people">
+            <People />
+          </TabsContent>
+        </Tabs>
+      ) : (
+        <>
+          {sidebar === 'chat' ? (
+            <Chat withHeader />
+          ) : (
+            <Participants withHeader />
+          )}
+        </>
+      )}
+    </Card>
+  );
 };
