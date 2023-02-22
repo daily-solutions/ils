@@ -2,6 +2,7 @@ import { useDaily, useDevices, useLocalSessionId } from '@daily-co/daily-react';
 import React, { memo, useCallback, useEffect, useMemo } from 'react';
 
 import { useMeetingState } from '../../contexts/UIState';
+import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { Box } from '../../ui/Box';
 import { Button } from '../../ui/Button';
 import { Divider } from '../../ui/Divider';
@@ -15,6 +16,7 @@ export const Setup = memo(() => {
   const daily = useDaily();
   const localSessionId = useLocalSessionId();
   const [, setMeetingState] = useMeetingState();
+  const isMobile = useMediaQuery('(max-width: 480px)');
 
   const { camState, micState } = useDevices();
 
@@ -39,7 +41,10 @@ export const Setup = memo(() => {
   return (
     <Box css={{ width: '100%', height: '100%' }}>
       {granted ? (
-        <Tile sessionId={localSessionId as string} />
+        <Tile
+          aspectRatio={isMobile ? 4 / 3 : 16 / 9}
+          sessionId={localSessionId as string}
+        />
       ) : (
         <Permissions />
       )}
