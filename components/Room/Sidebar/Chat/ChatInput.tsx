@@ -1,10 +1,12 @@
 import React, { memo, useCallback, useState } from 'react';
 
 import { useChat } from '../../../../hooks/useChat';
+import { useMediaQuery } from '../../../../hooks/useMediaQuery';
 import { Box } from '../../../../ui/Box';
 import { Input } from '../../../../ui/Input';
 
 export const ChatInput = memo(() => {
+  const isMobile = useMediaQuery('(max-width: 480px)');
   const [message, setMessage] = useState<string>('');
 
   const { sendMessage } = useChat();
@@ -24,7 +26,7 @@ export const ChatInput = memo(() => {
         }}
       >
         <Input
-          autoFocus
+          autoFocus={!isMobile}
           iconRight="arrow_right"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
