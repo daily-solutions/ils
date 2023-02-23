@@ -23,7 +23,8 @@ export type Emoji =
   | '😂'
   | '🤯'
   | '🔥'
-  | '🎉';
+  | '🎉'
+  | '📊';
 
 export interface ChatMessage {
   id: string;

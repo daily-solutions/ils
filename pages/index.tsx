@@ -23,6 +23,7 @@ const Home: NextPage = () => {
         avoidEval: true,
         experimentalChromeVideoMuteLightOff: true,
         useDevicePreferenceCookies: true,
+        micAudioMode: 'music',
       },
     });
     setCallObject(co);

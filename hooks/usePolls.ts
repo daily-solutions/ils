@@ -14,6 +14,7 @@ import {
   useViewPoll,
 } from '../contexts/UIState';
 import { getReactions } from './useChat';
+import { useReactions } from './useReactions';
 
 interface CreatePollAppMessage {
   event: 'poll';
@@ -45,6 +46,8 @@ export const usePolls = () => {
     localSessionId as string,
     ['user_name', 'userData']
   );
+
+  const { react } = useReactions();
 
   const handleQuestionChange = useCallback(
     (value: string) => setQuestion(value),
@@ -121,6 +124,8 @@ export const usePolls = () => {
         case 'vote-poll':
           const voteEvent =
             ev as DailyEventObjectAppMessage<VotePollAppMessage>;
+          // show a flying emoji whenever someone votes;
+          react('📊');
           setChatMsgs((msgs) => {
             const prev = [...msgs];
             const chatMsgId = prev.findIndex((m) => m.id === voteEvent.data.id);
@@ -156,7 +161,7 @@ export const usePolls = () => {
           break;
       }
     },
-    [setChatMsgs]
+    [react, setChatMsgs]
   );
 
   const createPoll = useCallback(() => {
