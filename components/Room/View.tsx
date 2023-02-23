@@ -19,7 +19,6 @@ import { Box } from '../../ui/Box';
 import { Flex } from '../../ui/Flex';
 import { ToastViewport } from '../../ui/Toast';
 import { Tile } from '../Tile';
-import { PaginationButton } from './PaginationButton';
 
 export const View = () => {
   const localSessionId = useLocalSessionId();
@@ -51,23 +50,16 @@ export const View = () => {
     }, [])
   );
 
-  const {
-    columns,
-    containerHeight,
-    containerWidth,
-    currentIds,
-    currentPage,
-    nextPage,
-    prevPage,
-    totalPages,
-  } = useVideoGrid({
-    width: dimensions.width,
-    height: dimensions.height,
-    minTileWidth: 280,
-    gap: 1,
-    sessionIds: participantIds,
-    maxCountPerPage: 6,
-  });
+  const { columns, containerHeight, containerWidth, currentIds } = useVideoGrid(
+    {
+      width: dimensions.width,
+      height: dimensions.height,
+      minTileWidth: 280,
+      gap: 1,
+      sessionIds: participantIds,
+      maxCountPerPage: 12,
+    }
+  );
 
   useEffect(() => {
     if (!viewRef.current) return;
@@ -161,13 +153,7 @@ export const View = () => {
           justifyContent: 'center',
         }}
       >
-        {totalPages > 1 && currentPage > 1 && (
-          <PaginationButton onClick={prevPage} />
-        )}
         {tiles}
-        {totalPages > 1 && currentPage < totalPages && (
-          <PaginationButton isPrev={false} onClick={nextPage} />
-        )}
         <ToastViewport />
       </Flex>
     </Box>
