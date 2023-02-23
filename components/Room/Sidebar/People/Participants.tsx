@@ -1,4 +1,5 @@
 import {
+  useDaily,
   useLocalSessionId,
   useParticipantProperty,
 } from '@daily-co/daily-react';
@@ -12,6 +13,7 @@ import { Button } from '../../../../ui/Button';
 import { Divider } from '../../../../ui/Divider';
 import { Flex } from '../../../../ui/Flex';
 import { Icon } from '../../../../ui/Icon';
+import { Menu } from '../../../../ui/Menu';
 import { Text } from '../../../../ui/Text';
 
 interface ParticipantProps {
@@ -19,6 +21,7 @@ interface ParticipantProps {
 }
 
 const Participant = memo(({ sessionId }: ParticipantProps) => {
+  const daily = useDaily();
   const localSessionId = useLocalSessionId();
   const isLocalOwner = useParticipantProperty(
     localSessionId as string,
@@ -36,6 +39,23 @@ const Participant = memo(({ sessionId }: ParticipantProps) => {
     [removeFromStage, sessionId]
   );
 
+  const handleRemove = useCallback(() => {
+    if (!daily || !isLocalOwner) return;
+
+    daily.updateParticipant(sessionId, { eject: true });
+  }, [daily, isLocalOwner, sessionId]);
+
+  const menuItems = [
+    {
+      label: 'Remove from stage',
+      onSelect: handleRemoveFromStage,
+    },
+    {
+      label: 'Kick',
+      onSelect: handleRemove,
+    },
+  ];
+
   return (
     <Flex css={{ alignItems: 'center', justifyContent: 'space-between' }}>
       <Text>
@@ -45,9 +65,11 @@ const Participant = memo(({ sessionId }: ParticipantProps) => {
         <Badge size={1}>Owner</Badge>
       ) : (
         isLocalOwner && (
-          <Button variant="danger" size="small" onClick={handleRemoveFromStage}>
-            Remove
-          </Button>
+          <Menu items={menuItems}>
+            <Button size="pagination" variant="ghost">
+              <Icon icon="more" />
+            </Button>
+          </Menu>
         )
       )}
     </Flex>

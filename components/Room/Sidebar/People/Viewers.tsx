@@ -5,6 +5,8 @@ import { useStage } from '../../../../hooks/useStage';
 import { Box } from '../../../../ui/Box';
 import { Button } from '../../../../ui/Button';
 import { Flex } from '../../../../ui/Flex';
+import { Icon } from '../../../../ui/Icon';
+import { Menu } from '../../../../ui/Menu';
 import { Text } from '../../../../ui/Text';
 
 interface Viewer {
@@ -19,12 +21,21 @@ export const Viewer = memo(({ id, userName }: Viewer) => {
     [bringToStage, id]
   );
 
+  const menuItems = [
+    {
+      label: 'Invite to stage',
+      onSelect: handleBringToStage,
+    },
+  ];
+
   return (
     <Flex css={{ alignItems: 'center', justifyContent: 'space-between' }}>
       <Text>{userName ?? 'Guest'}</Text>
-      <Button onClick={handleBringToStage} size="small">
-        Bring to stage
-      </Button>
+      <Menu items={menuItems}>
+        <Button size="pagination" variant="ghost">
+          <Icon icon="more" />
+        </Button>
+      </Menu>
     </Flex>
   );
 });
