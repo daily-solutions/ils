@@ -83,7 +83,7 @@ const itemStyles = {
   borderRadius: '$xs',
 
   '&[data-disabled]': {
-    color: '$disabled',
+    color: '$muted',
     pointerEvents: 'none',
   },
 
@@ -99,6 +99,7 @@ const StyledItem = styled(DropdownMenuPrimitive.Item, { ...itemStyles });
 interface MenuItem {
   label: string;
   onSelect: () => void;
+  disabled?: boolean;
 }
 
 interface Props {

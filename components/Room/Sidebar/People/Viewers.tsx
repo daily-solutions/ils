@@ -1,6 +1,7 @@
-import React, { memo, useCallback } from 'react';
+import React, { memo, useCallback, useMemo } from 'react';
 
 import { useViewers } from '../../../../contexts/UIState';
+import { useParticipantCounts } from '../../../../hooks/useParticipantCount';
 import { useStage } from '../../../../hooks/useStage';
 import { Box } from '../../../../ui/Box';
 import { Button } from '../../../../ui/Button';
@@ -21,10 +22,14 @@ export const Viewer = memo(({ id, userName }: Viewer) => {
     [bringToStage, id]
   );
 
+  const { present } = useParticipantCounts();
+  const disableBringToStage = useMemo(() => present >= 12, [present]);
+
   const menuItems = [
     {
       label: 'Invite to stage',
       onSelect: handleBringToStage,
+      disabled: disableBringToStage,
     },
   ];
 
