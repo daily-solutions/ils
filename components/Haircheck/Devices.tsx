@@ -17,7 +17,9 @@ interface Props {
 export const Devices = ({ audioVideo = true }: Props) => {
   const {
     cameras,
+    camState,
     microphones,
+    micState,
     setCamera,
     setMicrophone,
     setSpeaker,
@@ -64,7 +66,13 @@ export const Devices = ({ audioVideo = true }: Props) => {
           <Select
             value={currentCamera?.device?.deviceId}
             onChange={(e) => handleDeviceChange('cam', e.target.value)}
+            disabled={camState !== 'granted' || cameras.length === 0}
           >
+            {(camState !== 'granted' || cameras.length === 0) && (
+              <option disabled value={undefined} selected>
+                Turn on camera to allow access
+              </option>
+            )}
             {cameras.map((cam) => (
               <option value={cam.device.deviceId} key={cam.device.deviceId}>
                 {cam.device.label}
@@ -79,7 +87,11 @@ export const Devices = ({ audioVideo = true }: Props) => {
           <Select
             value={currentMic?.device?.deviceId}
             onChange={(e) => handleDeviceChange('mic', e.target.value)}
+            disabled={micState !== 'granted' || microphones.length === 0}
           >
+            {(micState !== 'granted' || microphones.length === 0) && (
+              <option disabled>Turn on microphone to allow access</option>
+            )}
             {microphones.map((mic) => (
               <option value={mic.device.deviceId} key={mic.device.deviceId}>
                 {mic.device.label}
