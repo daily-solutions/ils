@@ -120,7 +120,7 @@ export const useVideoGrid = ({
     return sessionIds.length - Math.max(currentPage, 1) * pageSize > 0
       ? sessionIds.slice(
           (Math.max(currentPage, 1) - 1) * pageSize,
-          currentPage * pageSize
+          Math.max(currentPage, 1) * pageSize
         )
       : sessionIds.slice(-pageSize);
   }, [currentPage, pageSize, sessionIds]);
