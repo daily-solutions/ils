@@ -57,7 +57,7 @@ export const View = () => {
       minTileWidth: 280,
       gap: 1,
       sessionIds: participantIds,
-      maxCountPerPage: 12,
+      maxCountPerPage: 6,
     }
   );
 

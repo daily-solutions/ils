@@ -23,7 +23,7 @@ export const Viewer = memo(({ id, userName }: Viewer) => {
   );
 
   const { present } = useParticipantCounts();
-  const disableBringToStage = useMemo(() => present >= 12, [present]);
+  const disableBringToStage = useMemo(() => present >= 6, [present]);
 
   const menuItems = [
     {
