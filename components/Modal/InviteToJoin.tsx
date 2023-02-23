@@ -3,9 +3,10 @@ import {
   useLocalSessionId,
   useParticipantProperty,
 } from '@daily-co/daily-react';
-import { useCallback } from 'react';
+import React, { useCallback } from 'react';
 
 import { useInviteToJoin } from '../../contexts/UIState';
+import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { Box } from '../../ui/Box';
 import { Button } from '../../ui/Button';
 import { Flex } from '../../ui/Flex';
@@ -19,6 +20,7 @@ export const InviteToJoin = () => {
   const localSessionId = useLocalSessionId();
   const userData = useParticipantProperty(localSessionId as string, 'userData');
   const [show, setShow] = useInviteToJoin();
+  const isMobile = useMediaQuery('(max-width: 480px)');
 
   const handleJoin = useCallback(() => {
     if (!daily) return;
@@ -29,7 +31,11 @@ export const InviteToJoin = () => {
 
   return (
     <Modal open={show} onClose={setShow} title="Invited to join stage">
-      <Tile sessionId={localSessionId as string} />
+      <Tile
+        fit="cover"
+        aspectRatio={isMobile ? 4 / 3 : 16 / 9}
+        sessionId={localSessionId as string}
+      />
       <Flex
         css={{
           alignItems: 'center',

@@ -18,8 +18,6 @@ export const Setup = memo(() => {
   const [, setMeetingState] = useMeetingState();
   const isMobile = useMediaQuery('(max-width: 480px)');
 
-  console.log(isMobile);
-
   const { camState, micState } = useDevices();
 
   const granted = useMemo(
