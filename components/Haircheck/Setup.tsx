@@ -18,6 +18,8 @@ export const Setup = memo(() => {
   const [, setMeetingState] = useMeetingState();
   const isMobile = useMediaQuery('(max-width: 480px)');
 
+  console.log(isMobile);
+
   const { camState, micState } = useDevices();
 
   const granted = useMemo(
@@ -42,6 +44,7 @@ export const Setup = memo(() => {
     <Box css={{ width: '100%', height: '100%' }}>
       {granted ? (
         <Tile
+          fit="cover"
           aspectRatio={isMobile ? 4 / 3 : 16 / 9}
           sessionId={localSessionId as string}
         />
