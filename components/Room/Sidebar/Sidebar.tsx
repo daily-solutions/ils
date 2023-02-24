@@ -34,11 +34,12 @@ export const Sidebar = () => {
       css={{
         position: md ? 'initial' : 'absolute',
         width: md ? (sidebar ? '20rem' : 0) : '100%',
-        height: md ? 'auto' : '100%',
+        height: md ? 'auto' : '90%',
         boxShadow: '0px 0px 20px 5px rgba(0, 0, 0, 0.05)',
         padding: 0,
         zIndex: 100,
         br: '$none',
+        bottom: 0,
       }}
     >
       {isOwner && md ? (
