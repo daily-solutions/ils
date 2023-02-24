@@ -312,5 +312,7 @@ export const globalStyles = globalCss({
     fontFamily: '$inter',
     color: '$text',
     backgroundColor: '$background!important',
+    WebkitTextSizeAdjust: 'none',
+    touchAction: 'manipulation',
   },
 });
