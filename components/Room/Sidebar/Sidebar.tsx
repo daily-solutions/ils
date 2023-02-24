@@ -20,7 +20,7 @@ export const Sidebar = () => {
   const [sidebar, setSidebar] = useSidebar();
   const md = useMediaQuery('(min-width: 800px)');
 
-  if (!sidebar) return null;
+  if (!sidebar && md && !isOwner) return null;
 
   return (
     <Card
@@ -36,7 +36,7 @@ export const Sidebar = () => {
     >
       {isOwner ? (
         <Tabs
-          value={sidebar}
+          value={md ? sidebar ?? 'chat' : (sidebar as 'chat' | 'people')}
           onValueChange={(value: string) =>
             setSidebar(value as 'chat' | 'people')
           }
