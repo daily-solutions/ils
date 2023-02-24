@@ -76,7 +76,8 @@ export const Tile = memo(
         <Box
           css={{
             pb: `${100 / aspectRatio}%`,
-            background: '$disabled',
+            background: '$muted',
+            color: '$background',
           }}
         >
           {video ? (

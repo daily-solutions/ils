@@ -17,6 +17,7 @@ import { useResizeObserver } from '../../hooks/useResizeObserver';
 import { useVideoGrid } from '../../hooks/useVideoGrid';
 import { Box } from '../../ui/Box';
 import { Flex } from '../../ui/Flex';
+import { Text } from '../../ui/Text';
 import { ToastViewport } from '../../ui/Toast';
 import { Tile } from '../Tile';
 
@@ -128,9 +129,27 @@ export const View = () => {
       );
     } else
       return (
-        <Box>
-          <h3>Please wait till a host joins your call</h3>
-        </Box>
+        <Flex
+          css={{
+            flexFlow: 'column wrap',
+            gap: '$3',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <Box
+            css={{ background: 'rgba(18, 26, 36, 0.2)', p: '$3 $4', br: '$sm' }}
+          >
+            <Text size={5} css={{ fontWeight: '$semibold' }}>
+              Waiting for the host to join
+            </Text>
+          </Box>
+          <Box
+            css={{ background: 'rgba(18, 26, 36, 0.2)', p: '$3 $4', br: '$sm' }}
+          >
+            <Text>Stream starting soon</Text>
+          </Box>
+        </Flex>
       );
   }, [currentIds]);
 
@@ -141,6 +160,8 @@ export const View = () => {
         height: '100%',
         width: '100%',
         flex: 1,
+        background: currentIds.length > 0 ? 'inherit' : '$muted',
+        color: currentIds.length > 0 ? 'inherit' : '$background',
       }}
     >
       <Flex
