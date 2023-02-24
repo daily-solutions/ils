@@ -4,7 +4,7 @@ import { useStage } from '../../../../hooks/useStage';
 import { Box } from '../../../../ui/Box';
 import { Flex } from '../../../../ui/Flex';
 import { Text } from '../../../../ui/Text';
-import { Viewer } from './Viewers';
+import { Viewer } from './Viewer';
 
 interface Viewer {
   id: string;

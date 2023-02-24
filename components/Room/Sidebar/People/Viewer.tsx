@@ -1,9 +1,7 @@
 import React, { memo, useCallback, useMemo } from 'react';
 
-import { useViewers } from '../../../../contexts/UIState';
 import { useParticipantCounts } from '../../../../hooks/useParticipantCount';
 import { useStage } from '../../../../hooks/useStage';
-import { Box } from '../../../../ui/Box';
 import { Button } from '../../../../ui/Button';
 import { Flex } from '../../../../ui/Flex';
 import { Icon } from '../../../../ui/Icon';
@@ -46,20 +44,3 @@ export const Viewer = memo(({ id, userName }: Viewer) => {
 });
 
 Viewer.displayName = 'Viewer';
-
-export const Viewers = () => {
-  const [viewers] = useViewers();
-  return (
-    <Box css={{ p: '$4' }}>
-      {viewers.length > 0 ? (
-        <Flex css={{ flexFlow: 'column wrap', rowGap: '$3' }}>
-          {viewers.map((v) => (
-            <Viewer {...v} key={v.id} />
-          ))}
-        </Flex>
-      ) : (
-        <Text>No viewers in the call</Text>
-      )}
-    </Box>
-  );
-};

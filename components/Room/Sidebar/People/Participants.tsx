@@ -5,7 +5,7 @@ import {
 } from '@daily-co/daily-react';
 import React, { memo, useCallback } from 'react';
 
-import { useSidebar } from '../../../../contexts/UIState';
+import { useSidebar, useViewers } from '../../../../contexts/UIState';
 import { useParticipants } from '../../../../hooks/useParticipants';
 import { useStage } from '../../../../hooks/useStage';
 import { Badge } from '../../../../ui/Badge';
@@ -15,6 +15,7 @@ import { Flex } from '../../../../ui/Flex';
 import { Icon } from '../../../../ui/Icon';
 import { Menu } from '../../../../ui/Menu';
 import { Text } from '../../../../ui/Text';
+import { Viewer } from './Viewer';
 
 interface ParticipantProps {
   sessionId: string;
@@ -86,6 +87,7 @@ export const Participants = ({ withHeader = false }: Props) => {
   const [, setSidebar] = useSidebar();
   const participantIds = useParticipants(true, 'user_name');
   const invitedIds = useParticipants(false, 'user_name');
+  const [viewers] = useViewers();
 
   return (
     <Flex css={{ flexFlow: 'column wrap' }}>
@@ -111,10 +113,10 @@ export const Participants = ({ withHeader = false }: Props) => {
       {withHeader && <Divider />}
       <Flex css={{ flexFlow: 'column wrap', p: '$4', rowGap: '$5' }}>
         <Flex css={{ flexFlow: 'column wrap' }}>
-          <Text size={0} css={{ color: '$muted' }}>
+          <Text size={0} css={{ color: '$muted', textTransform: 'uppercase' }}>
             Presenters
           </Text>
-          <Flex css={{ flexFlow: 'column wrap', rowGap: '$3', mt: '$2' }}>
+          <Flex css={{ flexFlow: 'column wrap', rowGap: '$3', mt: '$3' }}>
             {participantIds.length > 0 ? (
               participantIds.map((p) => <Participant sessionId={p} key={p} />)
             ) : (
@@ -130,6 +132,21 @@ export const Participants = ({ withHeader = false }: Props) => {
             <Flex css={{ flexFlow: 'column wrap', rowGap: '$3', mt: '$2' }}>
               {invitedIds.map((p) => (
                 <Participant sessionId={p} key={p} />
+              ))}
+            </Flex>
+          </Flex>
+        )}
+        {viewers.length > 0 && (
+          <Flex css={{ flexFlow: 'column wrap' }}>
+            <Text
+              size={0}
+              css={{ color: '$muted', textTransform: 'uppercase' }}
+            >
+              Viewers
+            </Text>
+            <Flex css={{ flexFlow: 'column wrap', rowGap: '$3', mt: '$3' }}>
+              {viewers.map((p) => (
+                <Viewer key={p.id} {...p} />
               ))}
             </Flex>
           </Flex>
