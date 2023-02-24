@@ -11,6 +11,7 @@ import { useResizeObserver } from '../../../hooks/useResizeObserver';
 import { useVideoGrid } from '../../../hooks/useVideoGrid';
 import { Box } from '../../../ui/Box';
 import { Flex } from '../../../ui/Flex';
+import { Text } from '../../../ui/Text';
 import { Tile } from '../../Tile';
 import { PaginationButton } from '../PaginationButton';
 
@@ -56,7 +57,7 @@ export const View = () => {
 
   useEffect(() => {
     if (!viewRef.current) return;
-    viewRef.current.style.setProperty('--grid-gap', '0px');
+    viewRef.current.style.setProperty('--grid-gap', '1px');
     viewRef.current.style.setProperty('--grid-columns', columns.toString());
     viewRef.current.style.setProperty('--grid-width', `${containerWidth}px`);
     viewRef.current.style.setProperty('--grid-height', `${containerHeight}px`);
@@ -91,12 +92,30 @@ export const View = () => {
           ))}
         </Flex>
       );
-    } else
-      return (
-        <Box>
-          <h4>Please wait till a host joins your call</h4>
+    }
+    return (
+      <Flex
+        css={{
+          flexFlow: 'column wrap',
+          gap: '$3',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <Box
+          css={{ background: 'rgba(18, 26, 36, 0.2)', p: '$3 $4', br: '$sm' }}
+        >
+          <Text size={5} css={{ fontWeight: '$semibold' }}>
+            Waiting for the host to join
+          </Text>
         </Box>
-      );
+        <Box
+          css={{ background: 'rgba(18, 26, 36, 0.2)', p: '$3 $4', br: '$sm' }}
+        >
+          <Text>Stream starting soon</Text>
+        </Box>
+      </Flex>
+    );
   }, [currentIds]);
 
   return (
@@ -107,6 +126,8 @@ export const View = () => {
         justifyContent: 'center',
         width: '100dvw',
         height: '100dvh',
+        background: currentIds.length > 0 ? 'inherit' : '$muted',
+        color: currentIds.length > 0 ? 'inherit' : '$background',
       }}
     >
       {totalPages > 1 && currentPage > 1 && (

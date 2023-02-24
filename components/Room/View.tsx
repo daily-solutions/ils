@@ -127,30 +127,30 @@ export const View = () => {
           ))}
         </Flex>
       );
-    } else
-      return (
-        <Flex
-          css={{
-            flexFlow: 'column wrap',
-            gap: '$3',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
+    }
+    return (
+      <Flex
+        css={{
+          flexFlow: 'column wrap',
+          gap: '$3',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <Box
+          css={{ background: 'rgba(18, 26, 36, 0.2)', p: '$3 $4', br: '$sm' }}
         >
-          <Box
-            css={{ background: 'rgba(18, 26, 36, 0.2)', p: '$3 $4', br: '$sm' }}
-          >
-            <Text size={5} css={{ fontWeight: '$semibold' }}>
-              Waiting for the host to join
-            </Text>
-          </Box>
-          <Box
-            css={{ background: 'rgba(18, 26, 36, 0.2)', p: '$3 $4', br: '$sm' }}
-          >
-            <Text>Stream starting soon</Text>
-          </Box>
-        </Flex>
-      );
+          <Text size={5} css={{ fontWeight: '$semibold' }}>
+            Waiting for the host to join
+          </Text>
+        </Box>
+        <Box
+          css={{ background: 'rgba(18, 26, 36, 0.2)', p: '$3 $4', br: '$sm' }}
+        >
+          <Text>Stream starting soon</Text>
+        </Box>
+      </Flex>
+    );
   }, [currentIds]);
 
   return (
