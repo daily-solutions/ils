@@ -2,6 +2,7 @@ import {
   useLocalSessionId,
   useParticipantProperty,
 } from '@daily-co/daily-react';
+import { useEffect } from 'react';
 
 import { useSidebar } from '../../../contexts/UIState';
 import { useMediaQuery } from '../../../hooks/useMediaQuery';
@@ -20,13 +21,19 @@ export const Sidebar = () => {
   const [sidebar, setSidebar] = useSidebar();
   const md = useMediaQuery('(min-width: 800px)');
 
-  if (!sidebar && md && !isOwner) return null;
+  useEffect(() => {
+    if (!isOwner) return;
+
+    setSidebar(md ? 'chat' : null);
+  }, [isOwner, md, setSidebar]);
+
+  if (!sidebar) return null;
 
   return (
     <Card
       css={{
         position: md ? 'initial' : 'absolute',
-        width: md ? '20rem' : '100%',
+        width: md ? (sidebar ? '20rem' : 0) : '100%',
         height: md ? 'auto' : '100%',
         boxShadow: '0px 0px 20px 5px rgba(0, 0, 0, 0.05)',
         padding: 0,
@@ -34,7 +41,7 @@ export const Sidebar = () => {
         br: '$none',
       }}
     >
-      {isOwner ? (
+      {isOwner && md ? (
         <Tabs
           value={md ? sidebar ?? 'chat' : (sidebar as 'chat' | 'people')}
           onValueChange={(value: string) =>
@@ -64,7 +71,7 @@ export const Sidebar = () => {
           {sidebar === 'chat' ? (
             <Chat withHeader />
           ) : (
-            <Participants withHeader />
+            sidebar === 'people' && <Participants withHeader />
           )}
         </>
       )}
