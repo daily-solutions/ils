@@ -1,3 +1,7 @@
+import {
+  useLocalSessionId,
+  useParticipantProperty,
+} from '@daily-co/daily-react';
 import React, { useCallback } from 'react';
 
 import { usePoll, useSidebar } from '../../../contexts/UIState';
@@ -8,6 +12,9 @@ import { TrayButton } from '../../TrayButton';
 export const RightTray = () => {
   const [, setPoll] = usePoll();
   const [, setSidebar] = useSidebar();
+  const localSessionId = useLocalSessionId();
+  const isOwner = useParticipantProperty(localSessionId as string, 'owner');
+
   const handleShare = useCallback(async () => {
     const sharedData = {
       title: 'Daily ILS Demo',
@@ -28,6 +35,7 @@ export const RightTray = () => {
         bottom: 80,
         width: '100%',
         px: '$3',
+        color: '$background',
       }}
     >
       <Flex css={{ flexFlow: 'column', gap: '$4', color: '$dark' }}>
@@ -38,13 +46,15 @@ export const RightTray = () => {
         >
           <Icon icon="chat" />
         </TrayButton>
-        <TrayButton
-          variant="transparent"
-          label="Poll"
-          onClick={() => setPoll((p) => !p)}
-        >
-          <Icon icon="poll" />
-        </TrayButton>
+        {isOwner && (
+          <TrayButton
+            variant="transparent"
+            label="Poll"
+            onClick={() => setPoll((p) => !p)}
+          >
+            <Icon icon="poll" />
+          </TrayButton>
+        )}
         <TrayButton variant="transparent" label="Share" onClick={handleShare}>
           <Icon icon="share" />
         </TrayButton>
