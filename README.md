@@ -55,3 +55,7 @@ yarn dev
 ```
 
 Demo should be live at - http://localhost:3000
+
+## Deploy your own on Vercel
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone-flow?repository-url=https%3A%2F%2Fgithub.com%2Fdaily-solutions%2Fils.git&env=NEXT_PUBLIC_DAILY_DOMAIN%2CNEXT_PUBLIC_DAILY_ROOM%2CDAILY_API_KEY)
