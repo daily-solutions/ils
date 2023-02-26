@@ -1,16 +1,57 @@
 # Interactive Live Streaming (aka ILS) Demo with [Daily](https://daily.co)
 
-Live here - https://daily-ils.vercel.app/
+![Interactive Live Streaming](./public/image.png)
+
+### Live example
+
+**[See it in action here ➡️](https://daily-ils.vercel.app/)**
+
+---
 
 ## Getting Started
 
+### Create Daily Room
+
+We are creating the room via Daily's [REST API](https://docs.daily.co/reference/rest-api/rooms/create-room),
+we need Daily's API Key to process this request, you can get the API Request from the Daily [Dashboard](https://dashboard.daily.co/developers).
+
+Replace `$TOKEN` with API token
+
 ```
-# Install dependencies
+curl -H "Content-Type: application/json" \
+     -H "Authorization: Bearer $TOKEN" \
+     -XPOST -d \
+     '{
+        "name": "ils",
+        "properties" : {
+          "permissions": {
+            "canSend": false,
+            "hasPresence": false,
+           },
+        }}' \
+     https://api.daily.co/v1/rooms/
+```
+
+### Install dependencies
+
+```
 yarn install
 
 # Enable husky
 yarn husky install
+```
 
-# Start dev server
+### Copy & update the env variables
+
+```
+# set DAILY_API_KEY, NEXT_PUBLIC_DAILY_DOMAIN & NEXT_PUBLIC_DAILY_ROOM
+cp env.example .env.local
+```
+
+### Start your dev server
+
+```
 yarn dev
 ```
+
+Demo should be live at - http://localhost:3000
