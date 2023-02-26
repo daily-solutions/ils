@@ -1,29 +1,58 @@
-import React, { useMemo } from 'react';
+import DailyIframe, { DailyCall } from '@daily-co/daily-js';
+import { DailyProvider } from '@daily-co/daily-react';
+import dynamic from 'next/dynamic';
+import React, { useEffect, useState } from 'react';
 
-import { useMeetingState } from '../../contexts/UIState';
 import { Loader } from '../../ui/Loader';
-import { Haircheck } from '../Haircheck';
-import { LeftMeeting } from '../Left';
-import { Room } from '../Room';
-import { Wrapper } from '../Wrapper';
+import { CallUI } from './CallUI';
 
-export const Layout = () => {
-  const [meetingState] = useMeetingState();
+const NotConfigured = dynamic(() => import('../NotConfigured'), {
+  loading: () => <Loader />,
+});
 
-  const callUI = useMemo(() => {
-    switch (meetingState) {
-      case 'lobby':
-        return <Haircheck />;
-      case 'joining-meeting':
-        return <Loader />;
-      case 'joined-meeting':
-        return <Room />;
-      case 'left-meeting':
-        return <LeftMeeting />;
-      default:
-        return <Loader />;
-    }
-  }, [meetingState]);
+interface Props {
+  domain: string;
+  isConfigured: boolean;
+  room: string;
+  token?: string;
+}
 
-  return <Wrapper>{callUI}</Wrapper>;
+export const Layout = ({ domain, isConfigured, room, token = '' }: Props) => {
+  const [callObject, setCallObject] = useState<DailyCall | null>(null);
+
+  useEffect(() => {
+    if (callObject || !domain || !room) return;
+
+    const co = DailyIframe.createCallObject({
+      url: `https://${domain}.daily.co/${room}`,
+      token,
+      subscribeToTracksAutomatically: true,
+      dailyConfig: {
+        avoidEval: true,
+        experimentalChromeVideoMuteLightOff: true,
+        useDevicePreferenceCookies: true,
+        micAudioMode: {
+          bitrate: 256000,
+          stereo: true,
+        },
+      },
+    });
+    setCallObject(co);
+  }, [callObject, domain, room, token]);
+
+  useEffect(() => {
+    return () => {
+      callObject?.destroy();
+    };
+  }, [callObject]);
+
+  if (!isConfigured) return <NotConfigured />;
+
+  if (!callObject) return <Loader />;
+
+  return (
+    <DailyProvider callObject={callObject}>
+      <CallUI />
+    </DailyProvider>
+  );
 };
