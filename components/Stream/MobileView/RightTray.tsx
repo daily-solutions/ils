@@ -42,7 +42,14 @@ export const RightTray = () => {
           label="Chat"
           onClick={() => setSidebar((s) => (s ? null : 'chat'))}
         >
-          <Icon icon="chat_outline" size={16} color="white" />
+          <Icon icon="chat" size={16} color="white" />
+        </TrayButton>
+        <TrayButton
+          variant="transparent"
+          label="People"
+          onClick={() => setSidebar((s) => (s ? null : 'people'))}
+        >
+          <Icon icon="user" size={16} color="white" />
         </TrayButton>
         {isOwner && (
           <TrayButton
@@ -50,11 +57,11 @@ export const RightTray = () => {
             label="Poll"
             onClick={() => setPoll((p) => !p)}
           >
-            <Icon icon="poll" />
+            <Icon icon="poll" size={16} color="white" />
           </TrayButton>
         )}
         <TrayButton variant="transparent" label="Share" onClick={handleShare}>
-          <Icon icon="share_outline" size={16} />
+          <Icon icon="share_outline" size={16} color="white" />
         </TrayButton>
       </Flex>
     </Flex>

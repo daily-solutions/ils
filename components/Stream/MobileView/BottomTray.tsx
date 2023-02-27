@@ -9,11 +9,12 @@ import { useParticipants } from '../../../hooks/useParticipants';
 import { useReactions } from '../../../hooks/useReactions';
 import { useStage } from '../../../hooks/useStage';
 import { Emoji, useInviteToJoin } from '../../../state';
-import { Button, Flex } from '../../../ui';
+import { Button, Divider, Flex } from '../../../ui';
 import { TrayButton } from '../../TrayButton';
 import { AudioControl } from '../Tray/AudioControl';
 import { PeopleControl } from '../Tray/PeopleControl';
 import { ReactionsControl } from '../Tray/ReactionsControl';
+import { RecordingControl } from '../Tray/RecordingControl';
 import { SettingsControl } from '../Tray/SettingsControl';
 import { VideoControl } from '../Tray/VideoControl';
 
@@ -76,9 +77,11 @@ export const BottomTray = () => {
           <Flex css={{ alignItems: 'center', gap: '$2' }}>
             <VideoControl />
             <AudioControl />
+            <Divider direction="vertical" />
             <PeopleControl />
             <ReactionsControl />
             <SettingsControl />
+            <RecordingControl />
           </Flex>
         ) : (
           mobileEmojis.map((e) => (
