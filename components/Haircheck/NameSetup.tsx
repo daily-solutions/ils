@@ -1,6 +1,6 @@
 import { useDaily } from '@daily-co/daily-react';
 import Avatar from 'boring-avatars';
-import React, { memo, useCallback, useState } from 'react';
+import React, { memo, useCallback, useMemo, useState } from 'react';
 
 import { Box, Button, Divider, Flex, Icon, Input, Label, Text } from '../../ui';
 
@@ -49,6 +49,8 @@ export const NameSetup = memo(({ hasPermission, onContinue }: Props) => {
     await daily.setUserData({ avatar: selectedAvatar });
     onContinue();
   }, [daily, name, onContinue, selectedAvatar]);
+
+  const disabled = useMemo(() => name.length === 0, [name]);
 
   return (
     <form
@@ -106,7 +108,7 @@ export const NameSetup = memo(({ hasPermission, onContinue }: Props) => {
         </Flex>
         <Divider />
         <Box css={{ p: '$5' }}>
-          <Button type="submit" fullWidth disabled={name === ''}>
+          <Button type="submit" fullWidth disabled={disabled}>
             <Flex
               css={{
                 alignItems: 'center',
