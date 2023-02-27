@@ -121,6 +121,7 @@ export const View = () => {
               sessionId={participantId}
               key={participantId}
               showBorder={currentIds.length > 1}
+              css={{ borderRadius: '9px' }}
             />
           ))}
         </Flex>
@@ -136,8 +137,7 @@ export const View = () => {
         height: '100%',
         width: '100%',
         flex: 1,
-        background: currentIds.length > 0 ? 'inherit' : '$muted',
-        color: currentIds.length > 0 ? 'inherit' : '$background',
+        p: '$4',
       }}
     >
       <Flex
