@@ -49,10 +49,10 @@ export const Sidebar = () => {
           <Box css={{ p: '$3' }}>
             <TabsList aria-label="Sidebar">
               <TabsTrigger value="chat">
-                <Icon icon="chat" />
+                <Icon icon="chat" size={16} />
               </TabsTrigger>
               <TabsTrigger value="people">
-                <Icon icon="user" />
+                <Icon icon="user" size={16} />
               </TabsTrigger>
             </TabsList>
           </Box>

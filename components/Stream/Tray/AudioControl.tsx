@@ -37,7 +37,7 @@ export const AudioControl = ({
       disabled={disabled}
       onClick={() => handleToggleAudio(!audio)}
     >
-      <Icon icon={audio ? 'mic' : 'mic_muted'} />
+      <Icon icon={audio ? 'mic' : 'mic_muted'} size={16} color="#2B3F56" />
     </TrayButton>
   );
 };

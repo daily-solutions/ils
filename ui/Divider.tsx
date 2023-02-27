@@ -4,7 +4,7 @@ export const Divider = styled('hr', {
   variants: {
     direction: {
       vertical: {
-        height: '1px',
+        height: '$trayButton',
         border: '0.5px solid $secondary',
         width: '1px',
       },

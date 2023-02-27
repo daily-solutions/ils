@@ -27,18 +27,31 @@ export const Tray = () => {
       }}
     >
       {md && <Image src={Logo} alt="Daily Logo" />}
-      <Flex css={{ alignItems: 'center', justifyContent: 'center', gap: '$2' }}>
-        <VideoControl />
-        <AudioControl />
-        <ChatControl />
-        <PollControl />
-        <RecordingControl />
-        <ReactionsControl />
-        <SettingsControl />
+      <Flex css={{ alignItems: 'center', justifyContent: 'center', gap: '$4' }}>
+        <Flex
+          css={{ alignItems: 'center', justifyContent: 'center', gap: '$2' }}
+        >
+          <VideoControl />
+          <AudioControl />
+        </Flex>
+        <Divider direction="vertical" />
+        <Flex
+          css={{ alignItems: 'center', justifyContent: 'center', gap: '$2' }}
+        >
+          <ChatControl />
+          <PollControl />
+          <RecordingControl />
+        </Flex>
+        <Divider direction="vertical" />
+        <Flex
+          css={{ alignItems: 'center', justifyContent: 'center', gap: '$2' }}
+        >
+          <ReactionsControl />
+          <SettingsControl />
+        </Flex>
       </Flex>
       <Flex css={{ alignItems: 'center', justifyContent: 'center', gap: '$2' }}>
         <RequestStageControl />
-        <Divider />
         <ViewerCount />
       </Flex>
     </Flex>

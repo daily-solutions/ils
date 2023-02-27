@@ -35,7 +35,12 @@ export const VideoControl = ({
       disabled={disabled}
       onClick={() => handleToggleVideo(!video)}
     >
-      <Icon icon={video ? 'cam' : 'cam_muted'} />
+      <Icon
+        icon={video ? 'cam' : 'cam_muted'}
+        width={16}
+        height={12}
+        color="#2B3F56"
+      />
     </TrayButton>
   );
 };

@@ -59,7 +59,7 @@ export const RecordingControl = () => {
 
   return (
     <TrayButton muted={isRecording} onClick={handleToggleRecording}>
-      <Icon icon="recording" />
+      <Icon icon="recording" color="#2B3F56" />
     </TrayButton>
   );
 };
