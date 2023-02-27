@@ -173,14 +173,27 @@ export const ViewPoll = () => {
           </Flex>
         </Box>
         <Divider />
-        <Flex
-          css={{
-            alignItems: 'center',
-            justifyContent: 'flex-end',
-            p: '$4 $5',
-          }}
-        >
-          {!myVote ? (
+        {!myVote ? (
+          <Flex
+            css={{
+              flexDirection: isMobile ? 'column' : 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              p: '$4 $5',
+              rowGap: '$5',
+            }}
+          >
+            <Text
+              size={2}
+              css={{
+                cursor: 'pointer',
+                color: '$muted',
+                order: isMobile ? 1 : 0,
+              }}
+              onClick={() => voteToPoll(viewPoll as string, 'skip-vote')}
+            >
+              Skip (show results)
+            </Text>
             <Button
               disabled={!vote}
               onClick={() => voteToPoll(viewPoll as string, vote as string)}
@@ -188,12 +201,20 @@ export const ViewPoll = () => {
             >
               Confirm selection
             </Button>
-          ) : (
+          </Flex>
+        ) : (
+          <Flex
+            css={{
+              alignItems: 'center',
+              justifyContent: 'flex-end',
+              p: '$4 $5',
+            }}
+          >
             <Button fullWidth={isMobile} onClick={() => setViewPoll(null)}>
               Exit results
             </Button>
-          )}
-        </Flex>
+          </Flex>
+        )}
       </DialogContent>
     </Dialog>
   );

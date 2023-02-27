@@ -169,10 +169,13 @@ export const usePolls = () => {
 
     const id = crypto.randomUUID();
     const filteredOptions = options.filter((o) => o !== '');
-    const votes = filteredOptions.reduce((obj: any, option) => {
-      obj[option] = [];
-      return obj;
-    }, {});
+    const votes = {
+      ...filteredOptions.reduce((obj: any, option) => {
+        obj[option] = [];
+        return obj;
+      }, {}),
+      ['skip-vote']: [],
+    };
     sendAppMessage({
       event: 'poll',
       id,
