@@ -5,9 +5,10 @@ import { Flex, Label, Select } from '../../ui';
 
 interface Props {
   audioVideo?: boolean;
+  speaker?: boolean;
 }
 
-export const Devices = ({ audioVideo = true }: Props) => {
+export const Devices = ({ audioVideo = true, speaker = true }: Props) => {
   const {
     cameras,
     camState,
@@ -97,25 +98,27 @@ export const Devices = ({ audioVideo = true }: Props) => {
           </Select>
         </Flex>
       )}
-      <Flex css={{ flexFlow: 'column wrap', rowGap: '$1' }}>
-        <Label size="sm">Speaker</Label>
-        <Select
-          value={currentSpeaker?.device?.deviceId}
-          onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-            handleDeviceChange('speaker', e.target.value)
-          }
-        >
-          {speakers.length > 0 ? (
-            speakers.map((s) => (
-              <option value={s.device.deviceId} key={s.device.deviceId}>
-                {s.device.label}
-              </option>
-            ))
-          ) : (
-            <option value="">System default</option>
-          )}
-        </Select>
-      </Flex>
+      {speaker && (
+        <Flex css={{ flexFlow: 'column wrap', rowGap: '$1' }}>
+          <Label size="sm">Speaker</Label>
+          <Select
+            value={currentSpeaker?.device?.deviceId}
+            onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+              handleDeviceChange('speaker', e.target.value)
+            }
+          >
+            {speakers.length > 0 ? (
+              speakers.map((s) => (
+                <option value={s.device.deviceId} key={s.device.deviceId}>
+                  {s.device.label}
+                </option>
+              ))
+            ) : (
+              <option value="">System default</option>
+            )}
+          </Select>
+        </Flex>
+      )}
     </Flex>
   );
 };

@@ -47,7 +47,7 @@ export const InviteToJoin = () => {
         <Button onClick={handleJoin}>Join</Button>
       </Flex>
       <Box css={{ p: '$4 $2' }}>
-        <Devices />
+        <Devices speaker={false} />
       </Box>
     </Modal>
   );
