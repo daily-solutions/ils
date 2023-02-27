@@ -5,8 +5,8 @@ import {
 } from '@daily-co/daily-react';
 import React, { useCallback } from 'react';
 
-import { useInviteToJoin } from '../../contexts/UIState';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
+import { useInviteToJoin } from '../../state';
 import { Box, Button, Flex, Modal } from '../../ui';
 import { Devices } from '../Haircheck/Devices';
 import { AudioControl, VideoControl } from '../Stream';

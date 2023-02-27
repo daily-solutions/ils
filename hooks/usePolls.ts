@@ -12,7 +12,7 @@ import {
   usePollOptions,
   usePollQuestion,
   useViewPoll,
-} from '../contexts/UIState';
+} from '../state';
 import { getReactions } from './useChat';
 import { useReactions } from './useReactions';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Emoji } from '../../contexts/UIState';
 import { emojis } from '../../hooks/useChat';
+import { Emoji } from '../../state';
 import { Box, Grid } from '../../ui';
 import { Popover, PopoverContent, PopoverTrigger } from '../../ui/Popover';
 

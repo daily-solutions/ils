@@ -8,7 +8,7 @@ import {
 import { useCallback } from 'react';
 import { atom, useRecoilState } from 'recoil';
 
-import { useInviteToJoin } from '../contexts/UIState';
+import { useInviteToJoin } from '../state';
 import { useToasts } from './useToast';
 
 interface BringToStageAppMessage {

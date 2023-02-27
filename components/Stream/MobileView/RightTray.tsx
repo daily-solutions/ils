@@ -4,7 +4,7 @@ import {
 } from '@daily-co/daily-react';
 import React, { useCallback } from 'react';
 
-import { usePoll, useSidebar } from '../../../contexts/UIState';
+import { usePoll, useSidebar } from '../../../state';
 import { Flex, Icon } from '../../../ui';
 import { TrayButton } from '../../TrayButton';
 

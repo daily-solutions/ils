@@ -2,9 +2,9 @@ import { useLocalSessionId } from '@daily-co/daily-react';
 import Image from 'next/image';
 import React, { useMemo, useState } from 'react';
 
-import { useMessage, useViewPoll } from '../../contexts/UIState';
 import { usePolls } from '../../hooks/usePolls';
 import Poll from '../../public/poll.svg';
+import { useMessage, useViewPoll } from '../../state';
 import {
   Badge,
   Box,

@@ -4,7 +4,7 @@ import {
 } from '@daily-co/daily-react';
 import React from 'react';
 
-import { usePoll } from '../../../contexts/UIState';
+import { usePoll } from '../../../state';
 import { Icon } from '../../../ui';
 import { TrayButton } from '../../TrayButton';
 

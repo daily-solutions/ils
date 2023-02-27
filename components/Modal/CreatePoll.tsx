@@ -1,5 +1,5 @@
-import { usePoll } from '../../contexts/UIState';
 import { usePolls } from '../../hooks/usePolls';
+import { usePoll } from '../../state';
 import { Button, Divider, Flex, Input, Label, Modal } from '../../ui';
 
 export const CreatePoll = () => {

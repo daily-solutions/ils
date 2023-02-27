@@ -5,9 +5,9 @@ import {
 } from '@daily-co/daily-react';
 import React, { memo, useCallback } from 'react';
 
-import { useSidebar, useViewers } from '../../../../contexts/UIState';
 import { useParticipants } from '../../../../hooks/useParticipants';
 import { useStage } from '../../../../hooks/useStage';
+import { useSidebar, useViewers } from '../../../../state';
 import { Badge, Button, Divider, Flex, Icon, Menu, Text } from '../../../../ui';
 import { Viewer } from './Viewer';
 

@@ -2,10 +2,10 @@ import Avatar from 'boring-avatars';
 import Image from 'next/image';
 import React, { useCallback, useMemo } from 'react';
 
-import { useMessage, useSidebar } from '../../../../contexts/UIState';
 import { useMediaQuery } from '../../../../hooks/useMediaQuery';
 import { usePolls } from '../../../../hooks/usePolls';
 import Poll from '../../../../public/poll.svg';
+import { useMessage, useSidebar } from '../../../../state';
 import { Badge, Box, Button, Flex, Text } from '../../../../ui';
 import { ChatReact } from './ChatReact';
 import { ChatReactions } from './ChatReactions';

@@ -4,8 +4,8 @@ import {
 } from '@daily-co/daily-react';
 import { useEffect } from 'react';
 
-import { useSidebar } from '../../../contexts/UIState';
 import { useMediaQuery } from '../../../hooks/useMediaQuery';
+import { useSidebar } from '../../../state';
 import { Box, Card, Divider, Icon } from '../../../ui';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../../ui/Tabs';
 import { Chat } from './Chat';

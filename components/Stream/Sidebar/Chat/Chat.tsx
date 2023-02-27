@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 
-import { useMessages, useSidebar } from '../../../../contexts/UIState';
+import { useMessages, useSidebar } from '../../../../state';
 import { Box, Button, Divider, Flex, Icon, Text } from '../../../../ui';
 import { ChatInput } from './ChatInput';
 import { ChatMessage } from './ChatMessage';

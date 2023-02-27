@@ -4,9 +4,9 @@ import {
 } from '@daily-co/daily-react';
 import React, { useCallback, useMemo } from 'react';
 
-import { useInviteToJoin } from '../../../contexts/UIState';
 import { useIsOnStage } from '../../../hooks/useIsOnStage';
 import { useStage } from '../../../hooks/useStage';
+import { useInviteToJoin } from '../../../state';
 import { Button } from '../../../ui';
 
 export const RequestStageControl = () => {

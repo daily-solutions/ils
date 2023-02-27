@@ -10,7 +10,6 @@ import {
 } from '@daily-co/daily-react';
 import React, { memo, useCallback, useEffect } from 'react';
 
-import { useMeetingState } from '../../contexts/UIState';
 import { ChatAppMessage, useChat } from '../../hooks/useChat';
 import { PollAppMessage, usePolls } from '../../hooks/usePolls';
 import { usePresence } from '../../hooks/usePresence';
@@ -19,6 +18,7 @@ import {
   useReactions,
 } from '../../hooks/useReactions';
 import { StageAppMessage, useStage } from '../../hooks/useStage';
+import { useMeetingState } from '../../state';
 import { ToastContainer } from './ToastContainer';
 
 type AppMessage =

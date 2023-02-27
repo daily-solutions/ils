@@ -10,7 +10,7 @@ import {
 } from '@daily-co/daily-react';
 import { useCallback } from 'react';
 
-import { PresenceParticipant, useViewers } from '../contexts/UIState';
+import { PresenceParticipant, useViewers } from '../state';
 
 export const usePresence = () => {
   const localSessionId = useLocalSessionId();

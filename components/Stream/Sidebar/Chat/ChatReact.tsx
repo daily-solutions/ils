@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 
-import { Emoji } from '../../../../contexts/UIState';
 import { useChat } from '../../../../hooks/useChat';
+import { Emoji } from '../../../../state';
 import { Box, Button, Icon } from '../../../../ui';
 import { EmojiReactionsPopover } from '../../EmojiReactionsPopover';
 

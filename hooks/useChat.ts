@@ -6,7 +6,7 @@ import {
 } from '@daily-co/daily-react';
 import { useCallback } from 'react';
 
-import { Emoji, useMessages } from '../contexts/UIState';
+import { Emoji, useMessages } from '../state';
 
 export const emojis: Emoji[] = [
   '👏',

@@ -1,8 +1,8 @@
 import { useDaily, useDevices, useLocalSessionId } from '@daily-co/daily-react';
 import React, { memo, useCallback, useEffect, useMemo } from 'react';
 
-import { useMeetingState } from '../../contexts/UIState';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
+import { useMeetingState } from '../../state';
 import { Box, Button, Divider, Flex } from '../../ui';
 import { AudioControl, VideoControl } from '../Stream';
 import { Tile } from '../Tile';

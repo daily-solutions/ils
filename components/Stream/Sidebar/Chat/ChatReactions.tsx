@@ -1,8 +1,8 @@
 import { useLocalSessionId } from '@daily-co/daily-react';
 import React from 'react';
 
-import { useMessage } from '../../../../contexts/UIState';
 import { emojis, useChat } from '../../../../hooks/useChat';
+import { useMessage } from '../../../../state';
 import { Button, Flex } from '../../../../ui';
 
 interface Props {

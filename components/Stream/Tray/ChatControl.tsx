@@ -4,7 +4,7 @@ import {
 } from '@daily-co/daily-react';
 import React, { useMemo } from 'react';
 
-import { useSidebar } from '../../../contexts/UIState';
+import { useSidebar } from '../../../state';
 import { Icon } from '../../../ui';
 import { TrayButton } from '../../TrayButton';
 

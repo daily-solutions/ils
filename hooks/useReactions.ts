@@ -2,7 +2,7 @@ import { DailyEventObjectAppMessage } from '@daily-co/daily-js';
 import { useAppMessage } from '@daily-co/daily-react';
 import { useCallback, useEffect } from 'react';
 
-import { Emoji } from '../contexts/UIState';
+import { Emoji } from '../state';
 
 export interface EmojiReactionsAppMessage {
   event: 'emoji-reactions';

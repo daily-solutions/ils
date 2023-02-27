@@ -4,10 +4,10 @@ import {
 } from '@daily-co/daily-react';
 import React, { useCallback, useMemo } from 'react';
 
-import { Emoji, useInviteToJoin } from '../../../contexts/UIState';
 import { useIsOnStage } from '../../../hooks/useIsOnStage';
 import { useReactions } from '../../../hooks/useReactions';
 import { useStage } from '../../../hooks/useStage';
+import { Emoji, useInviteToJoin } from '../../../state';
 import { Button, Flex } from '../../../ui';
 import { TrayButton } from '../../TrayButton';
 import { AudioControl } from '../Tray/AudioControl';

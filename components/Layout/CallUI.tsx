@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import { useMeetingState } from '../../contexts/UIState';
+import { useMeetingState } from '../../state';
 import { Loader } from '../../ui';
 import { Haircheck } from '../Haircheck';
 import { ILSContainer } from '../ILSContainer';

@@ -5,8 +5,8 @@ import {
 } from '@daily-co/daily-react';
 import React, { useCallback, useState } from 'react';
 
-import { useMeetingState } from '../../contexts/UIState';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
+import { useMeetingState } from '../../state';
 import { Card, Flex } from '../../ui';
 import { NameSetup } from './NameSetup';
 import { Setup } from './Setup';
