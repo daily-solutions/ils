@@ -5,7 +5,7 @@ import { Loader } from '../../ui';
 import { Haircheck } from '../Haircheck';
 import { ILSContainer } from '../ILSContainer';
 import { LeftMeeting } from '../Left';
-import { Room } from '../Stream';
+import { Stream } from '../Stream';
 
 export const CallUI = () => {
   const [meetingState] = useMeetingState();
@@ -17,7 +17,7 @@ export const CallUI = () => {
       case 'joining-meeting':
         return <Loader />;
       case 'joined-meeting':
-        return <Room />;
+        return <Stream />;
       case 'left-meeting':
         return <LeftMeeting />;
       default:

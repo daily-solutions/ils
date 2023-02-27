@@ -5,7 +5,7 @@ import { Header } from './Header';
 import { RightTray } from './RightTray';
 import { View } from './View';
 
-const MobileView = () => {
+export const MobileView = () => {
   return (
     <Flex
       css={{
@@ -26,5 +26,3 @@ const MobileView = () => {
     </Flex>
   );
 };
-
-export default MobileView;
