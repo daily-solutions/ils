@@ -10,7 +10,7 @@ export { Input } from './Input';
 export { Label } from './Label';
 export { Loader } from './Loader';
 export { Menu } from './Menu';
-export { Modal } from './Modal';
+export { Dialog, DialogContent } from './Modal';
 export { Popover } from './Popover';
 export { Progress } from './Progress';
 export { Select } from './Select';

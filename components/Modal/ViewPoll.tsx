@@ -10,9 +10,11 @@ import {
   Badge,
   Box,
   Button,
+  Dialog,
+  DialogContent,
+  Divider,
   Flex,
   Icon,
-  Modal,
   Progress,
   Text,
 } from '../../ui';
@@ -124,58 +126,58 @@ export const ViewPoll = () => {
   );
 
   return (
-    <Modal
-      open={!!viewPoll}
-      onClose={() => setViewPoll(null)}
-      title={
-        <Flex css={{ flexFlow: 'column wrap', rowGap: '$2' }}>
-          <Flex css={{ alignItems: 'center', gap: '$2' }}>
-            <Image src={Poll} alt="poll" />
-            <Text
-              css={{
-                fontWeight: '$semibold',
-                textTransform: 'uppercase',
-                fontSize: '10px',
-                color: '$orange',
-              }}
-            >
-              Poll
+    <Dialog open={!!viewPoll} onOpenChange={() => setViewPoll(null)}>
+      <DialogContent
+        title={
+          <Flex css={{ flexFlow: 'column wrap', rowGap: '$2' }}>
+            <Flex css={{ alignItems: 'center', gap: '$2' }}>
+              <Image src={Poll} alt="poll" />
+              <Text
+                css={{
+                  fontWeight: '$semibold',
+                  textTransform: 'uppercase',
+                  fontSize: '10px',
+                  color: '$orange',
+                }}
+              >
+                Poll
+              </Text>
+            </Flex>
+            {question}
+            <Text size={0}>
+              {votesCount} {votesCount === 1 ? 'vote' : 'votes'}
             </Text>
           </Flex>
-          {question}
-          <Text size={0}>
-            {votesCount} {votesCount === 1 ? 'vote' : 'votes'}
-          </Text>
-        </Flex>
-      }
-    >
-      <Box>
-        <Flex css={{ flexFlow: 'column wrap', gap: '$5', mb: '$6' }}>
-          {options.map((o) =>
-            !myVote ? (
-              <PollOption
-                option={o}
-                key={o}
-                selectedVote={o === vote}
-                onVote={(option) => setVote(option)}
-              />
-            ) : (
-              <PollResult
-                option={o}
-                key={o}
-                totalVotes={votesCount}
-                votes={votes[o]?.length}
-                myVote={myVote === o}
-              />
-            )
-          )}
-        </Flex>
+        }
+      >
+        <Box css={{ p: '$5' }}>
+          <Flex css={{ flexFlow: 'column wrap', gap: '$5', mb: '$6' }}>
+            {options.map((o) =>
+              !myVote ? (
+                <PollOption
+                  option={o}
+                  key={o}
+                  selectedVote={o === vote}
+                  onVote={(option) => setVote(option)}
+                />
+              ) : (
+                <PollResult
+                  option={o}
+                  key={o}
+                  totalVotes={votesCount}
+                  votes={votes[o]?.length}
+                  myVote={myVote === o}
+                />
+              )
+            )}
+          </Flex>
+        </Box>
+        <Divider />
         <Flex
           css={{
             alignItems: 'center',
             justifyContent: 'flex-end',
-            pt: '$5',
-            borderTop: '1px solid $disabled',
+            p: '$4 $5',
           }}
         >
           {!myVote ? (
@@ -192,7 +194,7 @@ export const ViewPoll = () => {
             </Button>
           )}
         </Flex>
-      </Box>
-    </Modal>
+      </DialogContent>
+    </Dialog>
   );
 };

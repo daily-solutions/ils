@@ -3,7 +3,6 @@ import type { CSS } from '@stitches/react';
 import React, { ReactNode } from 'react';
 
 import { keyframes, styled } from '../styles/stitches.config';
-import { Box } from './Box';
 import { Button } from './Button';
 import { Icon } from './Icon';
 
@@ -17,7 +16,7 @@ const overlayShow = keyframes({
   '100%': { opacity: 1 },
 });
 
-const Dialog = DialogPrimitive.Root;
+export const Dialog = DialogPrimitive.Root;
 
 const StyledOverlay = styled(DialogPrimitive.Overlay, {
   zIndex: 1000,
@@ -39,7 +38,6 @@ const StyledContent = styled(DialogPrimitive.Content, {
   width: '100%',
   maxWidth: 500,
   maxHeight: '100%',
-  padding: '$4 $6',
   background: '$background',
 
   // Among other things, prevents text alignment inconsistencies when dialog can't be centered in the viewport evenly.
@@ -63,6 +61,8 @@ const StyledHeader = styled('div', {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
+  px: '$5',
+  pt: '$3',
 });
 
 const StyledCloseButton = styled(DialogPrimitive.Close, {});
@@ -82,7 +82,7 @@ const DialogTitle = styled(DialogPrimitive.Title, {
   lineHeight: '100%',
 });
 
-const DialogContent = React.forwardRef<
+export const DialogContent = React.forwardRef<
   React.ElementRef<typeof StyledContent>,
   DialogContentProps
 >(({ children, showCloseButton = true, title, ...props }, forwardedRef) => (
@@ -106,28 +106,3 @@ const DialogContent = React.forwardRef<
 ));
 
 DialogContent.displayName = 'DialogContent';
-
-interface Props {
-  open: boolean;
-  onClose: (value: boolean) => void;
-  title: ReactNode;
-  showCloseButton?: boolean;
-  css?: CSS;
-}
-
-export const Modal = ({
-  children,
-  css,
-  onClose,
-  open,
-  showCloseButton = true,
-  title,
-}: React.PropsWithChildren<Props>) => {
-  return (
-    <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent title={title} css={css} showCloseButton={showCloseButton}>
-        <Box css={{ py: '$2' }}>{children}</Box>
-      </DialogContent>
-    </Dialog>
-  );
-};

@@ -10,6 +10,7 @@ export const LeftMeeting = () => {
         justifyContent: 'center',
         width: '100dvw',
         height: '100dvh',
+        background: '$secondary',
       }}
     >
       <Card>You left the meeting</Card>

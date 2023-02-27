@@ -7,7 +7,7 @@ import React, { useCallback } from 'react';
 
 import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { useInviteToJoin } from '../../state';
-import { Box, Button, Flex, Modal } from '../../ui';
+import { Box, Button, Dialog, DialogContent, Flex } from '../../ui';
 import { Devices } from '../Haircheck/Devices';
 import { AudioControl, VideoControl } from '../Stream';
 import { Tile } from '../Tile';
@@ -27,28 +27,32 @@ export const InviteToJoin = () => {
   }, [daily, setShow, userData]);
 
   return (
-    <Modal open={show} onClose={setShow} title="Invited to join stage">
-      <Tile
-        fit="cover"
-        aspectRatio={isMobile ? 4 / 3 : 16 / 9}
-        sessionId={localSessionId as string}
-      />
-      <Flex
-        css={{
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          mt: '$4',
-        }}
-      >
-        <Flex css={{ gap: '$2' }}>
-          <VideoControl ignoreOnStage />
-          <AudioControl ignoreOnStage />
-        </Flex>
-        <Button onClick={handleJoin}>Join</Button>
-      </Flex>
-      <Box css={{ p: '$4 $2' }}>
-        <Devices speaker={false} />
-      </Box>
-    </Modal>
+    <Dialog open={show} onOpenChange={setShow}>
+      <DialogContent title="Invited to join stage">
+        <Box css={{ p: '$5' }}>
+          <Tile
+            fit="cover"
+            aspectRatio={isMobile ? 4 / 3 : 16 / 9}
+            sessionId={localSessionId as string}
+          />
+          <Flex
+            css={{
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              mt: '$4',
+            }}
+          >
+            <Flex css={{ gap: '$2' }}>
+              <VideoControl ignoreOnStage />
+              <AudioControl ignoreOnStage />
+            </Flex>
+            <Button onClick={handleJoin}>Join</Button>
+          </Flex>
+          <Box css={{ p: '$4 $2' }}>
+            <Devices speaker={false} />
+          </Box>
+        </Box>
+      </DialogContent>
+    </Dialog>
   );
 };
