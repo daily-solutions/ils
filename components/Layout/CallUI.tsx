@@ -5,7 +5,7 @@ import { Loader } from '../../ui/Loader';
 import { Haircheck } from '../Haircheck';
 import { ILSContainer } from '../ILSContainer';
 import { LeftMeeting } from '../Left';
-import { Room } from '../Room';
+import { Room } from '../Stream';
 
 export const CallUI = () => {
   const [meetingState] = useMeetingState();

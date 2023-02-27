@@ -7,7 +7,7 @@ import { Box } from '../../ui/Box';
 import { Button } from '../../ui/Button';
 import { Divider } from '../../ui/Divider';
 import { Flex } from '../../ui/Flex';
-import { AudioControl, VideoControl } from '../Room';
+import { AudioControl, VideoControl } from '../Stream';
 import { Tile } from '../Tile';
 import { Devices } from './Devices';
 import { Permissions } from './Permissions';

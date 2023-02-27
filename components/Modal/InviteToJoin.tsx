@@ -12,7 +12,7 @@ import { Button } from '../../ui/Button';
 import { Flex } from '../../ui/Flex';
 import { Modal } from '../../ui/Modal';
 import { Devices } from '../Haircheck/Devices';
-import { AudioControl, VideoControl } from '../Room';
+import { AudioControl, VideoControl } from '../Stream';
 import { Tile } from '../Tile';
 
 export const InviteToJoin = () => {

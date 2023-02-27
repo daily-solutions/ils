@@ -11,7 +11,7 @@ import { Sidebar } from './Sidebar';
 import { Tray } from './Tray';
 import { View } from './View';
 
-const MobileView = dynamic(() => import('../Room/MobileView'), {
+const MobileView = dynamic(() => import('.//MobileView'), {
   loading: () => <Loader />,
 });
 
