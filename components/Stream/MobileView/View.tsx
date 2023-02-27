@@ -1,15 +1,9 @@
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 
 import { useParticipants } from '../../../hooks/useParticipants';
 import { useResizeObserver } from '../../../hooks/useResizeObserver';
 import { useVideoGrid } from '../../../hooks/useVideoGrid';
-import { Box, Flex, Text } from '../../../ui';
+import { Box, Flex, Grid, Text } from '../../../ui';
 import { Tile } from '../../Tile';
 import { PaginationButton } from '../PaginationButton';
 
@@ -35,12 +29,11 @@ export const View = () => {
 
   const {
     columns,
-    containerHeight,
-    containerWidth,
     currentIds,
     currentPage,
     nextPage,
     prevPage,
+    rows,
     totalPages,
   } = useVideoGrid({
     width: dimensions.width,
@@ -53,29 +46,15 @@ export const View = () => {
     maxCountPerPage: 2,
   });
 
-  useEffect(() => {
-    if (!viewRef.current) return;
-    viewRef.current.style.setProperty('--grid-gap', '1px');
-    viewRef.current.style.setProperty('--grid-columns', columns.toString());
-    viewRef.current.style.setProperty('--grid-width', `${containerWidth}px`);
-    viewRef.current.style.setProperty('--grid-height', `${containerHeight}px`);
-  }, [columns, containerHeight, containerWidth]);
-
   const tiles = useMemo(() => {
     if (currentIds.length > 0) {
       return (
-        <Flex
+        <Grid
           css={{
-            flexFlow: 'row wrap',
-            alignItems: 'center',
-            justifyContent: 'center',
-            margin: 'auto',
+            gridTemplateColumns: `repeat(${columns}, 1fr)`,
+            gridTemplateRows: `repeat(${rows}, 1fr)`,
             width: '100%',
-            gap: 'var(--grid-gap, 1px)',
-            maxHeight: 'var(--grid-height, 100%)',
-            maxWidth: 'var(--grid-width, 100%)',
-            overflow: 'hidden',
-            transition: 'height 100ms ease, width 100ms ease',
+            height: '100%',
           }}
         >
           {currentIds.map((participantId) => (
@@ -86,9 +65,10 @@ export const View = () => {
               key={participantId}
               showBorder={currentIds.length > 1}
               isMobile
+              css={{ width: '100%', height: '100%' }}
             />
           ))}
-        </Flex>
+        </Grid>
       );
     }
     return (
@@ -114,7 +94,7 @@ export const View = () => {
         </Box>
       </Flex>
     );
-  }, [currentIds]);
+  }, [columns, currentIds, rows]);
 
   return (
     <Flex

@@ -12,7 +12,6 @@ import { Emoji, useInviteToJoin } from '../../../state';
 import { Button, Divider, Flex } from '../../../ui';
 import { TrayButton } from '../../TrayButton';
 import { AudioControl } from '../Tray/AudioControl';
-import { PeopleControl } from '../Tray/PeopleControl';
 import { ReactionsControl } from '../Tray/ReactionsControl';
 import { RecordingControl } from '../Tray/RecordingControl';
 import { SettingsControl } from '../Tray/SettingsControl';
@@ -78,7 +77,6 @@ export const BottomTray = () => {
             <VideoControl />
             <AudioControl />
             <Divider direction="vertical" />
-            <PeopleControl />
             <ReactionsControl />
             <SettingsControl />
             <RecordingControl />
