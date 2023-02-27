@@ -3,9 +3,10 @@ import React, { useCallback, useMemo, useRef, useState } from 'react';
 import { useParticipants } from '../../../hooks/useParticipants';
 import { useResizeObserver } from '../../../hooks/useResizeObserver';
 import { useVideoGrid } from '../../../hooks/useVideoGrid';
-import { Box, Flex, Grid, Text } from '../../../ui';
+import { Flex, Grid } from '../../../ui';
 import { Tile } from '../../Tile';
 import { PaginationButton } from '../PaginationButton';
+import { StartingSoon } from '../StartingSoon';
 
 const DEFAULT_MOBILE_ASPECT_RATIO = 4 / 3;
 
@@ -71,29 +72,7 @@ export const View = () => {
         </Grid>
       );
     }
-    return (
-      <Flex
-        css={{
-          flexFlow: 'column wrap',
-          gap: '$3',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        <Box
-          css={{ background: 'rgba(18, 26, 36, 0.2)', p: '$3 $4', br: '$sm' }}
-        >
-          <Text size={5} css={{ fontWeight: '$semibold' }}>
-            Waiting for the host to join
-          </Text>
-        </Box>
-        <Box
-          css={{ background: 'rgba(18, 26, 36, 0.2)', p: '$3 $4', br: '$sm' }}
-        >
-          <Text>Stream starting soon</Text>
-        </Box>
-      </Flex>
-    );
+    return <StartingSoon />;
   }, [columns, currentIds, rows]);
 
   return (
