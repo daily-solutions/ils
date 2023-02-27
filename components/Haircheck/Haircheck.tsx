@@ -3,11 +3,13 @@ import {
   useLocalSessionId,
   useParticipantProperty,
 } from '@daily-co/daily-react';
+import Image from 'next/image';
 import React, { useCallback, useState } from 'react';
 
 import { useMediaQuery } from '../../hooks/useMediaQuery';
+import DailyLogo from '../../public/Logo.png';
 import { useMeetingState } from '../../state';
-import { Card, Flex } from '../../ui';
+import { Card, Flex, Text } from '../../ui';
 import { NameSetup } from './NameSetup';
 import { Setup } from './Setup';
 
@@ -35,25 +37,47 @@ export const Haircheck = () => {
   return (
     <Flex
       css={{
-        alignItems: 'center',
-        justifyContent: 'center',
         width: '100dvw',
         height: '100dvh',
         background: '$secondary',
       }}
     >
-      <Card
+      <Flex
         css={{
-          maxWidth: state === 'name' ? 330 : md ? 460 : '95%',
-          width: '100%',
-          padding: 0,
+          position: 'absolute',
+          top: 30,
+          p: '$3',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '$3',
         }}
       >
-        {state === 'name' && (
-          <NameSetup hasPermission={hasPermission} onContinue={onContinue} />
-        )}
-        {state === 'setup' && <Setup />}
-      </Card>
+        <Image src={DailyLogo} alt="Daily Logo" />
+        <Text css={{ color: '$muted', fontSize: '$6', fontWeight: '$normal' }}>
+          ILS Workshop Stream
+        </Text>
+      </Flex>
+      <Flex
+        css={{
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: '100%',
+          height: '100%',
+        }}
+      >
+        <Card
+          css={{
+            maxWidth: state === 'name' ? 330 : md ? 460 : '95%',
+            width: '100%',
+            padding: 0,
+          }}
+        >
+          {state === 'name' && (
+            <NameSetup hasPermission={hasPermission} onContinue={onContinue} />
+          )}
+          {state === 'setup' && <Setup />}
+        </Card>
+      </Flex>
     </Flex>
   );
 };
