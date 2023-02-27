@@ -4,8 +4,9 @@ import {
 } from '@daily-co/daily-react';
 import React from 'react';
 
+import { useStage } from '../../../../hooks/useStage';
 import { useSidebar } from '../../../../state';
-import { Box, Button, Divider, Flex, Icon, Text } from '../../../../ui';
+import { Badge, Box, Button, Divider, Flex, Icon, Text } from '../../../../ui';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../../../ui/Tabs';
 import { Participants } from './Participants';
 import { RequestedParticipants } from './RequestedParticipants';
@@ -18,6 +19,8 @@ export const People = ({ withHeader = false }: Props) => {
   const [, setSidebar] = useSidebar();
   const localSessionId = useLocalSessionId();
   const isOwner = useParticipantProperty(localSessionId as string, 'owner');
+
+  const { requestedParticipants } = useStage();
 
   return (
     <Box>
@@ -48,7 +51,18 @@ export const People = ({ withHeader = false }: Props) => {
               People
             </TabsTrigger>
             <TabsTrigger variant="secondary" value="join-requests">
-              Join Requests
+              <Flex
+                css={{
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '$1',
+                }}
+              >
+                Join Requests{' '}
+                <Badge size="xs" color="primary">
+                  {Object.keys(requestedParticipants).length}
+                </Badge>
+              </Flex>
             </TabsTrigger>
           </TabsList>
           <Divider css={{ mt: '$2' }} />
