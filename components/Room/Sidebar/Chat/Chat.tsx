@@ -65,9 +65,48 @@ export const Chat = ({ withHeader = false }: Props) => {
           scrollBehavior: 'smooth',
         }}
       >
-        {messages.map((message) => (
-          <ChatMessage key={message.id} id={message.id} />
-        ))}
+        {messages.length > 0 ? (
+          messages.map((message) => (
+            <ChatMessage key={message.id} id={message.id} />
+          ))
+        ) : (
+          <Flex
+            css={{
+              flexFlow: 'column wrap',
+              width: '100%',
+              height: '100%',
+              alignItems: 'center',
+              justifyContent: 'center',
+              p: '$4',
+              rowGap: '$4',
+              color: '$muted',
+            }}
+          >
+            <Flex
+              css={{
+                alignItems: 'center',
+                justifyContent: 'center',
+                background: '$secondary',
+                br: '50%',
+                width: 64,
+                height: 64,
+              }}
+            >
+              <Icon icon="sad_emoji" size={32} />
+            </Flex>
+            <Flex
+              css={{
+                flexFlow: 'column wrap',
+                gap: '$2',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <Text>It’s awful quiet in here</Text>
+              <Text>(why not send a message?)</Text>
+            </Flex>
+          </Flex>
+        )}
       </Box>
       <Divider />
       <ChatInput />
