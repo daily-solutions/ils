@@ -21,7 +21,7 @@ export const PollControl = () => {
       mutedVariant="inverse"
       onClick={() => setShow(true)}
     >
-      <Icon icon="poll" size={16} color="#2B3F56" />
+      <Icon icon="poll" size={16} color={show ? 'white' : '#2B3F56'} />
     </TrayButton>
   );
 };
