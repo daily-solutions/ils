@@ -2,6 +2,7 @@ import { useLocalSessionId } from '@daily-co/daily-react';
 import Image from 'next/image';
 import React, { useMemo, useState } from 'react';
 
+import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { usePolls } from '../../hooks/usePolls';
 import Poll from '../../public/poll.svg';
 import { useMessage, useViewPoll } from '../../state';
@@ -92,6 +93,7 @@ const PollOption = ({ onVote, option, selectedVote }: Props) => {
 };
 
 export const ViewPoll = () => {
+  const isMobile = useMediaQuery('(max-width: 480px)');
   const localSessionId = useLocalSessionId();
   const [viewPoll, setViewPoll] = useViewPoll();
   const message = useMessage(viewPoll as string);
@@ -180,11 +182,14 @@ export const ViewPoll = () => {
             <Button
               disabled={!vote}
               onClick={() => voteToPoll(viewPoll as string, vote as string)}
+              fullWidth={isMobile}
             >
               Confirm selection
             </Button>
           ) : (
-            <Button onClick={() => setViewPoll(null)}>Exit results</Button>
+            <Button fullWidth={isMobile} onClick={() => setViewPoll(null)}>
+              Exit results
+            </Button>
           )}
         </Flex>
       </Box>

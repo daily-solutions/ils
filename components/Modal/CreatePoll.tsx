@@ -1,8 +1,10 @@
+import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { usePolls } from '../../hooks/usePolls';
 import { usePoll } from '../../state';
 import { Button, Divider, Flex, Input, Label, Modal } from '../../ui';
 
 export const CreatePoll = () => {
+  const isMobile = useMediaQuery('(max-width: 480px)');
   const [show, setShow] = usePoll();
   const {
     cancelPoll,
@@ -40,11 +42,26 @@ export const CreatePoll = () => {
           ))}
         </Flex>
         <Divider />
-        <Flex css={{ gap: '$2', justifyContent: 'flex-end' }}>
-          <Button variant="outline" onClick={cancelPoll}>
+        <Flex
+          css={{
+            flexDirection: isMobile ? 'column' : 'row',
+            gap: '$2',
+            justifyContent: 'flex-end',
+          }}
+        >
+          <Button
+            variant="outline"
+            onClick={cancelPoll}
+            fullWidth={isMobile}
+            css={{ order: 1 }}
+          >
             Cancel
           </Button>
-          <Button disabled={!isValidPoll} onClick={createPoll}>
+          <Button
+            disabled={!isValidPoll}
+            onClick={createPoll}
+            fullWidth={isMobile}
+          >
             Create poll
           </Button>
         </Flex>

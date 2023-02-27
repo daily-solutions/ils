@@ -1,26 +1,16 @@
-import { GetServerSidePropsContext } from 'next';
-
 import { Layout } from '../components/Layout';
 
 interface Props {
   isConfigured: boolean;
   domain: string;
   room: string;
-  token: string;
 }
 
-const Home = ({ domain, isConfigured, room, token }: Props) => {
-  return (
-    <Layout
-      domain={domain}
-      isConfigured={isConfigured}
-      room={room}
-      token={token}
-    />
-  );
+const Home = ({ domain, isConfigured, room }: Props) => {
+  return <Layout domain={domain} isConfigured={isConfigured} room={room} />;
 };
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
+export async function getStaticProps() {
   return {
     props: {
       isConfigured:
@@ -29,7 +19,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
         !!process.env.DAILY_API_KEY,
       domain: process.env.NEXT_PUBLIC_DAILY_DOMAIN,
       room: process.env.NEXT_PUBLIC_DAILY_ROOM,
-      token: context.query?.['t'] ?? '',
     },
   };
 }
