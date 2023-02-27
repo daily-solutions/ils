@@ -42,11 +42,11 @@ export const Chat = ({ withHeader = false }: Props) => {
         >
           <Text>Chat</Text>
           <Button
-            variant="ghost"
+            variant="outline"
             size="pagination"
             onClick={() => setSidebar(null)}
           >
-            <Icon icon="cross" />
+            <Icon icon="cross" color="#6B7785" />
           </Button>
         </Flex>
       )}
@@ -87,7 +87,7 @@ export const Chat = ({ withHeader = false }: Props) => {
                 height: 64,
               }}
             >
-              <Icon icon="sad_emoji" size={32} />
+              <Icon icon="sad_emoji" color="#6B7785" size={32} />
             </Flex>
             <Flex
               css={{

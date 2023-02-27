@@ -140,7 +140,7 @@ export const {
       9: '80px',
       10: '90px',
       tab: '36px',
-      trayButton: '45px',
+      trayButton: '38px',
       container: '1200px',
     },
     radii: {

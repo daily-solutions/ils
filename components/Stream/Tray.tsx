@@ -6,7 +6,6 @@ import Logo from '../../public/Logo.png';
 import { Divider, Flex } from '../../ui';
 import { AudioControl } from './Tray/AudioControl';
 import { ChatControl } from './Tray/ChatControl';
-import { PeopleControl } from './Tray/PeopleControl';
 import { PollControl } from './Tray/PollControl';
 import { ReactionsControl } from './Tray/ReactionsControl';
 import { RecordingControl } from './Tray/RecordingControl';
@@ -32,7 +31,6 @@ export const Tray = () => {
         <VideoControl />
         <AudioControl />
         <ChatControl />
-        <PeopleControl />
         <PollControl />
         <RecordingControl />
         <ReactionsControl />

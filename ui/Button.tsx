@@ -91,8 +91,8 @@ const StyledButton = styled('button', {
         br: '$sm',
       },
       icon: {
-        height: '$7',
-        width: '$7',
+        height: '$trayButton',
+        width: '$trayButton',
       },
       xs: {
         height: '24px',

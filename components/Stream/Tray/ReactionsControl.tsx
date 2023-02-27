@@ -14,7 +14,7 @@ export const ReactionsControl = () => {
     <EmojiReactionsPopover open={open} setOpen={setOpen} onEmojiClick={react}>
       <Box>
         <TrayButton muted={open} mutedVariant="inverse">
-          <Icon icon="heart" />
+          <Icon icon="heart" width={16} height={15.3} color="#2B3F56" />
         </TrayButton>
       </Box>
     </EmojiReactionsPopover>
