@@ -42,11 +42,11 @@ export const NameSetup = memo(({ hasPermission, onContinue }: Props) => {
     avatarNames[Math.floor(Math.random() * 10)]
   );
 
-  const handleContinue = useCallback(() => {
+  const handleContinue = useCallback(async () => {
     if (!daily) return;
 
-    daily.setUserName(name);
-    daily.setUserData({ avatar: selectedAvatar });
+    await daily.setUserName(name);
+    await daily.setUserData({ avatar: selectedAvatar });
     onContinue();
   }, [daily, name, onContinue, selectedAvatar]);
 

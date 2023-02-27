@@ -28,7 +28,6 @@ export const Layout = ({ domain, isConfigured, room, token = '' }: Props) => {
       token,
       subscribeToTracksAutomatically: true,
       dailyConfig: {
-        avoidEval: true,
         experimentalChromeVideoMuteLightOff: true,
         useDevicePreferenceCookies: true,
         micAudioMode: {
@@ -41,6 +40,7 @@ export const Layout = ({ domain, isConfigured, room, token = '' }: Props) => {
   }, [callObject, domain, room, token]);
 
   useEffect(() => {
+    // cleanup function (destroys callObject on unmount)
     return () => {
       callObject?.destroy();
     };
