@@ -7,8 +7,8 @@ import React, { memo, useCallback } from 'react';
 
 import { useParticipants } from '../../../../hooks/useParticipants';
 import { useStage } from '../../../../hooks/useStage';
-import { useSidebar, useViewers } from '../../../../state';
-import { Badge, Button, Divider, Flex, Icon, Menu, Text } from '../../../../ui';
+import { useViewers } from '../../../../state';
+import { Badge, Button, Flex, Icon, Menu, Text } from '../../../../ui';
 import { Viewer } from './Viewer';
 
 interface ParticipantProps {
@@ -73,38 +73,13 @@ const Participant = memo(({ sessionId }: ParticipantProps) => {
 
 Participant.displayName = 'Participant';
 
-interface Props {
-  withHeader?: boolean;
-}
-
-export const Participants = ({ withHeader = false }: Props) => {
-  const [, setSidebar] = useSidebar();
+export const Participants = () => {
   const participantIds = useParticipants(true, 'user_name');
   const invitedIds = useParticipants(false, 'user_name');
   const [viewers] = useViewers();
 
   return (
     <Flex css={{ flexFlow: 'column wrap' }}>
-      {withHeader && (
-        <Flex
-          css={{
-            height: '44px',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            p: '$1 $4',
-          }}
-        >
-          <Text>People</Text>
-          <Button
-            variant="ghost"
-            size="pagination"
-            onClick={() => setSidebar(null)}
-          >
-            <Icon icon="cross" />
-          </Button>
-        </Flex>
-      )}
-      {withHeader && <Divider />}
       <Flex css={{ flexFlow: 'column wrap', p: '$4', rowGap: '$5' }}>
         <Flex css={{ flexFlow: 'column wrap' }}>
           <Text size={0} css={{ color: '$muted', textTransform: 'uppercase' }}>
