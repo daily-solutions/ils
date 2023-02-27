@@ -16,6 +16,11 @@ interface BringToStageAppMessage {
   sessionId: string;
 }
 
+interface DenyRequestToJoinAppMessage {
+  event: 'deny-request-to-join';
+  sessionId: string;
+}
+
 interface RemoveFromStageAppMessage {
   event: 'remove-from-stage';
   sessionId: string;
@@ -40,7 +45,8 @@ export type StageAppMessage =
   | BringToStageAppMessage
   | RemoveFromStageAppMessage
   | CancelRequestStageAppMessage
-  | LeaveStageAppMessage;
+  | LeaveStageAppMessage
+  | DenyRequestToJoinAppMessage;
 
 const isRequestingState = atom<boolean>({
   key: 'is-requesting-to-join-stage',
@@ -50,6 +56,7 @@ const isRequestingState = atom<boolean>({
 interface RequestedParticipant {
   id: string;
   userName: string;
+  avatar: string;
 }
 
 const requestedParticipantsState = atom<Record<string, RequestedParticipant>>({
@@ -111,6 +118,20 @@ export const useStage = () => {
     [daily, isOwner, sendAppMessage, setRequestedParticipants]
   );
 
+  const denyRequestToJoin = useCallback(
+    (sessionId: string) => {
+      if (!isOwner || !daily) return;
+
+      setRequestedParticipants((prev) => {
+        const prevP = { ...prev };
+        delete prevP[sessionId];
+        return prevP;
+      });
+      sendAppMessage({ event: 'deny-request-to-join', sessionId });
+    },
+    [daily, isOwner, sendAppMessage, setRequestedParticipants]
+  );
+
   const removeFromStage = useCallback(
     (sessionId: string) => {
       if (!isOwner || !daily) return;
@@ -148,6 +169,16 @@ export const useStage = () => {
             daily?.setUserData({ ...(userData as any), invited: true });
             setInvited(true);
             setIsRequesting(false);
+          }
+          break;
+        case 'deny-request-to-join':
+          const denySessionId = ev.data?.sessionId;
+          if (isOwner) {
+            setRequestedParticipants((prev) => {
+              const prevP = { ...prev };
+              delete prevP[denySessionId];
+              return prevP;
+            });
           }
           break;
         case 'remove-from-stage':
@@ -236,5 +267,6 @@ export const useStage = () => {
     bringToStage,
     removeFromStage,
     leaveStage,
+    denyRequestToJoin,
   };
 };

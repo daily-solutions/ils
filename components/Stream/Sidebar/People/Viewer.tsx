@@ -10,7 +10,7 @@ interface Viewer {
 }
 
 export const Viewer = memo(({ id, userName }: Viewer) => {
-  const { bringToStage } = useStage();
+  const { bringToStage, requestedParticipants } = useStage();
   const handleBringToStage = useCallback(
     () => bringToStage(id),
     [bringToStage, id]
@@ -19,13 +19,17 @@ export const Viewer = memo(({ id, userName }: Viewer) => {
   const { present } = useParticipantCounts();
   const disableBringToStage = useMemo(() => present >= 6, [present]);
 
-  const menuItems = [
-    {
-      label: 'Invite to stage',
-      onSelect: handleBringToStage,
-      disabled: disableBringToStage,
-    },
-  ];
+  const menuItems = useMemo(() => {
+    return [
+      {
+        label: requestedParticipants.hasOwnProperty(id)
+          ? 'Accept join request'
+          : 'Invite to stage',
+        onSelect: handleBringToStage,
+        disabled: disableBringToStage,
+      },
+    ];
+  }, [disableBringToStage, handleBringToStage, id, requestedParticipants]);
 
   return (
     <Flex css={{ alignItems: 'center', justifyContent: 'space-between' }}>

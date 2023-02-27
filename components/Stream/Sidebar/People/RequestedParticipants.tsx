@@ -2,12 +2,7 @@ import React, { useMemo } from 'react';
 
 import { useStage } from '../../../../hooks/useStage';
 import { Box, Flex, Text } from '../../../../ui';
-import { Viewer } from './Viewer';
-
-interface Viewer {
-  id: string;
-  userName: string;
-}
+import { RequestedViewer } from './RequestedViewer';
 
 export const RequestedParticipants = () => {
   const { requestedParticipants } = useStage();
@@ -21,7 +16,7 @@ export const RequestedParticipants = () => {
       {participants.length > 0 ? (
         <Flex css={{ flexFlow: 'column wrap', rowGap: '$3' }}>
           {participants.map((v) => (
-            <Viewer {...v} key={v.id} />
+            <RequestedViewer {...v} key={v.id} />
           ))}
         </Flex>
       ) : (
