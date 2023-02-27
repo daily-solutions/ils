@@ -7,8 +7,7 @@ import React, { useCallback, useState } from 'react';
 
 import { useMeetingState } from '../../contexts/UIState';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
-import Card from '../../ui/Card';
-import { Flex } from '../../ui/Flex';
+import { Card, Flex } from '../../ui';
 import { NameSetup } from './NameSetup';
 import { Setup } from './Setup';
 

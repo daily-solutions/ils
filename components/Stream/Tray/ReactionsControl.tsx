@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 
 import { useReactions } from '../../../hooks/useReactions';
-import { Box } from '../../../ui/Box';
-import { Icon } from '../../../ui/Icon';
+import { Box, Icon } from '../../../ui';
 import { TrayButton } from '../../TrayButton';
 import { EmojiReactionsPopover } from '../EmojiReactionsPopover';
 

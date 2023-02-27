@@ -5,8 +5,7 @@ import {
 import React, { useCallback } from 'react';
 
 import { usePoll, useSidebar } from '../../../contexts/UIState';
-import { Flex } from '../../../ui/Flex';
-import { Icon } from '../../../ui/Icon';
+import { Flex, Icon } from '../../../ui';
 import { TrayButton } from '../../TrayButton';
 
 export const RightTray = () => {

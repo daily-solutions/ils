@@ -15,10 +15,7 @@ import React, {
 
 import { useResizeObserver } from '../../hooks/useResizeObserver';
 import { useVideoGrid } from '../../hooks/useVideoGrid';
-import { Box } from '../../ui/Box';
-import { Flex } from '../../ui/Flex';
-import { Text } from '../../ui/Text';
-import { ToastViewport } from '../../ui/Toast';
+import { Box, Flex, Text, ToastViewport } from '../../ui';
 import { Tile } from '../Tile';
 
 export const View = () => {

@@ -3,7 +3,7 @@ import { DailyProvider } from '@daily-co/daily-react';
 import dynamic from 'next/dynamic';
 import React, { useEffect, useState } from 'react';
 
-import { Loader } from '../../ui/Loader';
+import { Loader } from '../../ui';
 import { CallUI } from './CallUI';
 
 const NotConfigured = dynamic(() => import('../NotConfigured'), {

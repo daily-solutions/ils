@@ -8,5 +8,3 @@ export const Card = styled('div', {
   padding: '$6',
   boxShadow: '$card',
 });
-
-export default Card;

@@ -2,14 +2,7 @@ import { useDaily } from '@daily-co/daily-react';
 import Avatar from 'boring-avatars';
 import React, { memo, useCallback, useState } from 'react';
 
-import { Box } from '../../ui/Box';
-import { Button } from '../../ui/Button';
-import { Divider } from '../../ui/Divider';
-import { Flex } from '../../ui/Flex';
-import { Icon } from '../../ui/Icon';
-import { Input } from '../../ui/Input';
-import { Label } from '../../ui/Label';
-import { Text } from '../../ui/Text';
+import { Box, Button, Divider, Flex, Icon, Input, Label, Text } from '../../ui';
 
 type Avatar =
   | 'Margaret Brent'

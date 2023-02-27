@@ -5,7 +5,7 @@ import {
 import React, { useMemo } from 'react';
 
 import { useSidebar } from '../../../contexts/UIState';
-import { Icon } from '../../../ui/Icon';
+import { Icon } from '../../../ui';
 import { TrayButton } from '../../TrayButton';
 
 export const ChatControl = () => {

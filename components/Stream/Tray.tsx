@@ -3,8 +3,7 @@ import React from 'react';
 
 import { useMediaQuery } from '../../hooks/useMediaQuery';
 import Logo from '../../public/Logo.png';
-import { Divider } from '../../ui/Divider';
-import { Flex } from '../../ui/Flex';
+import { Divider, Flex } from '../../ui';
 import { AudioControl } from './Tray/AudioControl';
 import { ChatControl } from './Tray/ChatControl';
 import { PeopleControl } from './Tray/PeopleControl';

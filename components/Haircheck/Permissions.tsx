@@ -1,8 +1,7 @@
 import { useDevices } from '@daily-co/daily-react';
 import { useMemo } from 'react';
 
-import { Flex } from '../../ui/Flex';
-import { Text } from '../../ui/Text';
+import { Flex, Text } from '../../ui';
 
 export const Permissions = () => {
   const { camState, micState } = useDevices();

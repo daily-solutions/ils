@@ -1,7 +1,6 @@
 import React from 'react';
 
-import Card from '../../ui/Card';
-import { Flex } from '../../ui/Flex';
+import { Card, Flex } from '../../ui';
 
 export const LeftMeeting = () => {
   return (

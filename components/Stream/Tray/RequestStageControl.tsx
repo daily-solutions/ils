@@ -7,7 +7,7 @@ import React, { useCallback, useMemo } from 'react';
 import { useInviteToJoin } from '../../../contexts/UIState';
 import { useIsOnStage } from '../../../hooks/useIsOnStage';
 import { useStage } from '../../../hooks/useStage';
-import { Button } from '../../../ui/Button';
+import { Button } from '../../../ui';
 
 export const RequestStageControl = () => {
   const localSessionId = useLocalSessionId();

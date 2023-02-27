@@ -7,10 +7,7 @@ import React, { useCallback } from 'react';
 
 import { useInviteToJoin } from '../../contexts/UIState';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
-import { Box } from '../../ui/Box';
-import { Button } from '../../ui/Button';
-import { Flex } from '../../ui/Flex';
-import { Modal } from '../../ui/Modal';
+import { Box, Button, Flex, Modal } from '../../ui';
 import { Devices } from '../Haircheck/Devices';
 import { AudioControl, VideoControl } from '../Stream';
 import { Tile } from '../Tile';

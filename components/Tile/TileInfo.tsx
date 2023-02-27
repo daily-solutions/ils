@@ -1,8 +1,7 @@
 import { useParticipantProperty } from '@daily-co/daily-react';
 import { memo } from 'react';
 
-import { Flex } from '../../ui/Flex';
-import { Text } from '../../ui/Text';
+import { Flex, Text } from '../../ui';
 
 interface Props {
   sessionId: string;

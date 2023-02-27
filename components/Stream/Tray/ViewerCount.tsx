@@ -3,9 +3,7 @@ import React from 'react';
 
 import { useParticipantCounts } from '../../../hooks/useParticipantCount';
 import eye from '../../../public/eye.svg';
-import { Badge } from '../../../ui/Badge';
-import { Flex } from '../../../ui/Flex';
-import { Text } from '../../../ui/Text';
+import { Badge, Flex, Text } from '../../../ui';
 
 interface Props {
   isMobile?: boolean;

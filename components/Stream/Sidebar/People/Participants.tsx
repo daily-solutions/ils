@@ -8,13 +8,7 @@ import React, { memo, useCallback } from 'react';
 import { useSidebar, useViewers } from '../../../../contexts/UIState';
 import { useParticipants } from '../../../../hooks/useParticipants';
 import { useStage } from '../../../../hooks/useStage';
-import { Badge } from '../../../../ui/Badge';
-import { Button } from '../../../../ui/Button';
-import { Divider } from '../../../../ui/Divider';
-import { Flex } from '../../../../ui/Flex';
-import { Icon } from '../../../../ui/Icon';
-import { Menu } from '../../../../ui/Menu';
-import { Text } from '../../../../ui/Text';
+import { Badge, Button, Divider, Flex, Icon, Menu, Text } from '../../../../ui';
 import { Viewer } from './Viewer';
 
 interface ParticipantProps {

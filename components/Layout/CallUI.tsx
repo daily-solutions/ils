@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 
 import { useMeetingState } from '../../contexts/UIState';
-import { Loader } from '../../ui/Loader';
+import { Loader } from '../../ui';
 import { Haircheck } from '../Haircheck';
 import { ILSContainer } from '../ILSContainer';
 import { LeftMeeting } from '../Left';

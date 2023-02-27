@@ -3,8 +3,7 @@ import React from 'react';
 
 import { useMessage } from '../../../../contexts/UIState';
 import { emojis, useChat } from '../../../../hooks/useChat';
-import { Button } from '../../../../ui/Button';
-import { Flex } from '../../../../ui/Flex';
+import { Button, Flex } from '../../../../ui';
 
 interface Props {
   id: string;

@@ -6,7 +6,7 @@ import {
 import React, { useCallback } from 'react';
 
 import { useIsOnStage } from '../../../hooks/useIsOnStage';
-import { Icon } from '../../../ui/Icon';
+import { Icon } from '../../../ui';
 import { TrayButton } from '../../TrayButton';
 
 interface Props {

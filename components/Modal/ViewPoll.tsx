@@ -5,14 +5,16 @@ import React, { useMemo, useState } from 'react';
 import { useMessage, useViewPoll } from '../../contexts/UIState';
 import { usePolls } from '../../hooks/usePolls';
 import Poll from '../../public/poll.svg';
-import { Badge } from '../../ui/Badge';
-import { Box } from '../../ui/Box';
-import { Button } from '../../ui/Button';
-import { Flex } from '../../ui/Flex';
-import { Icon } from '../../ui/Icon';
-import { Modal } from '../../ui/Modal';
-import { Progress } from '../../ui/Progress';
-import { Text } from '../../ui/Text';
+import {
+  Badge,
+  Box,
+  Button,
+  Flex,
+  Icon,
+  Modal,
+  Progress,
+  Text,
+} from '../../ui';
 
 interface Props {
   option: string;

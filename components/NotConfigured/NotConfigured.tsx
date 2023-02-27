@@ -1,7 +1,5 @@
 import { useMediaQuery } from '../../hooks/useMediaQuery';
-import Card from '../../ui/Card';
-import { Flex } from '../../ui/Flex';
-import { Text } from '../../ui/Text';
+import { Card, Flex, Text } from '../../ui';
 
 export const NotConfigured = () => {
   const isMobile = useMediaQuery('(max-width: 480px)');

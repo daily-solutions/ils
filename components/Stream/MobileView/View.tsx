@@ -9,9 +9,7 @@ import React, {
 import { useParticipants } from '../../../hooks/useParticipants';
 import { useResizeObserver } from '../../../hooks/useResizeObserver';
 import { useVideoGrid } from '../../../hooks/useVideoGrid';
-import { Box } from '../../../ui/Box';
-import { Flex } from '../../../ui/Flex';
-import { Text } from '../../../ui/Text';
+import { Box, Flex, Text } from '../../../ui';
 import { Tile } from '../../Tile';
 import { PaginationButton } from '../PaginationButton';
 

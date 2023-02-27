@@ -6,10 +6,7 @@ import { useEffect } from 'react';
 
 import { useSidebar } from '../../../contexts/UIState';
 import { useMediaQuery } from '../../../hooks/useMediaQuery';
-import { Box } from '../../../ui/Box';
-import { Card } from '../../../ui/Card';
-import { Divider } from '../../../ui/Divider';
-import { Icon } from '../../../ui/Icon';
+import { Box, Card, Divider, Icon } from '../../../ui';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../../ui/Tabs';
 import { Chat } from './Chat';
 import { People } from './People';

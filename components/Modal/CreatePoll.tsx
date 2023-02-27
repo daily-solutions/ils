@@ -1,11 +1,6 @@
 import { usePoll } from '../../contexts/UIState';
 import { usePolls } from '../../hooks/usePolls';
-import { Button } from '../../ui/Button';
-import { Divider } from '../../ui/Divider';
-import { Flex } from '../../ui/Flex';
-import { Input } from '../../ui/Input';
-import { Label } from '../../ui/Label';
-import { Modal } from '../../ui/Modal';
+import { Button, Divider, Flex, Input, Label, Modal } from '../../ui';
 
 export const CreatePoll = () => {
   const [show, setShow] = usePoll();

@@ -1,8 +1,6 @@
 import React from 'react';
 
-import { Box } from '../../ui/Box';
-import { Button } from '../../ui/Button';
-import { Icon } from '../../ui/Icon';
+import { Box, Button, Icon } from '../../ui';
 
 interface Props {
   isPrev?: boolean;

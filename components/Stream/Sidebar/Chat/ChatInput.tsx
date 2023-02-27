@@ -2,8 +2,7 @@ import React, { memo, useCallback, useState } from 'react';
 
 import { useChat } from '../../../../hooks/useChat';
 import { useMediaQuery } from '../../../../hooks/useMediaQuery';
-import { Box } from '../../../../ui/Box';
-import { Input } from '../../../../ui/Input';
+import { Box, Input } from '../../../../ui';
 
 export const ChatInput = memo(() => {
   const isMobile = useMediaQuery('(max-width: 480px)');

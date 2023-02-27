@@ -5,7 +5,7 @@ import {
 import React from 'react';
 
 import { usePoll } from '../../../contexts/UIState';
-import { Icon } from '../../../ui/Icon';
+import { Icon } from '../../../ui';
 import { TrayButton } from '../../TrayButton';
 
 export const PollControl = () => {

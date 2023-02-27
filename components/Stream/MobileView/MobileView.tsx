@@ -1,5 +1,4 @@
-import { Flex } from '../../../ui/Flex';
-import { ToastViewport } from '../../../ui/Toast';
+import { Flex, ToastViewport } from '../../../ui';
 import { Sidebar } from '../Sidebar';
 import { BottomTray } from './BottomTray';
 import { Header } from './Header';

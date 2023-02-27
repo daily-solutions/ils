@@ -1,9 +1,7 @@
 import React, { useMemo } from 'react';
 
 import { useStage } from '../../../../hooks/useStage';
-import { Box } from '../../../../ui/Box';
-import { Flex } from '../../../../ui/Flex';
-import { Text } from '../../../../ui/Text';
+import { Box, Flex, Text } from '../../../../ui';
 import { Viewer } from './Viewer';
 
 interface Viewer {

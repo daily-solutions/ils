@@ -3,10 +3,7 @@ import React, { memo, useCallback, useEffect, useMemo } from 'react';
 
 import { useMeetingState } from '../../contexts/UIState';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
-import { Box } from '../../ui/Box';
-import { Button } from '../../ui/Button';
-import { Divider } from '../../ui/Divider';
-import { Flex } from '../../ui/Flex';
+import { Box, Button, Divider, Flex } from '../../ui';
 import { AudioControl, VideoControl } from '../Stream';
 import { Tile } from '../Tile';
 import { Devices } from './Devices';

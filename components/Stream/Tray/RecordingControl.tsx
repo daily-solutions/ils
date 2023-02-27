@@ -5,7 +5,7 @@ import {
 } from '@daily-co/daily-react';
 import React, { useCallback } from 'react';
 
-import { Icon } from '../../../ui/Icon';
+import { Icon } from '../../../ui';
 import { TrayButton } from '../../TrayButton';
 
 export const RecordingControl = () => {

@@ -1,14 +1,7 @@
 import { useDevices } from '@daily-co/daily-react';
 import React, { useCallback, useMemo } from 'react';
 
-import { styled } from '../../styles/stitches.config';
-import { Flex } from '../../ui/Flex';
-import { Select } from '../../ui/Select';
-
-const StyledLabel = styled('label', {
-  fontSize: '$1',
-  fontWeight: 600,
-});
+import { Flex, Label, Select } from '../../ui';
 
 interface Props {
   audioVideo?: boolean;
@@ -62,10 +55,12 @@ export const Devices = ({ audioVideo = true }: Props) => {
     <Flex css={{ flexFlow: 'column wrap', rowGap: '$3' }}>
       {audioVideo && (
         <Flex css={{ flexFlow: 'column wrap', rowGap: '$1' }}>
-          <StyledLabel>Camera</StyledLabel>
+          <Label size="sm">Camera</Label>
           <Select
             value={currentCamera?.device?.deviceId}
-            onChange={(e) => handleDeviceChange('cam', e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+              handleDeviceChange('cam', e.target.value)
+            }
             disabled={camState !== 'granted' || cameras.length === 0}
           >
             {(camState !== 'granted' || cameras.length === 0) && (
@@ -83,10 +78,12 @@ export const Devices = ({ audioVideo = true }: Props) => {
       )}
       {audioVideo && (
         <Flex css={{ flexFlow: 'column wrap', rowGap: '$1' }}>
-          <StyledLabel>Microphone</StyledLabel>
+          <Label size="sm">Microphone</Label>
           <Select
             value={currentMic?.device?.deviceId}
-            onChange={(e) => handleDeviceChange('mic', e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+              handleDeviceChange('mic', e.target.value)
+            }
             disabled={micState !== 'granted' || microphones.length === 0}
           >
             {(micState !== 'granted' || microphones.length === 0) && (
@@ -101,10 +98,12 @@ export const Devices = ({ audioVideo = true }: Props) => {
         </Flex>
       )}
       <Flex css={{ flexFlow: 'column wrap', rowGap: '$1' }}>
-        <StyledLabel>Speaker</StyledLabel>
+        <Label size="sm">Speaker</Label>
         <Select
           value={currentSpeaker?.device?.deviceId}
-          onChange={(e) => handleDeviceChange('speaker', e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+            handleDeviceChange('speaker', e.target.value)
+          }
         >
           {speakers.length > 0 ? (
             speakers.map((s) => (

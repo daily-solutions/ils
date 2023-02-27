@@ -1,12 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 
 import { useMessages, useSidebar } from '../../../../contexts/UIState';
-import { Box } from '../../../../ui/Box';
-import { Button } from '../../../../ui/Button';
-import { Divider } from '../../../../ui/Divider';
-import { Flex } from '../../../../ui/Flex';
-import { Icon } from '../../../../ui/Icon';
-import { Text } from '../../../../ui/Text';
+import { Box, Button, Divider, Flex, Icon, Text } from '../../../../ui';
 import { ChatInput } from './ChatInput';
 import { ChatMessage } from './ChatMessage';
 

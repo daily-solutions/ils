@@ -6,11 +6,7 @@ import { useMessage, useSidebar } from '../../../../contexts/UIState';
 import { useMediaQuery } from '../../../../hooks/useMediaQuery';
 import { usePolls } from '../../../../hooks/usePolls';
 import Poll from '../../../../public/poll.svg';
-import { Badge } from '../../../../ui/Badge';
-import { Box } from '../../../../ui/Box';
-import { Button } from '../../../../ui/Button';
-import { Flex } from '../../../../ui/Flex';
-import { Text } from '../../../../ui/Text';
+import { Badge, Box, Button, Flex, Text } from '../../../../ui';
 import { ChatReact } from './ChatReact';
 import { ChatReactions } from './ChatReactions';
 

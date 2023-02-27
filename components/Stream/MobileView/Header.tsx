@@ -1,4 +1,4 @@
-import { Flex } from '../../../ui/Flex';
+import { Flex } from '../../../ui';
 import { ViewerCount } from '../Tray/ViewerCount';
 
 export const Header = () => {

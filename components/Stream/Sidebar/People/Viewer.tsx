@@ -2,11 +2,7 @@ import React, { memo, useCallback, useMemo } from 'react';
 
 import { useParticipantCounts } from '../../../../hooks/useParticipantCount';
 import { useStage } from '../../../../hooks/useStage';
-import { Button } from '../../../../ui/Button';
-import { Flex } from '../../../../ui/Flex';
-import { Icon } from '../../../../ui/Icon';
-import { Menu } from '../../../../ui/Menu';
-import { Text } from '../../../../ui/Text';
+import { Button, Flex, Icon, Menu, Text } from '../../../../ui';
 
 interface Viewer {
   id: string;

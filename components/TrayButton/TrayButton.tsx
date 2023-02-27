@@ -1,8 +1,7 @@
 import React from 'react';
 
+import { Flex, Text } from '../../ui';
 import { Button, ButtonVariant } from '../../ui/Button';
-import { Flex } from '../../ui/Flex';
-import { Text } from '../../ui/Text';
 
 interface Props extends React.ComponentProps<typeof Button> {
   muted?: boolean;

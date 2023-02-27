@@ -3,8 +3,7 @@ import dynamic from 'next/dynamic';
 import React from 'react';
 
 import { useMediaQuery } from '../../hooks/useMediaQuery';
-import { Flex } from '../../ui/Flex';
-import { Loader } from '../../ui/Loader';
+import { Flex, Loader } from '../../ui';
 import { Modals } from '../Modal';
 import { EmojiReactions } from './EmojiReactions';
 import { Sidebar } from './Sidebar';

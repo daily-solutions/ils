@@ -1,6 +1,5 @@
 import { useIsOnStage } from '../../../hooks/useIsOnStage';
-import { Box } from '../../../ui/Box';
-import { Icon } from '../../../ui/Icon';
+import { Box, Icon } from '../../../ui';
 import { Popover, PopoverContent, PopoverTrigger } from '../../../ui/Popover';
 import { Devices } from '../../Haircheck/Devices';
 import { TrayButton } from '../../TrayButton';

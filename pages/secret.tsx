@@ -1,5 +1,4 @@
 import { GetServerSidePropsContext } from 'next';
-import { fetch } from 'next/dist/compiled/@edge-runtime/primitives/fetch';
 
 import { Layout } from '../components/Layout';
 

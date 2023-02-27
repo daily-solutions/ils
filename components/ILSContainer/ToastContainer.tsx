@@ -2,9 +2,7 @@ import React from 'react';
 
 import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { useToasts } from '../../hooks/useToast';
-import { Button } from '../../ui/Button';
-import { Flex } from '../../ui/Flex';
-import { Toast } from '../../ui/Toast';
+import { Button, Flex, Toast } from '../../ui';
 
 export const ToastContainer = () => {
   const { toaster, toasts } = useToasts();

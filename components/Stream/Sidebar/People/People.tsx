@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Divider } from '../../../../ui/Divider';
+import { Divider } from '../../../../ui';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../../../ui/Tabs';
 import { Participants } from './Participants';
 import { RequestedParticipants } from './RequestedParticipants';

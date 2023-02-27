@@ -2,8 +2,7 @@ import React from 'react';
 
 import { Emoji } from '../../contexts/UIState';
 import { emojis } from '../../hooks/useChat';
-import { Box } from '../../ui/Box';
-import { Grid } from '../../ui/Grid';
+import { Box, Grid } from '../../ui';
 import { Popover, PopoverContent, PopoverTrigger } from '../../ui/Popover';
 
 interface Props {

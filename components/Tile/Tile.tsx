@@ -10,7 +10,7 @@ import React, {
 } from 'react';
 
 import { useActiveSpeakerId } from '../../hooks/useActiveSpeakerId';
-import { Box } from '../../ui/Box';
+import { Box } from '../../ui';
 import { TileInfo } from './TileInfo';
 
 interface Props {

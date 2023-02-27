@@ -2,9 +2,7 @@ import React, { useCallback, useState } from 'react';
 
 import { Emoji } from '../../../../contexts/UIState';
 import { useChat } from '../../../../hooks/useChat';
-import { Box } from '../../../../ui/Box';
-import { Button } from '../../../../ui/Button';
-import { Icon } from '../../../../ui/Icon';
+import { Box, Button, Icon } from '../../../../ui';
 import { EmojiReactionsPopover } from '../../EmojiReactionsPopover';
 
 interface Props {
