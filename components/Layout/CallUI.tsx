@@ -3,9 +3,9 @@ import React, { useMemo } from 'react';
 import { useMeetingState } from '../../contexts/UIState';
 import { Loader } from '../../ui/Loader';
 import { Haircheck } from '../Haircheck';
+import { ILSContainer } from '../ILSContainer';
 import { LeftMeeting } from '../Left';
 import { Room } from '../Room';
-import { Wrapper } from '../Wrapper';
 
 export const CallUI = () => {
   const [meetingState] = useMeetingState();
@@ -25,5 +25,5 @@ export const CallUI = () => {
     }
   }, [meetingState]);
 
-  return <Wrapper>{callUI}</Wrapper>;
+  return <ILSContainer>{callUI}</ILSContainer>;
 };
