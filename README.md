@@ -19,17 +19,10 @@ Replace `$TOKEN` with API token
 
 ```
 curl -H "Content-Type: application/json" \
-     -H "Authorization: Bearer $TOKEN" \
-     -XPOST -d \
-     '{
-        "name": "ils",
-        "properties" : {
-          "permissions": {
-            "canSend": false,
-            "hasPresence": false,
-           },
-        }}' \
-     https://api.daily.co/v1/rooms/
+  -H "Authorization: Bearer $TOKEN" \
+  -XPOST -d \
+  '{"properties":{"permissions": { "canSend": false, "hasPresence": false }}}' \
+  https://api.daily.co/v1/rooms/
 ```
 
 ### Install dependencies
