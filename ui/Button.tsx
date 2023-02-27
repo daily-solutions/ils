@@ -65,7 +65,7 @@ const StyledButton = styled('button', {
         backgroundColor: '$cyanLight',
         color: '$cyanLightText',
       },
-      orange: {
+      warning: {
         backgroundColor: '$orangeLight',
         color: '$orange',
       },
@@ -133,8 +133,8 @@ export type ButtonVariant =
   | 'ghost'
   | 'cyan'
   | 'outline'
-  | 'orange'
-  | 'transparent';
+  | 'transparent'
+  | 'warning';
 
 interface Props extends React.ComponentPropsWithRef<'button'> {
   size?: 'small' | 'medium' | 'icon' | 'xs' | 'reaction' | 'pagination';

@@ -5,6 +5,7 @@ import {
 import React, { useCallback, useMemo } from 'react';
 
 import { useIsOnStage } from '../../../hooks/useIsOnStage';
+import { useParticipants } from '../../../hooks/useParticipants';
 import { useStage } from '../../../hooks/useStage';
 import { useInviteToJoin } from '../../../state';
 import { Button } from '../../../ui';
@@ -17,6 +18,8 @@ export const RequestStageControl = () => {
   ]);
   const isOnStage = useIsOnStage();
   const [, setInvited] = useInviteToJoin();
+
+  const participantIds = useParticipants();
 
   const isInvited = useMemo(() => (userData as any)?.invited, [userData]);
 
@@ -50,10 +53,11 @@ export const RequestStageControl = () => {
 
   return (
     <Button
-      variant={isRequesting ? 'danger' : 'primary'}
+      variant={isRequesting ? 'warning' : 'primary'}
       onClick={handleToggleRequest}
+      disabled={participantIds.length === 0}
     >
-      {isRequesting ? 'Cancel' : 'Ask a question'}
+      {isRequesting ? 'Cancel join request' : 'Join the stage'}
     </Button>
   );
 };

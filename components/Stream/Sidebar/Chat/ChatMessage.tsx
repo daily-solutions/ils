@@ -33,7 +33,7 @@ const PollMessage = ({ id, question }: { id: string; question: string }) => {
       <Text size={2} css={{ color: '$baseText', lineHeight: '130%' }}>
         {question}
       </Text>
-      <Button fullWidth variant="orange" onClick={handleViewPoll}>
+      <Button fullWidth variant="warning" onClick={handleViewPoll}>
         View poll
       </Button>
     </Flex>

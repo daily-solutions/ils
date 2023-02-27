@@ -5,6 +5,7 @@ import {
 import React, { useCallback, useMemo } from 'react';
 
 import { useIsOnStage } from '../../../hooks/useIsOnStage';
+import { useParticipants } from '../../../hooks/useParticipants';
 import { useReactions } from '../../../hooks/useReactions';
 import { useStage } from '../../../hooks/useStage';
 import { Emoji, useInviteToJoin } from '../../../state';
@@ -28,6 +29,7 @@ export const BottomTray = () => {
   ]);
   const isOnStage = useIsOnStage();
   const [, setInvited] = useInviteToJoin();
+  const participantIds = useParticipants();
 
   const isInvited = useMemo(() => (userData as any)?.invited, [userData]);
 
@@ -92,14 +94,15 @@ export const BottomTray = () => {
           size={isOnStage ? 'small' : 'medium'}
           variant={isOnStage || isRequesting ? 'danger' : 'primary'}
           onClick={handleToggleRequest}
+          disabled={participantIds.length === 0}
         >
           {isOnStage
             ? 'Leave stage'
             : isInvited
             ? 'Join'
             : isRequesting
-            ? 'Cancel'
-            : 'Ask a question'}
+            ? 'Cancel join request'
+            : 'Join the stage'}
         </Button>
       )}
     </Flex>
