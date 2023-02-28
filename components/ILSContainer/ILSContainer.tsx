@@ -1,7 +1,6 @@
 import {
   DailyEventObject,
   DailyEventObjectAppMessage,
-  DailyRoomInfo,
 } from '@daily-co/daily-js';
 import {
   useAppMessage,
@@ -116,16 +115,7 @@ export const ILSContainer = memo(
       // @ts-ignore
       const { token, url } = daily.properties;
       await daily.preAuth({ url, token });
-      const room = (await daily.room()) as DailyRoomInfo;
-      if (room?.id) {
-        const { config, domainConfig, tokenConfig } = room;
-        const enablePrejoinUI =
-          tokenConfig?.enable_prejoin_ui ??
-          config?.enable_prejoin_ui ??
-          domainConfig?.enable_prejoin_ui;
-        if (enablePrejoinUI) setMeetingState('lobby');
-        else await daily.join();
-      }
+      setMeetingState('lobby');
     }, [daily, setMeetingState]);
 
     useEffect(() => {
