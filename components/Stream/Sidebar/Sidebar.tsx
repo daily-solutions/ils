@@ -65,11 +65,7 @@ export const Sidebar = () => {
         </Tabs>
       ) : (
         <>
-          {sidebar === 'chat' ? (
-            <Chat withHeader />
-          ) : (
-            sidebar === 'people' && <People withHeader />
-          )}
+          <People withHeader />
         </>
       )}
     </Card>

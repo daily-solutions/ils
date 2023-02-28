@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 
 import { useMeetingState } from '../../state';
 import { Loader } from '../../ui';
+import { ILSContainer } from '../ILSContainer';
 
 export const CallUI = () => {
   const [meetingState] = useMeetingState();
@@ -9,17 +10,19 @@ export const CallUI = () => {
   const callUI = useMemo(() => {
     switch (meetingState) {
       case 'lobby':
-        return 'lobby';
+        return <div>Lobby</div>;
       case 'joining-meeting':
+        console.log('joining...');
         return <Loader />;
       case 'joined-meeting':
-        return 'joined!';
+        console.log('joined!');
+        return <div>Joined!</div>;
       case 'left-meeting':
-        return 'left meeting';
+        return <div>Left</div>;
       default:
         return <Loader />;
     }
   }, [meetingState]);
 
-  return <div>{callUI}</div>;
+  return <ILSContainer>{callUI}</ILSContainer>;
 };

@@ -4,7 +4,6 @@ import React from 'react';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { Flex } from '../../ui';
 import { Modals } from '../Modal';
-import { EmojiReactions } from './EmojiReactions';
 import { MobileView } from './MobileView';
 import { Sidebar } from './Sidebar';
 import { Tray } from './Tray';
@@ -33,7 +32,6 @@ export const Stream = () => {
         </Flex>
       )}
       <DailyAudio />
-      <EmojiReactions />
       <Modals />
     </>
   );
