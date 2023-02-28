@@ -38,7 +38,7 @@ export const VideoControl = ({
       <Icon
         icon={video ? 'cam' : 'cam_muted'}
         width={16}
-        height={12}
+        height={!video ? 16 : 12}
         color="#2B3F56"
       />
     </TrayButton>
