@@ -179,6 +179,13 @@ export const useStage = () => {
               delete prevP[denySessionId];
               return prevP;
             });
+          } else if (denySessionId === localSessionId) {
+            const participant = daily?.participants()?.[ev.fromId];
+            setIsRequesting(false);
+            toaster.notify('light', {
+              title: 'Your request to join stage was rejected',
+              description: `${participant?.user_name} rejected your request`,
+            });
           }
           break;
         case 'remove-from-stage':

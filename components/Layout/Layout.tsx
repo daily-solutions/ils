@@ -8,6 +8,7 @@ import { CallUI } from './CallUI';
 
 const NotConfigured = dynamic(() => import('../NotConfigured'), {
   loading: () => <Loader />,
+  ssr: false,
 });
 
 interface Props {

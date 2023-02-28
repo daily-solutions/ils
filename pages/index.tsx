@@ -17,8 +17,8 @@ export async function getStaticProps() {
         !!process.env.NEXT_PUBLIC_DAILY_DOMAIN &&
         !!process.env.NEXT_PUBLIC_DAILY_ROOM &&
         !!process.env.DAILY_API_KEY,
-      domain: process.env.NEXT_PUBLIC_DAILY_DOMAIN,
-      room: process.env.NEXT_PUBLIC_DAILY_ROOM,
+      domain: process.env.NEXT_PUBLIC_DAILY_DOMAIN ?? null,
+      room: process.env.NEXT_PUBLIC_DAILY_ROOM ?? null,
     },
   };
 }
