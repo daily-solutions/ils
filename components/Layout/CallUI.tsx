@@ -2,10 +2,6 @@ import React, { useMemo } from 'react';
 
 import { useMeetingState } from '../../state';
 import { Loader } from '../../ui';
-import { Haircheck } from '../Haircheck';
-import { ILSContainer } from '../ILSContainer';
-import { LeftMeeting } from '../Left';
-import { Stream } from '../Stream';
 
 export const CallUI = () => {
   const [meetingState] = useMeetingState();
@@ -13,17 +9,17 @@ export const CallUI = () => {
   const callUI = useMemo(() => {
     switch (meetingState) {
       case 'lobby':
-        return <Haircheck />;
+        return 'lobby';
       case 'joining-meeting':
         return <Loader />;
       case 'joined-meeting':
-        return <Stream />;
+        return 'joined!';
       case 'left-meeting':
-        return <LeftMeeting />;
+        return 'left meeting';
       default:
         return <Loader />;
     }
   }, [meetingState]);
 
-  return <ILSContainer>{callUI}</ILSContainer>;
+  return <div>{callUI}</div>;
 };
