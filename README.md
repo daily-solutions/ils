@@ -1,6 +1,14 @@
-# Interactive Live Streaming (aka ILS) Demo with [Daily](https://daily.co)
+# Interactive Live Streaming (aka ILS) Demo with [Daily](https://www.daily.co/products/interactive-live-streaming)
 
 ![Interactive Live Streaming](./public/image.png)
+
+Daily Interactive Live Streaming (ILS) is the next generation of large video experiences. Host real-time streams with up to 100,000 viewers and 25 speakers interacting **at under 200ms latency**. Build better webinars, live classes, creator streams, live commerce, town halls and any large experience.
+
+This demo features a NextJS + Typescript implementation that showcases Daily's ILS and includes support for:
+- 'Bring-to-stage' role promotion flow from viewer to speaker 
+- Two-way chat support between viewers and speakers
+- Support for reactions, polls, and recording
+
 
 ### Live example
 
