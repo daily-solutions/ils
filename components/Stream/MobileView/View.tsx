@@ -2,6 +2,7 @@ import React, { useCallback, useMemo, useRef, useState } from 'react';
 
 import { useParticipants } from '../../../hooks/useParticipants';
 import { useResizeObserver } from '../../../hooks/useResizeObserver';
+import { useTrackSubscriptions } from '../../../hooks/useTrackSubscriptions';
 import { useVideoGrid } from '../../../hooks/useVideoGrid';
 import { Flex, Grid } from '../../../ui';
 import { Tile } from '../../Tile';
@@ -33,6 +34,7 @@ export const View = () => {
     currentIds,
     currentPage,
     nextPage,
+    pageSize,
     prevPage,
     rows,
     totalPages,
@@ -45,6 +47,13 @@ export const View = () => {
     sessionIds: participantIds,
     minCountPerPage: 1,
     maxCountPerPage: 2,
+  });
+
+  useTrackSubscriptions({
+    currentIds,
+    currentPage,
+    pageSize,
+    participantIds,
   });
 
   const tiles = useMemo(() => {

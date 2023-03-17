@@ -27,7 +27,7 @@ export const Layout = ({ domain, isConfigured, room, token = '' }: Props) => {
     const co = DailyIframe.createCallObject({
       url: `https://${domain}.daily.co/${room}`,
       token,
-      subscribeToTracksAutomatically: true,
+      subscribeToTracksAutomatically: false,
       dailyConfig: {
         experimentalChromeVideoMuteLightOff: true,
         useDevicePreferenceCookies: true,

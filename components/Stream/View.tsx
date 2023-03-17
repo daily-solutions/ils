@@ -14,9 +14,11 @@ import React, {
 } from 'react';
 
 import { useResizeObserver } from '../../hooks/useResizeObserver';
+import { useTrackSubscriptions } from '../../hooks/useTrackSubscriptions';
 import { useVideoGrid } from '../../hooks/useVideoGrid';
 import { Box, Flex, ToastViewport } from '../../ui';
 import { Tile } from '../Tile';
+import { PaginationButton } from './PaginationButton';
 import { StartingSoon } from './StartingSoon';
 
 export const View = () => {
@@ -49,16 +51,24 @@ export const View = () => {
     }, [])
   );
 
-  const { columns, containerHeight, containerWidth, currentIds } = useVideoGrid(
-    {
-      width: dimensions.width,
-      height: dimensions.height,
-      minTileWidth: 280,
-      gap: 1,
-      sessionIds: participantIds,
-      maxCountPerPage: 6,
-    }
-  );
+  const {
+    columns,
+    containerHeight,
+    containerWidth,
+    currentIds,
+    currentPage,
+    nextPage,
+    pageSize,
+    prevPage,
+    totalPages,
+  } = useVideoGrid({
+    width: dimensions.width,
+    height: dimensions.height,
+    minTileWidth: 280,
+    gap: 1,
+    sessionIds: participantIds,
+    maxCountPerPage: 6,
+  });
 
   useEffect(() => {
     if (!viewRef.current) return;
@@ -67,6 +77,13 @@ export const View = () => {
     viewRef.current.style.setProperty('--grid-width', `${containerWidth}px`);
     viewRef.current.style.setProperty('--grid-height', `${containerHeight}px`);
   }, [columns, containerHeight, containerWidth]);
+
+  useTrackSubscriptions({
+    currentIds,
+    currentPage,
+    pageSize,
+    participantIds,
+  });
 
   const { updateReceiveSettings } = useReceiveSettings();
 
@@ -150,7 +167,13 @@ export const View = () => {
           justifyContent: 'center',
         }}
       >
+        {totalPages > 1 && currentPage > 1 && (
+          <PaginationButton onClick={prevPage} />
+        )}
         {tiles}
+        {totalPages > 1 && currentPage < totalPages && (
+          <PaginationButton isPrev={false} onClick={nextPage} />
+        )}
         <ToastViewport />
       </Flex>
     </Box>
