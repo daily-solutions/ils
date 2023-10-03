@@ -5,10 +5,10 @@
 Daily Interactive Live Streaming (ILS) is the next generation of large video experiences. Host real-time streams with up to 100,000 viewers and 25 speakers interacting **at under 200ms latency**. Build better webinars, live classes, creator streams, live commerce, town halls and any large experience.
 
 This demo features a NextJS + Typescript implementation that showcases Daily's ILS and includes support for:
-- 'Bring-to-stage' role promotion flow from viewer to speaker 
+
+- 'Bring-to-stage' role promotion flow from viewer to speaker
 - Two-way chat support between viewers and speakers
 - Support for reactions, polls, and recording
-
 
 ### Live example
 
@@ -43,6 +43,8 @@ yarn husky install
 ```
 
 ### Copy & update the env variables
+
+You'll find `DAILY_API_KEY` in your [Daily dashboard](https://dashboard.daily.co/developers). `NEXT_PUBLIC_DAILY_DOMAIN` is the subdomain for your account; for example, `[YOUR_DOMAIN].daily.co`. `NEXT_PUBLIC_DAILY_ROOM` should be the room you've created, either via the REST API or through your Daily dashboard.
 
 ```
 # set DAILY_API_KEY, NEXT_PUBLIC_DAILY_DOMAIN & NEXT_PUBLIC_DAILY_ROOM
