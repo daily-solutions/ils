@@ -46,6 +46,8 @@ yarn husky install
 
 You'll find `DAILY_API_KEY` in your [Daily dashboard](https://dashboard.daily.co/developers). `NEXT_PUBLIC_DAILY_DOMAIN` is the subdomain for your account; for example, `[YOUR_DOMAIN].daily.co`. `NEXT_PUBLIC_DAILY_ROOM` should be the room you've created, either via the REST API or through your Daily dashboard.
 
+![where-to-find-daily-keys](keys.png)
+
 ```
 # set DAILY_API_KEY, NEXT_PUBLIC_DAILY_DOMAIN & NEXT_PUBLIC_DAILY_ROOM
 cp env.example .env.local
